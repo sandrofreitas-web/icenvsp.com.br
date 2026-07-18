@@ -1,0 +1,6 @@
+{
+  "name": "Igreja Cristã Evangélica Nova Vida",
+  "description": "Website oficial da Igreja Cristã Evangélica Nova Vida - São Paulo, desde 1912 pregando a palavra de Deus.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
