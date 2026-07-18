@@ -58,7 +58,7 @@ export default function HomeView({ language, onChangeTab }: HomeViewProps) {
         <div className="absolute inset-0 bg-gradient-to-t from-[#1b0f4c]/40 via-transparent to-black/30 z-10" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full">
-          <div className="max-w-3xl mr-auto bg-[#1e1054]/30 backdrop-blur-md border border-white/10 rounded-2xl p-6 sm:p-10 md:p-12 space-y-6 shadow-2xl text-left">
+          <div className="max-w-3xl mr-auto space-y-6 text-left p-4 sm:p-0">
             <div className="flex flex-wrap items-center gap-3">
               <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-white/10 text-white border border-white/20 tracking-wider uppercase backdrop-blur-sm">
                 <span className="h-1.5 w-1.5 rounded-full bg-amber-400 animate-pulse" />
