@@ -5,7 +5,7 @@ import { DICTIONARY, SERMONS, EVENTS } from '../data';
 import { getSermons, getEvents } from '../lib/supabase';
 import DenominationLogo from './DenominationLogo';
 // @ts-ignore
-import heroBgImage from '../hero-bg.jpg';
+import heroBgImage from '../20250420_065947.jpg';
 
 interface HomeViewProps {
   language: Language;

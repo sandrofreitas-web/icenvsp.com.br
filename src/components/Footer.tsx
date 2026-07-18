@@ -162,7 +162,7 @@ export default function Footer({ onChangeTab, language }: FooterProps) {
               <li className="flex items-center">
                 <Mail className="h-4 w-4 text-amber-400 mr-2.5 shrink-0" />
                 <a
-                  href="mailto:contato@igrejacristanovavida.org.br"
+                  href="mailto:contato@icenvsp.com.br"
                   className="hover:text-amber-400 transition-colors break-all"
                 >
                   {dict.contactEmail}

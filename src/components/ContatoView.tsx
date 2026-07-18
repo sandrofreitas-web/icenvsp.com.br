@@ -240,7 +240,7 @@ export default function ContatoView({ language }: ContatoViewProps) {
                       <h4 className="font-sans font-bold text-gray-900 mb-0.5">
                         {language === 'pt' ? 'E-mail Principal' : 'Primary Email'}
                       </h4>
-                      <a href="mailto:contato@igrejacristanovavida.org.br" className="text-gray-500 hover:text-amber-700 transition-colors break-all">
+                      <a href="mailto:contato@icenvsp.com.br" className="text-gray-500 hover:text-amber-700 transition-colors break-all">
                         {dict.contactEmail}
                       </a>
                     </div>
