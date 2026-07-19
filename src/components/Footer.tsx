@@ -18,35 +18,35 @@ export default function Footer({ onChangeTab, language }: FooterProps) {
   };
 
   return (
-    <footer id="footer-container" className="bg-neutral-900 text-neutral-300 border-t border-neutral-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+    <footer id="footer-container" className="bg-gradient-to-br from-[#1e1054] to-[#0a0421] text-gray-200 border-t-2 border-[#b59a57]/30 shadow-2xl relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12">
           {/* Brand Col */}
-          <div className="space-y-4">
+          <div className="space-y-6">
             <div className="flex items-center cursor-pointer" onClick={() => handleLinkClick('home')}>
-              <ChurchLogo language={language} isScrolled={false} />
+              <ChurchLogo language={language} isScrolled={false} className="h-16 sm:h-20 md:h-24" />
             </div>
-            <p className="text-sm text-neutral-400 leading-relaxed">
+            <p className="text-sm text-gray-300 leading-relaxed">
               {language === 'pt'
                 ? 'Uma igreja de teologia bíblica reformada, liturgia acolhedora e compromisso profundo com o testemunho cristão no coração de São Paulo.'
                 : 'A church of reformed biblical theology, welcoming liturgy, and deep commitment to Christian witness in the heart of São Paulo.'}
             </p>
             <div className="pt-2">
-              <span className="text-xs uppercase tracking-wider font-semibold text-neutral-500 block mb-2">
+              <span className="text-xs uppercase tracking-wider font-bold text-gray-400 block mb-2">
                 {language === 'pt' ? 'Filiação Denominacional' : 'Denominational Affiliation'}
               </span>
-              <p className="text-xs text-neutral-400 mb-2">
+              <p className="text-xs text-gray-300 mb-3">
                 {language === 'pt'
                   ? 'Filiada à Igreja Cristã Evangélica do Brasil (ICEB).'
                   : 'Affiliated with the Evangelical Christian Church of Brazil (ICEB).'}
               </p>
-              <DenominationLogo theme="dark" className="h-8 opacity-90 hover:opacity-100 transition-opacity" />
+              <DenominationLogo theme="dark" className="h-10 sm:h-12" />
             </div>
           </div>
 
           {/* Navigation Links Col */}
           <div>
-            <h3 className="text-sm font-semibold tracking-wider uppercase text-neutral-100 mb-4">
+            <h3 className="text-base font-bold tracking-wider uppercase text-amber-400 mb-6 font-sans">
               {language === 'pt' ? 'Links Úteis' : 'Useful Links'}
             </h3>
             <ul className="space-y-2.5 text-sm">
@@ -112,7 +112,7 @@ export default function Footer({ onChangeTab, language }: FooterProps) {
 
           {/* Schedule Col */}
           <div>
-            <h3 className="text-sm font-semibold tracking-wider uppercase text-neutral-100 mb-4">
+            <h3 className="text-base font-bold tracking-wider uppercase text-amber-400 mb-6 font-sans">
               {language === 'pt' ? 'Nossos Horários' : 'Our Services'}
             </h3>
             <div className="space-y-4 text-sm">
@@ -145,10 +145,10 @@ export default function Footer({ onChangeTab, language }: FooterProps) {
 
           {/* Contact details Col */}
           <div>
-            <h3 className="text-sm font-semibold tracking-wider uppercase text-neutral-100 mb-4">
+            <h3 className="text-base font-bold tracking-wider uppercase text-amber-400 mb-6 font-sans">
               {language === 'pt' ? 'Contate-nos' : 'Get in Touch'}
             </h3>
-            <ul className="space-y-3.5 text-sm text-neutral-400">
+            <ul className="space-y-3.5 text-sm text-gray-300">
               <li className="flex items-start">
                 <MapPin className="h-5 w-5 text-amber-400 mr-2.5 mt-0.5 shrink-0" />
                 <span>{dict.contactAddress}</span>
@@ -173,7 +173,7 @@ export default function Footer({ onChangeTab, language }: FooterProps) {
         </div>
 
         {/* Bottom Social / Copyright Row */}
-        <div className="mt-12 pt-8 border-t border-neutral-800 flex flex-col sm:flex-row items-center justify-between text-xs text-neutral-500">
+        <div className="mt-12 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-400">
           <p className="mb-4 sm:mb-0">
             &copy; {new Date().getFullYear()} Igreja Cristã Evangélica Nova Vida. {language === 'pt' ? 'Todos os direitos reservados.' : 'All rights reserved.'}
           </p>

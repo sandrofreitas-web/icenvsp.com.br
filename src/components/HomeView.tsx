@@ -65,24 +65,9 @@ export default function HomeView({ language, onChangeTab }: HomeViewProps) {
                 {language === 'pt' ? 'Bem-vindo à Nova Vida' : 'Welcome to Nova Vida'}
               </div>
               
-              {/* Denomination Reference Badge with beautiful mini logo */}
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold bg-[#007cc3]/30 text-white border border-[#007cc3]/40 backdrop-blur-sm">
-                <svg viewBox="0 0 100 100" className="h-3.5 w-3.5 shrink-0">
-                  <circle cx="50" cy="50" r="45" fill="#007cc3" />
-                  <path
-                    d="M 50,15 A 35 35 0 0 0 50 85 C 43 77, 36 69, 36 59 C 36 51, 41 48, 35 46 C 38 44, 44 42, 46 37 C 48 31, 49 22, 50 15 Z"
-                    fill="white"
-                  />
-                  <path
-                    d="M 50,15 A 35 35 0 0 1 50 85 C 56 77, 64 71, 64 65 C 64 59, 56 53, 70 48 C 56 45, 52 37, 64 24 C 56 22, 52 18, 50 15 Z"
-                    fill="#e6f2fa"
-                  />
-                </svg>
-                <span>
-                  {language === 'pt' 
-                    ? 'Igreja Cristã Evangélica' 
-                    : 'Evangelical Christian Church'}
-                </span>
+              {/* Denomination Reference Badge with official logo */}
+              <div className="inline-flex items-center bg-white px-3 py-1.5 rounded-full shadow-md border border-white/10 hover:scale-105 transition-transform duration-300">
+                <DenominationLogo theme="light" className="h-4 sm:h-4.5" />
               </div>
             </div>
             

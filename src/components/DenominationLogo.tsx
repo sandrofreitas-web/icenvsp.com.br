@@ -1,4 +1,4 @@
-import React from 'react';
+import logoICE from '../Logo_Denominacao_ICE.png';
 
 interface DenominationLogoProps {
   className?: string;
@@ -6,34 +6,30 @@ interface DenominationLogoProps {
 }
 
 export default function DenominationLogo({ className = 'h-10', theme = 'light' }: DenominationLogoProps) {
-  const textColor = theme === 'light' ? 'text-gray-500' : 'text-neutral-300';
-  
-  return (
-    <div className={`flex items-center space-x-3 ${className}`}>
-      {/* Dove Circle */}
-      <svg viewBox="0 0 100 100" className="h-full shrink-0 drop-shadow-sm">
-        <circle cx="50" cy="50" r="45" fill="#007cc3" />
-        {/* White dove negative space silhouette */}
-        <path
-          d="M 50,15 A 35 35 0 0 0 50 85 C 43 77, 36 69, 36 59 C 36 51, 41 48, 35 46 C 38 44, 44 42, 46 37 C 48 31, 49 22, 50 15 Z"
-          fill="white"
+  // Since logoICE has a solid white background, if we are in dark theme (like in the footer),
+  // we render it inside a white rounded container with padding so it looks like a clean badge.
+  // In light theme, we can just render the image directly.
+  if (theme === 'dark') {
+    return (
+      <div className="inline-flex items-center bg-white px-4 py-2 rounded-xl shadow-md border border-white/10 hover:shadow-lg transition-all duration-300">
+        <img
+          src={logoICE}
+          alt="Igreja Cristã Evangélica"
+          className={`${className} w-auto object-contain`}
         />
-        {/* Subtle highlight to give it depth */}
-        <path
-          d="M 50,15 A 35 35 0 0 1 50 85 C 56 77, 64 71, 64 65 C 64 59, 56 53, 70 48 C 56 45, 52 37, 64 24 C 56 22, 52 18, 50 15 Z"
-          fill="#e6f2fa"
-        />
-      </svg>
-      
-      {/* Brand Text styled like the official logo in the attachment */}
-      <div className="flex flex-col text-left font-sans select-none leading-none">
-        <span className="text-[#007cc3] text-xs sm:text-sm font-medium tracking-wide">
-          Igreja
-        </span>
-        <span className={`text-sm sm:text-base md:text-lg font-black tracking-tight ${textColor}`}>
-          Cristã Evangélica
-        </span>
       </div>
+    );
+  }
+
+  return (
+    <div className={`flex items-center select-none ${className}`}>
+      <img
+        src={logoICE}
+        alt="Igreja Cristã Evangélica"
+        className="h-full w-auto object-contain"
+      />
     </div>
   );
 }
+
+
