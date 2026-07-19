@@ -94,3 +94,38 @@ VALUES
 ('Domingo, 09h30', 'Sunday, 09:30 AM', 'Escola Bíblica Dominical (EBD)', 'Sunday Bible School', 'Classes para crianças, jovens e adultos sobre teologia, casamento e vida cristã.', 'Classes for children, youth, and adults about theology, marriage, and Christian life.', 1),
 ('Domingo, 18h00', 'Sunday, 06:00 PM', 'Culto de Adoração Principal', 'Main Worship Service', 'Nosso encontro comunitário principal focado na liturgia bíblica, louvor congregacional e pregação bíblica expositiva.', 'Our primary community gathering focused on biblical liturgy, congregational praise, and expository biblical preaching.', 2),
 ('Terça-feira, 20h00', 'Tuesday, 08:00 PM', 'Reunião de Oração e Estudo Bíblico', 'Prayer and Bible Study Meeting', 'Momento devocional no meio da semana com períodos de oração comunitária e estudo temático aprofundado.', 'Mid-week devotional moment with times of community prayer and deep thematic study.', 3);
+
+-- ==========================================================
+-- 7. STORAGE BUCKET FOR MEDIA UPLOADS (Sermons and Events)
+-- ==========================================================
+
+-- Create the public bucket 'church-media' if it does not exist
+INSERT INTO storage.buckets (id, name, public) 
+VALUES ('church-media', 'church-media', true) 
+ON CONFLICT (id) DO NOTHING;
+
+-- Policy to allow authenticated users to upload files (sermon covers / event flyers)
+CREATE POLICY "Allow authenticated users to upload media" 
+ON storage.objects FOR INSERT 
+TO authenticated 
+WITH CHECK (bucket_id = 'church-media');
+
+-- Policy to allow authenticated users to update/overwrite media files
+CREATE POLICY "Allow authenticated users to update media" 
+ON storage.objects FOR UPDATE 
+TO authenticated 
+USING (bucket_id = 'church-media')
+WITH CHECK (bucket_id = 'church-media');
+
+-- Policy to allow authenticated users to delete media files
+CREATE POLICY "Allow authenticated users to delete media" 
+ON storage.objects FOR DELETE 
+TO authenticated 
+USING (bucket_id = 'church-media');
+
+-- Policy to allow the public to read files from this bucket (so the website can load them)
+CREATE POLICY "Allow public read access to media" 
+ON storage.objects FOR SELECT 
+TO public 
+USING (bucket_id = 'church-media');
+

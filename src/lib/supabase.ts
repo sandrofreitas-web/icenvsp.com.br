@@ -360,3 +360,33 @@ export async function deleteWeeklySchedule(id: string): Promise<boolean> {
   if (error) throw error;
   return true;
 }
+
+// ==========================================
+// MEDIA STORAGE HELPERS
+// ==========================================
+
+export async function uploadImage(file: File, folder: 'sermons' | 'events'): Promise<string> {
+  if (!supabase) throw new Error('Supabase is not configured.');
+
+  // Create clean, unique file path: e.g. "sermons/1721389812493-abcde.jpg"
+  const fileExt = file.name.split('.').pop() || 'jpg';
+  const cleanFileName = `${Date.now()}-${Math.random().toString(36).substring(2, 9)}.${fileExt}`;
+  const filePath = `${folder}/${cleanFileName}`;
+
+  const { data, error } = await supabase.storage
+    .from('church-media')
+    .upload(filePath, file, {
+      cacheControl: '3600',
+      upsert: true
+    });
+
+  if (error) throw error;
+
+  // Retrieve public URL
+  const { data: { publicUrl } } = supabase.storage
+    .from('church-media')
+    .getPublicUrl(filePath);
+
+  return publicUrl;
+}
+

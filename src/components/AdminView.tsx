@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { 
   Lock, Mail, Eye, EyeOff, LayoutDashboard, Calendar, Video, 
   Clock, Plus, Trash2, Edit2, LogOut, CheckCircle, AlertTriangle, 
-  Database, RefreshCw, X, Save, ArrowLeft, Globe, ArrowUpRight
+  Database, RefreshCw, X, Save, ArrowLeft, Globe, ArrowUpRight, Upload
 } from 'lucide-react';
 import { Language, Sermon, ChurchEvent } from '../types';
 import { 
@@ -17,7 +17,8 @@ import {
   getWeeklySchedules,
   saveWeeklySchedule,
   deleteWeeklySchedule,
-  WeeklySchedule
+  WeeklySchedule,
+  uploadImage
 } from '../lib/supabase';
 
 interface AdminViewProps {
@@ -54,6 +55,43 @@ export default function AdminView({ language }: AdminViewProps) {
 
   // Status message state
   const [statusMessage, setStatusMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
+
+  // Image Uploading States
+  const [uploadingSermonImage, setUploadingSermonImage] = useState(false);
+  const [uploadingEventImage, setUploadingEventImage] = useState(false);
+
+  // Image Upload Handlers
+  const handleSermonImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploadingSermonImage(true);
+    try {
+      const url = await uploadImage(file, 'sermons');
+      setEditSermon((prev) => ({ ...prev, image: url }));
+      triggerToast('success', 'Imagem da capa carregada com sucesso!');
+    } catch (err: any) {
+      console.error(err);
+      triggerToast('error', `Falha no upload: ${err.message || err}`);
+    } finally {
+      setUploadingSermonImage(false);
+    }
+  };
+
+  const handleEventImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploadingEventImage(true);
+    try {
+      const url = await uploadImage(file, 'events');
+      setEditEvent((prev) => ({ ...prev, image: url }));
+      triggerToast('success', 'Imagem de divulgação carregada com sucesso!');
+    } catch (err: any) {
+      console.error(err);
+      triggerToast('error', `Falha no upload: ${err.message || err}`);
+    } finally {
+      setUploadingEventImage(false);
+    }
+  };
 
   // Load Auth Session
   useEffect(() => {
@@ -988,14 +1026,36 @@ export default function AdminView({ language }: AdminViewProps) {
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-gray-700 uppercase mb-1">URL da Imagem de Capa</label>
-                <input
-                  type="url"
-                  value={editSermon.image || ''}
-                  onChange={(e) => setEditSermon({ ...editSermon, image: e.target.value })}
-                  className="w-full px-3 py-2 border rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-[#007cc3]"
-                  placeholder="https://images.unsplash.com/photo-..."
-                />
+                <label className="block text-xs font-bold text-gray-700 uppercase mb-1">Imagem de Capa</label>
+                <div className="flex gap-2">
+                  <input
+                    type="url"
+                    value={editSermon.image || ''}
+                    onChange={(e) => setEditSermon({ ...editSermon, image: e.target.value })}
+                    className="flex-grow px-3 py-2 border border-gray-250 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-[#007cc3]"
+                    placeholder="Cole a URL ou faça upload ao lado..."
+                  />
+                  <label className="flex items-center justify-center gap-1.5 px-3.5 py-2 bg-slate-100 hover:bg-slate-200 border border-slate-200 rounded-lg text-xs font-bold text-slate-700 cursor-pointer transition-colors shrink-0 select-none">
+                    {uploadingSermonImage ? (
+                      <>
+                        <RefreshCw className="h-4 w-4 animate-spin text-slate-500" />
+                        <span>Enviando...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Upload className="h-4 w-4 text-slate-500" />
+                        <span>Fazer Upload</span>
+                      </>
+                    )}
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleSermonImageUpload}
+                      disabled={uploadingSermonImage}
+                      className="hidden"
+                    />
+                  </label>
+                </div>
               </div>
 
               {/* Save / Cancel buttons */}
@@ -1150,30 +1210,52 @@ export default function AdminView({ language }: AdminViewProps) {
               </div>
 
               {/* Location */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs font-bold text-gray-700 uppercase mb-1">Local (Português) *</label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="Ex: Templo Principal"
-                    value={editEvent.location?.pt || ''}
-                    onChange={(e) => setEditEvent({
-                      ...editEvent,
-                      location: { pt: e.target.value, en: e.target.value }
-                    })}
-                    className="w-full px-3 py-2 border rounded-lg text-sm focus:outline-none"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-bold text-gray-700 uppercase mb-1">URL Imagem Divulgação</label>
+              <div>
+                <label className="block text-xs font-bold text-gray-700 uppercase mb-1">Local (Português) *</label>
+                <input
+                  type="text"
+                  required
+                  placeholder="Ex: Templo Principal"
+                  value={editEvent.location?.pt || ''}
+                  onChange={(e) => setEditEvent({
+                    ...editEvent,
+                    location: { pt: e.target.value, en: e.target.value }
+                  })}
+                  className="w-full px-3 py-2 border rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-[#007cc3]"
+                />
+              </div>
+
+              {/* Image */}
+              <div>
+                <label className="block text-xs font-bold text-gray-700 uppercase mb-1">Imagem de Divulgação</label>
+                <div className="flex gap-2">
                   <input
                     type="url"
-                    placeholder="https://images.unsplash.com/photo-..."
+                    placeholder="Cole a URL ou faça upload ao lado..."
                     value={editEvent.image || ''}
                     onChange={(e) => setEditEvent({ ...editEvent, image: e.target.value })}
-                    className="w-full px-3 py-2 border rounded-lg text-sm focus:outline-none"
+                    className="flex-grow px-3 py-2 border border-gray-250 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-[#007cc3]"
                   />
+                  <label className="flex items-center justify-center gap-1.5 px-3.5 py-2 bg-slate-100 hover:bg-slate-200 border border-slate-200 rounded-lg text-xs font-bold text-slate-700 cursor-pointer transition-colors shrink-0 select-none">
+                    {uploadingEventImage ? (
+                      <>
+                        <RefreshCw className="h-4 w-4 animate-spin text-slate-500" />
+                        <span>Enviando...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Upload className="h-4 w-4 text-slate-500" />
+                        <span>Fazer Upload</span>
+                      </>
+                    )}
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleEventImageUpload}
+                      disabled={uploadingEventImage}
+                      className="hidden"
+                    />
+                  </label>
                 </div>
               </div>
 
