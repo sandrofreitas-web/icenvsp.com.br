@@ -1,0 +1,388 @@
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-surface": "#2f2e43",
+                    "surface-tint": "#E8F4FB",
+                    "background": "#fcf8ff",
+                    "outline": "#707882",
+                    "text-muted": "#64748B",
+                    "tertiary": "#755b00",
+                    "on-error-container": "#93000a",
+                    "on-tertiary": "#ffffff",
+                    "inverse-primary": "#98cbff",
+                    "tertiary-fixed": "#ffe08f",
+                    "on-secondary-fixed-variant": "#004a76",
+                    "surface-variant": "#e2e0fc",
+                    "on-tertiary-container": "#4f3d00",
+                    "surface-container-high": "#e8e5ff",
+                    "on-secondary-container": "#005180",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container": "#efecff",
+                    "on-secondary": "#ffffff",
+                    "on-background": "#1a1a2e",
+                    "on-primary-container": "#00050e",
+                    "inverse-on-surface": "#f2efff",
+                    "secondary": "#166397",
+                    "on-secondary-fixed": "#001d33",
+                    "secondary-container": "#86c4fe",
+                    "surface-dim": "#dad7f3",
+                    "on-primary-fixed": "#001d33",
+                    "tertiary-container": "#c8a74b",
+                    "outline-variant": "#bfc7d2",
+                    "primary-fixed": "#cfe5ff",
+                    "on-primary-fixed-variant": "#004a77",
+                    "error-container": "#ffdad6",
+                    "primary-container": "#007cc3",
+                    "secondary-fixed-dim": "#97cbff",
+                    "on-primary": "#ffffff",
+                    "surface-container-highest": "#e2e0fc",
+                    "surface": "#fcf8ff",
+                    "on-surface-variant": "#404751",
+                    "on-tertiary-fixed-variant": "#584400",
+                    "surface-bright": "#fcf8ff",
+                    "on-tertiary-fixed": "#241a00",
+                    "error": "#ba1a1a",
+                    "secondary-fixed": "#cee5ff",
+                    "surface-container-low": "#f5f2ff",
+                    "tertiary-fixed-dim": "#e6c364",
+                    "on-error": "#ffffff",
+                    "primary-fixed-dim": "#98cbff",
+                    "on-surface": "#1a1a2e",
+                    "surface-alt": "#F8FAFC",
+                    "primary": "#00629c"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "margin-desktop": "48px",
+                    "base": "8px",
+                    "margin-mobile": "16px",
+                    "container-max": "1200px",
+                    "section-gap": "80px"
+            },
+            "fontFamily": {
+                    "caption": ["Inter"],
+                    "label-md": ["Inter"],
+                    "display-lg-mobile": ["Playfair Display"],
+                    "headline-md": ["Playfair Display"],
+                    "body-md": ["Inter"],
+                    "headline-lg": ["Playfair Display"],
+                    "display-lg": ["Playfair Display"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "caption": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "display-lg-mobile": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                    "display-lg": ["56px", {"lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+            line-height: 1;
+        }
+        .ambient-shadow {
+            box-shadow: 0px 10px 40px rgba(0, 98, 156, 0.08);
+        }
+        .event-card-hover {
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .event-card-hover:hover {
+            transform: translateY(-8px);
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #00629c;
+            border-radius: 4px;
+        }
+        .heading-mask {
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(to right, #00629c, #166397);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed font-body-md">
+<!-- TopNavBar -->
+<nav class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-desktop h-24 bg-secondary dark:bg-secondary transition-colors duration-300">
+<div class="flex items-center gap-6 h-full">
+<div class="flex items-center h-16 w-16 bg-white rounded-lg p-1">
+<img alt="ICENVSP Logo Principal" class="h-full w-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRQmgmA0-gRjHcYMAdW4En9N9DI_UYj237dJ36rv5H-H5dgXk86XQYkeHqn1ZoK6lhj8IvZXogj_GVcnhBTistHROJ0HU_EMs61gqM8OAwmfOa1FNvuX526hwhNMxauDGkeQQkiiXDCLwzfxNDS0J7xXxgH2XphBjDilY8KBk-z3h8lSkXYqKdN0Uh8jOIbLZTH91uPRJ9eQtUW7_-vIDu0qW0qOkRvJteJpsZOQ9emwL2ZnRxW0NtnuL8vkNo7q3WmEN0K0Teyoc"/>
+</div>
+<div class="h-8 border-l border-on-secondary/30 hidden sm:block"></div>
+<div class="flex items-center h-8">
+<img alt="Logo Denominação ICE" class="h-full w-auto object-contain brightness-0 invert opacity-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbPTLe1RpucregXMYSG3CQRbSvbzkMVSqOYcmJivjHMvx9sYuMb4fNLHUHLZ8w2KDsnDrzewN66qd6_Chdel3DR7PBTLjc0eHu282uRiaEIpowwUxZpQb7BzPKIaIbeRL7LEmuH1trNobSWIFjKLq2wxW2sXbKtiMRbSNYJRNAmBwYo7jZBN0M3W_unJmVeeDgFjVbJ-EHdbbXd7168PC4WSiysU_brDr2jdgRqVf_G-C14o27ziRzLs6modX-HZirlwGofpyxmX4"/>
+</div>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-on-secondary dark:text-on-secondary-fixed hover:text-tertiary-fixed-dim font-label-md text-label-md transition-colors" href="#">Home</a>
+<a class="text-on-secondary dark:text-on-secondary-fixed hover:text-tertiary-fixed-dim font-label-md text-label-md transition-colors" href="#">Sobre</a>
+<a class="text-on-secondary dark:text-on-secondary-fixed hover:text-tertiary-fixed-dim font-label-md text-label-md transition-colors" href="#">Cultos</a>
+<a class="text-on-secondary dark:text-on-secondary-fixed hover:text-tertiary-fixed-dim font-label-md text-label-md transition-colors" href="#">Sermões</a>
+<a class="text-tertiary-container dark:text-tertiary-fixed border-b-2 border-tertiary-container dark:border-tertiary-fixed pb-1 font-label-md text-label-md" href="#">Eventos</a>
+<a class="text-on-secondary dark:text-on-secondary-fixed hover:text-tertiary-fixed-dim font-label-md text-label-md transition-colors" href="#">Contato</a>
+</div>
+<div class="flex items-center gap-4">
+<span class="text-on-secondary font-label-md text-label-md">PT | EN</span>
+<button class="md:hidden text-on-secondary">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</nav>
+<!-- Hero Section -->
+<header class="relative pt-48 pb-24 px-margin-desktop overflow-hidden bg-white">
+<div class="max-w-container-max mx-auto relative z-10">
+<div class="flex flex-col gap-4 max-w-3xl">
+<span class="text-primary font-label-md text-label-md tracking-[0.2em] uppercase font-bold">Nossa Comunidade</span>
+<h1 class="font-display-lg text-display-lg text-on-background heading-mask">Agenda de Eventos</h1>
+<p class="font-body-lg text-body-lg text-text-muted mt-4 leading-relaxed max-w-xl">
+                    Participe de nossos encontros, conferências e atividades ministeriais. Um espaço para crescimento espiritual e comunhão.
+                </p>
+</div>
+</div>
+<!-- Decorative elements -->
+<div class="absolute top-0 right-0 w-1/3 h-full bg-surface-container-low -skew-x-12 translate-x-1/2"></div>
+<div class="absolute top-1/4 right-1/4 w-32 h-32 border border-primary/10 rounded-full"></div>
+</header>
+<!-- Filter Navigation -->
+<div class="sticky top-24 z-40 bg-white/90 backdrop-blur-md border-b border-outline-variant">
+<div class="max-w-container-max mx-auto px-margin-desktop">
+<div class="flex flex-wrap gap-8 py-6">
+<button class="font-label-md text-label-md text-primary border-b-2 border-primary pb-2 transition-all" id="tab-proximos">
+                Próximos Eventos
+            </button>
+<button class="font-label-md text-label-md text-text-muted hover:text-primary pb-2 transition-all" id="tab-conferencias">
+                Conferências
+            </button>
+<button class="font-label-md text-label-md text-text-muted hover:text-primary pb-2 transition-all" id="tab-ministerios">
+                Ministérios
+            </button>
+</div>
+</div>
+</div>
+<!-- Main Grid Layout -->
+<main class="px-margin-desktop py-16 max-w-container-max mx-auto min-h-screen">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="events-list">
+<!-- Event Card 1 (Featured Style) -->
+<div class="md:col-span-2 lg:col-span-2 relative group overflow-hidden rounded-2xl bg-white border border-outline-variant event-card-hover ambient-shadow">
+<div class="aspect-[21/9] overflow-hidden relative">
+<img alt="Conferência de Renovação" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDi9dU0mR9jQ3GJ2BQcZULD5c3nZwuunkTT8W9zandMumKsPxxPZdx7BmoSLWenF4nDVuIGgCIJS_xC3BRfF4VcZOHhcCAztjFiKd-uWQfN6FpPYyZf_jMUyw-sLeLc7apiXyzjUQZmRunDoChqoUNPueehGSJ0yKIhOS1ORfsZGSR0F8pNVYG9QnIMbNL4RWs7O4TNvJsnHp-tHbdMSdihs6DXeFwUelGP6SfYd6Y5I0J0pu6bKguayAtj9PfGti23Tt40MprXyeo"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+<div class="absolute top-6 left-6 flex flex-col items-center bg-white/95 backdrop-blur px-4 py-3 rounded-xl shadow-lg">
+<span class="font-display-lg text-headline-md text-primary leading-none">15</span>
+<span class="font-label-md text-caption text-tertiary font-bold uppercase mt-1">OUT</span>
+</div>
+<div class="absolute bottom-8 left-8 right-8">
+<span class="inline-block bg-primary text-on-primary px-4 py-1 rounded-full text-caption font-label-md uppercase mb-4">Conferência</span>
+<h3 class="font-headline-lg text-display-lg-mobile text-white mb-4">Conferência de Renovação 2024</h3>
+<div class="flex flex-wrap gap-6 text-white/90 font-body-md">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">location_on</span>
+<span>Auditório Principal</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">schedule</span>
+<span>19:30 - 22:00</span>
+</div>
+</div>
+</div>
+</div>
+<div class="p-8 flex justify-end">
+<button class="bg-tertiary-container text-on-tertiary font-label-md text-label-md px-10 py-4 rounded-full hover:shadow-xl hover:-translate-y-0.5 active:scale-95 transition-all">
+                    Inscreva-se
+                </button>
+</div>
+</div>
+<!-- Sidebar Highlight -->
+<div class="bg-secondary p-8 rounded-2xl text-on-secondary flex flex-col justify-between event-card-hover ambient-shadow">
+<div>
+<h4 class="font-headline-md text-headline-md mb-6 leading-tight">Destaque do Mês</h4>
+<div class="aspect-square bg-secondary-container rounded-xl mb-6 overflow-hidden">
+<img alt="Destaque" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcMyRlBcfmI9TYDderu5Ca93mkb1h8BiWvJXRqsnC4X7uvASgr0KtimfzNgiIQTQsC3RKInbmzix9uMDFQ3QJsH_g_vsvBqltUudwNdItrWf_fFfJgwLaeUKJqMq7nDHr-y-wS3vD93Z_MYK8fZVJxQ0og2oYIc94q6MQLKxwr-zg8szo_Po5EvrU7Ep7KiSPbN3MGVo1YGRjK2U0QWmC0-F4f9ZrpMtogO4PbRVEtFlZAP-eOVqD2N39MCZvmVKs1Pnl8IN32rxM"/>
+</div>
+<h5 class="font-label-md text-label-md text-tertiary-fixed-dim uppercase mb-3">10-12 Outubro</h5>
+<p class="font-body-md text-body-md mb-8 opacity-80 leading-relaxed">Participe de nossa Jornada Teológica Anual com palestrantes convidados de todo o país.</p>
+</div>
+<a class="flex items-center gap-2 font-label-md text-label-md border-b border-on-secondary/30 pb-2 w-fit hover:border-on-secondary hover:text-tertiary-fixed transition-colors" href="#">
+                Saiba mais sobre a Jornada
+                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<!-- Event Card 2 -->
+<div class="group rounded-2xl bg-white border border-outline-variant overflow-hidden event-card-hover ambient-shadow">
+<div class="aspect-[4/3] overflow-hidden relative">
+<img alt="Louvor e Adoração" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqgJ7MDb0BirsGd5UffQVRCkqfLut7si6DNe4rXn7vKU6TX__AwyLOF46dGeXb6457R1F_RTE6ff3WX1WjjVnl4eFA6ki26ZAxUF94rL72vmL_liwOBnLIQDBUvA-JpL-xH4cFYU3ilxcw0ePvzSEJyqZJMYwQzDixbhQQRjBqt6Ajv15ahB1lu3MDLOwhZIvehY-uTAic7b8iEqFIur73rs3X6k3CjGnSZApJjgECSumcKrsfAwRkF1RiywPLKorC1jGXKS-GCw0"/>
+<div class="absolute top-4 left-4 bg-white px-3 py-2 rounded-lg shadow-md">
+<span class="block font-bold text-primary text-center">22</span>
+<span class="block text-[10px] text-tertiary font-bold text-center uppercase">OUT</span>
+</div>
+</div>
+<div class="p-6">
+<span class="text-primary font-label-md text-caption uppercase tracking-wider mb-2 block">Ministérios</span>
+<h3 class="font-headline-md text-headline-md text-on-background mb-4 h-16 overflow-hidden">Noite de Louvor e Adoração</h3>
+<div class="space-y-2 text-text-muted text-body-md mb-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg">location_on</span>
+<span>Santuário ICENVSP</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg">schedule</span>
+<span>20:00</span>
+</div>
+</div>
+<button class="w-full border-2 border-primary text-primary font-label-md text-label-md py-3 rounded-full hover:bg-primary hover:text-white transition-all">
+                    Ver Detalhes
+                </button>
+</div>
+</div>
+<!-- Event Card 3 -->
+<div class="group rounded-2xl bg-white border border-outline-variant overflow-hidden event-card-hover ambient-shadow">
+<div class="aspect-[4/3] overflow-hidden relative">
+<img alt="Workshop Liderança" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDd93lvxy5BzYKxJuZZc285iPN82UMFveprDYLLf6oIup8hGAtfaltC81pLcoYUvGYcQE8FMmDMIHvRQWGVW6ysbd73plad8uaMzLdvQyuo0zzet5Wqq5Zk7mAAZg9yDm1fdWglbYACDHU5l5b3cW1HGimNMNe_kCtuaTxhEhYPRDB30YR0FNb1-fQMrtZxUiT5EZQzO12cB_W-okjLhheNeUnROlNWtJyfOwsjZOqq4mnuIcrsCW8IdIQj71SqSC5rDB7aDlFOczg"/>
+<div class="absolute top-4 left-4 bg-white px-3 py-2 rounded-lg shadow-md">
+<span class="block font-bold text-primary text-center">05</span>
+<span class="block text-[10px] text-tertiary font-bold text-center uppercase">NOV</span>
+</div>
+</div>
+<div class="p-6">
+<span class="text-primary font-label-md text-caption uppercase tracking-wider mb-2 block">Educação</span>
+<h3 class="font-headline-md text-headline-md text-on-background mb-4 h-16 overflow-hidden">Workshop: Liderança Cristã</h3>
+<div class="space-y-2 text-text-muted text-body-md mb-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg">location_on</span>
+<span>Sala 302 - Anexo</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg">schedule</span>
+<span>14:00 - 18:00</span>
+</div>
+</div>
+<button class="w-full bg-tertiary-container text-on-tertiary font-label-md text-label-md py-3 rounded-full hover:opacity-90 transition-all">
+                    Inscreva-se
+                </button>
+</div>
+</div>
+<!-- Newsletter CTA Card -->
+<div class="bg-surface-container border border-outline-variant p-8 rounded-2xl flex flex-col justify-center event-card-hover ambient-shadow">
+<div class="bg-primary-container/10 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-primary text-3xl">mail</span>
+</div>
+<h4 class="font-headline-md text-headline-md text-on-background mb-4">Mantenha-se Informado</h4>
+<p class="font-body-md text-body-md text-text-muted mb-8 leading-relaxed">Receba atualizações semanais sobre nossos cultos e eventos especiais diretamente no seu e-mail.</p>
+<form class="space-y-4" onsubmit="event.preventDefault();">
+<input class="w-full px-6 py-4 rounded-full border border-outline-variant bg-white text-on-surface focus:border-primary focus:ring-4 focus:ring-primary/5 outline-none transition-all placeholder:text-text-muted/60" placeholder="Seu melhor e-mail" type="email"/>
+<button class="w-full bg-primary text-on-primary font-label-md text-label-md py-4 rounded-full hover:shadow-lg transition-all" type="submit">Inscrever na Newsletter</button>
+</form>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-section-gap px-margin-desktop grid grid-cols-1 md:grid-cols-3 gap-gutter bg-secondary dark:bg-on-secondary-fixed border-t border-outline-variant text-on-secondary dark:text-secondary-fixed">
+<div class="flex flex-col gap-6">
+<div class="flex flex-col gap-4">
+<div class="h-20 w-20 bg-white rounded-lg p-1">
+<img alt="ICENVSP Logo Principal" class="h-full w-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRQmgmA0-gRjHcYMAdW4En9N9DI_UYj237dJ36rv5H-H5dgXk86XQYkeHqn1ZoK6lhj8IvZXogj_GVcnhBTistHROJ0HU_EMs61gqM8OAwmfOa1FNvuX526hwhNMxauDGkeQQkiiXDCLwzfxNDS0J7xXxgH2XphBjDilY8KBk-z3h8lSkXYqKdN0Uh8jOIbLZTH91uPRJ9eQtUW7_-vIDu0qW0qOkRvJteJpsZOQ9emwL2ZnRxW0NtnuL8vkNo7q3WmEN0K0Teyoc"/>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-caption font-label-md uppercase tracking-wider opacity-60">Filiada à</span>
+<img alt="Logo ICE" class="h-6 w-auto object-contain brightness-0 invert opacity-70" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbPTLe1RpucregXMYSG3CQRbSvbzkMVSqOYcmJivjHMvx9sYuMb4fNLHUHLZ8w2KDsnDrzewN66qd6_Chdel3DR7PBTLjc0eHu282uRiaEIpowwUxZpQb7BzPKIaIbeRL7LEmuH1trNobSWIFjKLq2wxW2sXbKtiMRbSNYJRNAmBwYo7jZBN0M3W_unJmVeeDgFjVbJ-EHdbbXd7168PC4WSiysU_brDr2jdgRqVf_G-C14o27ziRzLs6modX-HZirlwGofpyxmX4"/>
+</div>
+</div>
+<p class="font-body-md text-body-md opacity-80 max-w-xs">
+                Igreja Cristã Evangélica de Nova Vida em São Paulo. Vivendo o Evangelho, transformando vidas.
+            </p>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="font-label-md text-label-md uppercase tracking-widest text-tertiary-fixed">Links Rápidos</h4>
+<div class="grid grid-cols-2 gap-2">
+<a class="text-on-secondary/80 dark:text-on-secondary-fixed-variant hover:text-tertiary-fixed transition-colors font-label-md text-label-md" href="#">Home</a>
+<a class="text-on-secondary/80 dark:text-on-secondary-fixed-variant hover:text-tertiary-fixed transition-colors font-label-md text-label-md" href="#">Sobre</a>
+<a class="text-on-secondary/80 dark:text-on-secondary-fixed-variant hover:text-tertiary-fixed transition-colors font-label-md text-label-md" href="#">Cultos</a>
+<a class="text-on-secondary/80 dark:text-on-secondary-fixed-variant hover:text-tertiary-fixed transition-colors font-label-md text-label-md" href="#">Sermões</a>
+<a class="text-tertiary-fixed font-bold font-label-md text-label-md" href="#">Eventos</a>
+<a class="text-on-secondary/80 dark:text-on-secondary-fixed-variant hover:text-tertiary-fixed transition-colors font-label-md text-label-md" href="#">Contato</a>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="font-label-md text-label-md uppercase tracking-widest text-tertiary-fixed">Localização</h4>
+<p class="font-body-md text-body-md opacity-80">
+                Av. das Nações Unidas, 1234<br/>
+                São Paulo - SP, Brasil
+            </p>
+<div class="flex gap-4 mt-2">
+<a class="material-symbols-outlined hover:text-tertiary-fixed transition-colors" href="#">public</a>
+<a class="material-symbols-outlined hover:text-tertiary-fixed transition-colors" href="#">share</a>
+<a class="material-symbols-outlined hover:text-tertiary-fixed transition-colors" href="#">mail</a>
+</div>
+</div>
+<div class="md:col-span-3 pt-12 border-t border-on-secondary/10 mt-8 text-center">
+<p class="font-label-md text-label-md opacity-60">© 2024 ICENVSP. Todos os direitos reservados.</p>
+</div>
+</footer>
+<script>
+    // Tab switching interaction
+    const tabs = ['tab-proximos', 'tab-conferencias', 'tab-ministerios'];
+    
+    tabs.forEach(tabId => {
+        const el = document.getElementById(tabId);
+        if (el) {
+            el.addEventListener('click', function() {
+                tabs.forEach(t => {
+                    const tab = document.getElementById(t);
+                    if (tab) {
+                        tab.classList.remove('text-primary', 'border-b-2', 'border-primary');
+                        tab.classList.add('text-text-muted');
+                    }
+                });
+                
+                this.classList.add('text-primary', 'border-b-2', 'border-primary');
+                this.classList.remove('text-text-muted');
+                
+                const list = document.getElementById('events-list');
+                if (list) {
+                    list.style.opacity = '0';
+                    list.style.transform = 'translateY(10px)';
+                    setTimeout(() => {
+                        list.style.opacity = '1';
+                        list.style.transform = 'translateY(0)';
+                    }, 300);
+                }
+            });
+        }
+    });
+
+    const list = document.getElementById('events-list');
+    if (list) {
+        list.style.transition = 'all 0.4s ease';
+    }
+</script>
+</body></html>

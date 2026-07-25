@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sermões | ICENVSP</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Playfair+Display:wght@600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;family=Playfair+Display:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-surface": "#2f2e43",
+                    "surface-tint": "#E8F4FB",
+                    "background": "#fcf8ff",
+                    "outline": "#707882",
+                    "text-muted": "#64748B",
+                    "tertiary": "#755b00",
+                    "on-error-container": "#93000a",
+                    "on-tertiary": "#ffffff",
+                    "inverse-primary": "#98cbff",
+                    "tertiary-fixed": "#ffe08f",
+                    "on-secondary-fixed-variant": "#004a76",
+                    "surface-variant": "#e2e0fc",
+                    "on-tertiary-container": "#4f3d00",
+                    "surface-container-high": "#e8e5ff",
+                    "on-secondary-container": "#005180",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container": "#efecff",
+                    "on-secondary": "#ffffff",
+                    "on-background": "#1a1a2e",
+                    "on-primary-container": "#00050e",
+                    "inverse-on-surface": "#f2efff",
+                    "secondary": "#166397",
+                    "on-secondary-fixed": "#001d33",
+                    "secondary-container": "#86c4fe",
+                    "surface-dim": "#dad7f3",
+                    "on-primary-fixed": "#001d33",
+                    "tertiary-container": "#c8a74b",
+                    "outline-variant": "#bfc7d2",
+                    "primary-fixed": "#cfe5ff",
+                    "on-primary-fixed-variant": "#004a77",
+                    "error-container": "#ffdad6",
+                    "primary-container": "#007cc3",
+                    "secondary-fixed-dim": "#97cbff",
+                    "on-primary": "#ffffff",
+                    "surface-container-highest": "#e2e0fc",
+                    "surface": "#fcf8ff",
+                    "on-surface-variant": "#404751",
+                    "on-tertiary-fixed-variant": "#584400",
+                    "surface-bright": "#fcf8ff",
+                    "on-tertiary-fixed": "#241a00",
+                    "error": "#ba1a1a",
+                    "secondary-fixed": "#cee5ff",
+                    "surface-container-low": "#f5f2ff",
+                    "tertiary-fixed-dim": "#e6c364",
+                    "on-error": "#ffffff",
+                    "primary-fixed-dim": "#98cbff",
+                    "on-surface": "#1a1a2e",
+                    "surface-alt": "#F8FAFC",
+                    "primary": "#00629c"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "margin-desktop": "48px",
+                    "base": "8px",
+                    "margin-mobile": "16px",
+                    "container-max": "1200px",
+                    "section-gap": "80px"
+            },
+            "fontFamily": {
+                    "caption": ["Inter"],
+                    "label-md": ["Inter"],
+                    "display-lg-mobile": ["Playfair Display"],
+                    "headline-md": ["Playfair Display"],
+                    "body-md": ["Inter"],
+                    "headline-lg": ["Playfair Display"],
+                    "display-lg": ["Playfair Display"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "caption": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "display-lg-mobile": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "display-lg": ["56px", {"lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .ambient-shadow { box-shadow: 0px 10px 30px rgba(26, 26, 46, 0.05); }
+        .sermon-card-hover:hover { transform: translateY(-2px); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .nav-glass { backdrop-filter: blur(8px); }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md overflow-x-hidden">
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-desktop h-20 bg-secondary transition-colors duration-300">
+<div class="flex items-center gap-4">
+<img alt="ICENVSP Logo" class="h-14 w-auto object-contain brightness-0 invert" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDedLVqA2xwNqJ1KX1udBIVwAIjXiPH4KsgwSR6ws72QSVC4aSJbb50-Hc-K2w7UKzVGmak4pxjQCAOJ7NqpCTzSD78BhR_ytLDhZ-YofXu3Xj-6Rc67dNVpMf6gqyCBJwSar82GJxbjv6y-xe6WszsiiwFQTiD36vPRvlPWXjKcFXJy4jbaWgFDaIEB9wW4tiN-cq8ZlPSqajQvT6-PvKbdHayNmOwMCvNdxlK0TUtg5tcmMP_BwIpySBH1U6R32wd6tW3XP1OBl4"/>
+<div class="h-8 w-[1px] bg-white/30 hidden sm:block"></div>
+<img alt="Denomination Logo" class="h-8 w-auto object-contain brightness-0 invert opacity-90 hidden sm:block" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzAuPRlW_gm7UnXNeoE4HQ5kw1FR011RCn_p3oCyCsZ9mcdQYTfvXbl8DeV4JkYbxK5mxv8fKe4ti1HtHgWoz-dsIv0u460glCUk7R_4qKDLVGfFAY20HP83y_uzRE0bt1bUhvNA9UIOvd_To99xA6ZF04JLjOItoiC1AcMFOFJT3C0xwjUeQHnEi_TBjiwNhnv2t3gP0F6gIlamqNuj-Cg1xE4lnlM34_-TuIagurVnnx4b3720lmcM0vcf4N2zvyvmzknsREl4M"/>
+</div>
+<nav class="hidden md:flex items-center space-x-8">
+<a class="text-on-secondary dark:text-on-secondary-fixed hover:text-tertiary-fixed-dim font-label-md text-label-md transition-colors" href="#">Home</a>
+<a class="text-on-secondary dark:text-on-secondary-fixed hover:text-tertiary-fixed-dim font-label-md text-label-md transition-colors" href="#">Sobre</a>
+<a class="text-on-secondary dark:text-on-secondary-fixed hover:text-tertiary-fixed-dim font-label-md text-label-md transition-colors" href="#">Cultos</a>
+<a class="text-tertiary-container dark:text-tertiary-fixed border-b-2 border-tertiary-container dark:border-tertiary-fixed pb-1 font-label-md text-label-md" href="#">Sermões</a>
+<a class="text-on-secondary dark:text-on-secondary-fixed hover:text-tertiary-fixed-dim font-label-md text-label-md transition-colors" href="#">Eventos</a>
+<a class="text-on-secondary dark:text-on-secondary-fixed hover:text-tertiary-fixed-dim font-label-md text-label-md transition-colors" href="#">Contato</a>
+</nav>
+<div class="flex items-center space-x-4">
+<span class="font-label-md text-label-md text-on-secondary">PT | EN</span>
+<button class="md:hidden text-on-secondary">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</header>
+<main class="pt-20">
+<!-- Hero Section -->
+<section class="relative h-[40vh] min-h-[300px] flex items-center justify-center overflow-hidden">
+<div class="relative z-10 text-center px-margin-mobile">
+<h1 class="font-display-lg text-display-lg text-primary mb-4 max-md:font-display-lg-mobile max-md:text-display-lg-mobile">Nossos Sermões</h1>
+<p class="font-body-lg text-body-lg text-text-muted max-w-2xl mx-auto">Explore nosso arquivo de mensagens bíblicas e mergulhe profundamente na Palavra de Deus.</p>
+</div>
+</section>
+<!-- Search and Filter Bar -->
+<section class="bg-surface-alt border-b border-outline-variant/30 py-8 sticky top-20 z-40">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+<!-- Search Input -->
+<div class="relative md:col-span-1">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted">search</span>
+<input class="w-full pl-10 pr-4 py-3 bg-white border border-outline rounded-lg focus:ring-2 focus:ring-primary/10 focus:border-primary outline-none transition-all font-body-md" placeholder="Buscar sermão..." type="text"/>
+</div>
+<!-- Series Filter -->
+<div class="relative">
+<select class="w-full px-4 py-3 bg-white border border-outline rounded-lg appearance-none focus:border-primary outline-none font-body-md">
+<option value="">Série</option>
+<option value="joao">Evangelho de João</option>
+<option value="salmos">Os Salmos</option>
+<option value="reforma">Herança da Reforma</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-text-muted">expand_more</span>
+</div>
+<!-- Preacher Filter -->
+<div class="relative">
+<select class="w-full px-4 py-3 bg-white border border-outline rounded-lg appearance-none focus:border-primary outline-none font-body-md">
+<option value="">Pregador</option>
+<option value="pr_silas">Pr. Silas Campos</option>
+<option value="pr_marcos">Pr. Marcos Ferreira</option>
+<option value="visitante">Pregador Visitante</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-text-muted">expand_more</span>
+</div>
+<!-- Topic Filter -->
+<div class="relative">
+<select class="w-full px-4 py-3 bg-white border border-outline rounded-lg appearance-none focus:border-primary outline-none font-body-md">
+<option value="">Tema</option>
+<option value="graca">Graça</option>
+<option value="fe">Fé</option>
+<option value="esperanca">Esperança</option>
+<option value="santificacao">Santificação</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-text-muted">expand_more</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Sermon Grid -->
+<section class="py-section-gap max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Sermon Card 1 -->
+<article class="bg-white border border-surface-tint rounded-xl overflow-hidden sermon-card-hover ambient-shadow flex flex-col">
+<div class="relative aspect-video overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A cinematic, high-quality photograph of a wooden pulpit in a solemn, sunlit sanctuary. The lighting is soft and ethereal, capturing the dust motes dancing in the light. The scene is dominated by deep blues and rich gold accents from a stained glass window reflecting on the polished wood. The mood is peaceful, institutional, and deeply spiritual." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2iLI_cUlDbdrXs6tk_BKEFfqdUqeh_y4Gr2S7PnrBdQreBh2ovtP2EaUug_XInxhz6WCTggl3tOMzy3GIFrH8jA9LzR4azuOxh0AlsBTvgycIuOWH4lSHBOBDD0YQw2Py8OEaYFVUQQtaahZM7OJt40vZalU55QWMnyrbhRoSGUWhhYzM3GmC2ah9CVHOup09mkXE6F8zWoFOlegK2-2wtGwXQIK2dirGoa0WFsb1qgq2EhoJ5N1b_Z1Y6kjhmaKGMG5_vGC-0DA"/>
+<div class="absolute bottom-3 right-3 bg-on-background/80 text-white px-2 py-1 rounded text-caption font-caption backdrop-blur-sm">45:12</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="mb-3">
+<span class="inline-block px-3 py-1 bg-surface-tint text-primary-fixed-dim rounded-full text-caption font-label-md uppercase">Evangelho de João</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-background mb-4 line-clamp-2">A Luz que Resplandece nas Trevas</h3>
+<div class="mt-auto space-y-2">
+<div class="flex items-center text-text-muted">
+<span class="material-symbols-outlined text-[18px] mr-2">person</span>
+<span class="font-body-md text-body-md">Pr. Silas Campos</span>
+</div>
+<div class="flex items-center text-text-muted">
+<span class="material-symbols-outlined text-[18px] mr-2">calendar_today</span>
+<span class="font-body-md text-body-md">12 Mai, 2024</span>
+</div>
+</div>
+</div>
+</article>
+<!-- Sermon Card 2 -->
+<article class="bg-white border border-surface-tint rounded-xl overflow-hidden sermon-card-hover ambient-shadow flex flex-col">
+<div class="relative aspect-video overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="An atmospheric, top-down view of an open Bible resting on a dark blue velvet surface. The pages are crisp and illuminated by a single warm spotlight, creating a dramatic contrast. Subtle gold dust particles are scattered across the composition, reflecting the light. The aesthetic is refined and editorial, conveying a sense of timeless wisdom and grace." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6oz3hycUMrsEWfFyTKkSGkhPRzaJpGdnNpEVXVr5195Z6-OMk24FGby-_1ITDp2fuo42XhdWZ_ZAwh0PnHRQWOtwCUV7Uh3QuhAhhh2zy9IeYD7N2EzXfDyBRdqOmpRS_kas3dbh_Kmm5PWCkIbUo60LP4cDzxsjTmM1h9acyYYeINqvc5KTfZFd-PLtzLe0BZBzTyvpxNnBcLcJjmoqu1TgxBiCpzA17tRNgL_5OX3tikAWAh1M_UPmi1wFvHkBoMcLMQz2Xqy8"/>
+<div class="absolute bottom-3 right-3 bg-on-background/80 text-white px-2 py-1 rounded text-caption font-caption backdrop-blur-sm">38:45</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="mb-3">
+<span class="inline-block px-3 py-1 bg-surface-tint text-primary-fixed-dim rounded-full text-caption font-label-md uppercase">Os Salmos</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-background mb-4 line-clamp-2">Descansando na Soberania de Deus</h3>
+<div class="mt-auto space-y-2">
+<div class="flex items-center text-text-muted">
+<span class="material-symbols-outlined text-[18px] mr-2">person</span>
+<span class="font-body-md text-body-md">Pr. Marcos Ferreira</span>
+</div>
+<div class="flex items-center text-text-muted">
+<span class="material-symbols-outlined text-[18px] mr-2">calendar_today</span>
+<span class="font-body-md text-body-md">05 Mai, 2024</span>
+</div>
+</div>
+</div>
+</article>
+<!-- Sermon Card 3 -->
+<article class="bg-white border border-surface-tint rounded-xl overflow-hidden sermon-card-hover ambient-shadow flex flex-col">
+<div class="relative aspect-video overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A minimalist architectural shot of a modern church interior, featuring clean lines and vast white spaces. High-key natural lighting pours in through a large cross-shaped window, creating a serene and welcoming atmosphere. The color palette is dominated by whites and soft grays, with deep blue accents on the pews. The mood is one of clarity and contemplation." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDK97Xm8_iehPfKptVkMqJ2TgoTUptwTk2Y3v2KMJubrUjfhZlyJT0mfila_ut7-hCNFIIsv6XvpaxXXG3eOcTX_1JySRqIa41imCXGhXC26-uHMgQ3xpYOavRnmTMLoc9QDgICG9JODmg6c404FCN9kgBfMYrROyRzHJNh3jM-kFEcmkxH6NoXyhPj5mO_uUKQjBezjFFTeb-DRqezcEul44SfS0HODPDfIGLH_Tqm6bI6lU4iCUOMsTHUAlqFNva01ai2dWinybU"/>
+<div class="absolute bottom-3 right-3 bg-on-background/80 text-white px-2 py-1 rounded text-caption font-caption backdrop-blur-sm">42:20</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="mb-3">
+<span class="inline-block px-3 py-1 bg-surface-tint text-primary-fixed-dim rounded-full text-caption font-label-md uppercase">Herança da Reforma</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-background mb-4 line-clamp-2">Sola Fide: A Justificação Somente pela Fé</h3>
+<div class="mt-auto space-y-2">
+<div class="flex items-center text-text-muted">
+<span class="material-symbols-outlined text-[18px] mr-2">person</span>
+<span class="font-body-md text-body-md">Pr. Silas Campos</span>
+</div>
+<div class="flex items-center text-text-muted">
+<span class="material-symbols-outlined text-[18px] mr-2">calendar_today</span>
+<span class="font-body-md text-body-md">28 Abr, 2024</span>
+</div>
+</div>
+</div>
+</article>
+<!-- Sermon Card 4 -->
+<article class="bg-white border border-surface-tint rounded-xl overflow-hidden sermon-card-hover ambient-shadow flex flex-col">
+<div class="relative aspect-video overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A close-up of a vintage compass resting on an old, weathered map. The lighting is warm and directional, emphasizing the textures of the metal and paper. The composition is clean and focused, using a palette of deep navy blues and aged gold. It represents a journey of faith and spiritual guidance. The style is solemn and classic, with a modern editorial touch." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBeSO5Oso2PKF-uyCrE1MKcCP0z6RzyO6Dc4DovooLGE00IMQ77T3OYPdoJm55BWa9jGO7qhpD3qiioYhn63Vs2uLVGRXkdMB6PL1qMH_LFrM1MhlhSblf0WKPwefEdP6R6YPWcXslMx5l14r5t8494m2MCSyO_82Uf5Ms0GnFcCNpFMXDa-j3hHEV3TOaBcj1ocktqSj6B7LfIGHQy-EZFS-Ko1qe0a4MyqNYoFJDyQ3Pr_itHN2zx9G0gOE_eqnEZkJnTzduxbM"/>
+<div class="absolute bottom-3 right-3 bg-on-background/80 text-white px-2 py-1 rounded text-caption font-caption backdrop-blur-sm">51:05</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="mb-3">
+<span class="inline-block px-3 py-1 bg-surface-tint text-primary-fixed-dim rounded-full text-caption font-label-md uppercase">Evangelho de João</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-background mb-4 line-clamp-2">O Bom Pastor e Suas Ovelhas</h3>
+<div class="mt-auto space-y-2">
+<div class="flex items-center text-text-muted">
+<span class="material-symbols-outlined text-[18px] mr-2">person</span>
+<span class="font-body-md text-body-md">Pr. Marcos Ferreira</span>
+</div>
+<div class="flex items-center text-text-muted">
+<span class="material-symbols-outlined text-[18px] mr-2">calendar_today</span>
+<span class="font-body-md text-body-md">21 Abr, 2024</span>
+</div>
+</div>
+</div>
+</article>
+<!-- Sermon Card 5 -->
+<article class="bg-white border border-surface-tint rounded-xl overflow-hidden sermon-card-hover ambient-shadow flex flex-col">
+<div class="relative aspect-video overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="An artistic representation of a sunrise over a calm ocean, viewed through a minimalist stone archway. The sky is painted in soft hues of gold and deep blue. The lighting is low-key and dramatic, suggesting hope and a new beginning. The visual style is clean and dignified, avoiding visual clutter to allow for contemplation and peace." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNoD-dxSdqdtsp8ZTWtgT_V1PXA8rKh1BiHKYaNB97qpO3zZzJ74P1wSL2YXfKVn_OQSXNNFzzKy8L29c8nU9bFWBOtIJdBwekXOkNvFvcx01mGdcfkgxo3vA5mQWWjC5iODq3bPi92B8gf5EaPw0Q2-mc16rebgPqJQnrt_b7teko6fdZW-o4IqLqKW12PA0_GH5tjC5LJamDk1vDWxHCJsHnIN_hAC--d1QJPIu787dx7hQKvnNLNVJXeJJ1kDv39Ta4fm0wTzQ"/>
+<div class="absolute bottom-3 right-3 bg-on-background/80 text-white px-2 py-1 rounded text-caption font-caption backdrop-blur-sm">44:30</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="mb-3">
+<span class="inline-block px-3 py-1 bg-surface-tint text-primary-fixed-dim rounded-full text-caption font-label-md uppercase">Avulsos</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-background mb-4 line-clamp-2">A Ressurreição e a Vida Eterna</h3>
+<div class="mt-auto space-y-2">
+<div class="flex items-center text-text-muted">
+<span class="material-symbols-outlined text-[18px] mr-2">person</span>
+<span class="font-body-md text-body-md">Pr. Silas Campos</span>
+</div>
+<div class="flex items-center text-text-muted">
+<span class="material-symbols-outlined text-[18px] mr-2">calendar_today</span>
+<span class="font-body-md text-body-md">14 Abr, 2024</span>
+</div>
+</div>
+</div>
+</article>
+<!-- Sermon Card 6 -->
+<article class="bg-white border border-surface-tint rounded-xl overflow-hidden sermon-card-hover ambient-shadow flex flex-col">
+<div class="relative aspect-video overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A detailed, macro shot of a single wheat stalk glowing in the golden hour light against a deep blue evening sky. The focus is sharp on the wheat, symbolizing growth and spiritual harvest. The lighting is warm and evocative, creating a sense of peace and divine providence. The overall aesthetic is minimalist, modern, and high-contrast." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCG5cAmBP7IK4BtXjRGatoR_M9o4D1Mn-q2JGZJsrEt6AQ0_XZpsogGNq4tZXXtMkI8xODNqat1U_OvIGpmMKg2sjvhCTnPUBGTA8pm-12nnuwLJn9g6a_57XlkIAF_e8UNpU0h6S8_mnSO9gnxOphFv-HJLy9mXQDaIkQGvXBBkA6XKEDx43QxlSdSUOvnwqg-G2K6prkF2Uc4cpFKQDooyXVszp-XUJirFuV77vcRwajfkpyyBEOcZazUPb_NUprcMLo_ONTQ4Ag"/>
+<div class="absolute bottom-3 right-3 bg-on-background/80 text-white px-2 py-1 rounded text-caption font-caption backdrop-blur-sm">39:15</div>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="mb-3">
+<span class="inline-block px-3 py-1 bg-surface-tint text-primary-fixed-dim rounded-full text-caption font-label-md uppercase">Os Salmos</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-background mb-4 line-clamp-2">O Senhor é Meu Pastor</h3>
+<div class="mt-auto space-y-2">
+<div class="flex items-center text-text-muted">
+<span class="material-symbols-outlined text-[18px] mr-2">person</span>
+<span class="font-body-md text-body-md">Pregador Visitante</span>
+</div>
+<div class="flex items-center text-text-muted">
+<span class="material-symbols-outlined text-[18px] mr-2">calendar_today</span>
+<span class="font-body-md text-body-md">07 Abr, 2024</span>
+</div>
+</div>
+</div>
+</article>
+</div>
+<!-- Pagination / Load More -->
+<div class="mt-section-gap flex flex-col items-center">
+<button class="bg-primary text-on-primary px-10 py-4 rounded-full font-label-md text-label-md hover:bg-primary-container transition-all flex items-center group">
+                    Carregar Mais Sermões
+                    <span class="material-symbols-outlined ml-2 group-hover:translate-y-1 transition-transform">expand_more</span>
+</button>
+<div class="mt-8 flex space-x-2">
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant text-primary hover:bg-surface-tint transition-colors">1</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-on-primary">2</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant text-text-muted hover:bg-surface-tint transition-colors">3</button>
+<span class="flex items-center px-2 text-text-muted">...</span>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant text-text-muted hover:bg-surface-tint transition-colors">12</button>
+</div>
+</div>
+</section>
+<!-- Newsletter / Call to Action -->
+<section class="bg-secondary-container py-section-gap">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop text-center">
+<h2 class="font-headline-lg text-headline-lg text-on-secondary-container mb-4">Receba novas mensagens no seu e-mail</h2>
+<p class="font-body-lg text-body-lg text-on-secondary-container/80 mb-8 max-w-xl mx-auto">Inscreva-se para ser notificado sempre que um novo sermão for publicado em nosso site.</p>
+<form class="flex flex-col md:flex-row gap-4 max-w-lg mx-auto">
+<input class="flex-grow px-6 py-4 rounded-lg bg-white border border-outline-variant focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none font-body-md" placeholder="Seu melhor e-mail" type="email"/>
+<button class="bg-tertiary-container text-on-tertiary-container px-8 py-4 rounded-lg font-label-md text-label-md hover:opacity-90 transition-opacity" type="submit">Inscrever-se</button>
+</form>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-section-gap px-margin-desktop grid grid-cols-1 md:grid-cols-3 gap-gutter bg-secondary dark:bg-on-secondary-fixed border-t border-outline-variant">
+<div class="flex flex-col space-y-6">
+<div class="mb-2 flex flex-col gap-4">
+<img alt="ICENVSP Logo" class="h-20 w-auto object-contain brightness-0 invert self-start" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDedLVqA2xwNqJ1KX1udBIVwAIjXiPH4KsgwSR6ws72QSVC4aSJbb50-Hc-K2w7UKzVGmak4pxjQCAOJ7NqpCTzSD78BhR_ytLDhZ-YofXu3Xj-6Rc67dNVpMf6gqyCBJwSar82GJxbjv6y-xe6WszsiiwFQTiD36vPRvlPWXjKcFXJy4jbaWgFDaIEB9wW4tiN-cq8ZlPSqajQvT6-PvKbdHayNmOwMCvNdxlK0TUtg5tcmMP_BwIpySBH1U6R32wd6tW3XP1OBl4"/>
+<div class="flex items-center gap-2 opacity-70">
+<span class="text-on-secondary/60 text-caption font-caption uppercase tracking-wider">Afiliada à</span>
+<img alt="Denomination Logo" class="h-6 w-auto object-contain brightness-0 invert" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzAuPRlW_gm7UnXNeoE4HQ5kw1FR011RCn_p3oCyCsZ9mcdQYTfvXbl8DeV4JkYbxK5mxv8fKe4ti1HtHgWoz-dsIv0u460glCUk7R_4qKDLVGfFAY20HP83y_uzRE0bt1bUhvNA9UIOvd_To99xA6ZF04JLjOItoiC1AcMFOFJT3C0xwjUeQHnEi_TBjiwNhnv2t3gP0F6gIlamqNuj-Cg1xE4lnlM34_-TuIagurVnnx4b3720lmcM0vcf4N2zvyvmzknsREl4M"/>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-secondary/80 max-w-xs">Uma igreja comprometida com a exposição fiel das Escrituras e o amor cristão.</p>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="flex flex-col space-y-4">
+<a class="text-on-secondary/80 dark:text-on-secondary-fixed-variant hover:text-tertiary-fixed transition-colors font-label-md text-label-md" href="#">Home</a>
+<a class="text-on-secondary/80 dark:text-on-secondary-fixed-variant hover:text-tertiary-fixed transition-colors font-label-md text-label-md" href="#">Sobre</a>
+<a class="text-on-secondary/80 dark:text-on-secondary-fixed-variant hover:text-tertiary-fixed transition-colors font-label-md text-label-md" href="#">Cultos</a>
+</div>
+<div class="flex flex-col space-y-4">
+<a class="text-tertiary-fixed font-bold font-label-md text-label-md underline" href="#">Sermões</a>
+<a class="text-on-secondary/80 dark:text-on-secondary-fixed-variant hover:text-tertiary-fixed transition-colors font-label-md text-label-md" href="#">Eventos</a>
+<a class="text-on-secondary/80 dark:text-on-secondary-fixed-variant hover:text-tertiary-fixed transition-colors font-label-md text-label-md" href="#">Contato</a>
+</div>
+</div>
+<div class="flex flex-col space-y-6">
+<div class="font-label-md text-label-md text-on-secondary uppercase tracking-widest">Siga-nos</div>
+<div class="flex space-x-4">
+<a class="w-10 h-10 rounded-full border border-on-secondary/30 flex items-center justify-center text-on-secondary hover:bg-on-secondary hover:text-secondary transition-all" href="#">
+<span class="material-symbols-outlined">share</span>
+</a>
+<a class="w-10 h-10 rounded-full border border-on-secondary/30 flex items-center justify-center text-on-secondary hover:bg-on-secondary hover:text-secondary transition-all" href="#">
+<span class="material-symbols-outlined">play_circle</span>
+</a>
+</div>
+<p class="font-caption text-caption text-on-secondary/60">© 2024 ICENVSP. Todos os direitos reservados.</p>
+</div>
+</footer>
+<script>
+        // Micro-interaction for filter selects
+        document.querySelectorAll('select').forEach(select => {
+            select.addEventListener('change', function() {
+                this.parentElement.classList.add('ring-2', 'ring-primary/10');
+                setTimeout(() => {
+                    this.parentElement.classList.remove('ring-2', 'ring-primary/10');
+                }, 1000);
+            });
+        });
+
+        // Simple scroll effect for TopAppBar
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 20) {
+                header.classList.add('nav-glass', 'bg-secondary/95');
+                header.classList.remove('bg-secondary');
+            } else {
+                header.classList.remove('nav-glass', 'bg-secondary/95');
+                header.classList.add('bg-secondary');
+            }
+        });
+    </script>
+</body></html>
