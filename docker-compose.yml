@@ -3,11 +3,15 @@ version: '3.8'
 services:
   web:
     build: .
+    container_name: igreja-crist-evan-web-1
     ports:
       - "3000:3000"
     volumes:
       - .:/app
       - /app/node_modules
+      # Compartilha as credenciais de login da Hostinger com o container Docker:
+      - C:\Users\salmeida\AppData\Roaming\hostinger-mcp:/root/.config/hostinger-mcp
     environment:
       - CHOKIDAR_USEPOLLING=true
       - WATCHPACK_POLLING=true
+

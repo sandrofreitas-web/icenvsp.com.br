@@ -27,12 +27,7 @@ export default function TopNavBar({
   }, []);
 
   const navItems: { id: ActiveTab; label: string }[] = [
-    { id: 'home', label: dict.navHome },
-    { id: 'sobre', label: dict.navAbout },
     { id: 'cultos', label: dict.navServices },
-    { id: 'sermoes', label: dict.navSermons },
-    { id: 'eventos', label: dict.navEvents },
-    { id: 'contato', label: dict.navContact },
   ];
 
   const handleTabClick = (tabId: ActiveTab) => {
@@ -56,7 +51,7 @@ export default function TopNavBar({
           <div
             id="brand-logo"
             className="flex items-center cursor-pointer group"
-            onClick={() => handleTabClick('home')}
+            onClick={() => handleTabClick('cultos')}
           >
             <ChurchLogo language={language} isScrolled={isScrolled} />
           </div>

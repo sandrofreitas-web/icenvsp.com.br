@@ -8,19 +8,19 @@ export const DICTIONARY = {
     navSermons: 'Sermões',
     navEvents: 'Eventos',
     navContact: 'Contato',
-    
+
     // Home View
     heroSub: 'Desde 1912 adorando a Deus, edificando os crentes e proclamando o evangelho ao mundo',
     heroBtnVisit: 'Venha nos Visitar',
     heroBtnSermons: 'Nossos Sermões',
-    
+
     pastorTitle: 'Uma Mensagem do Nosso Pastor',
     pastorGreeting: 'Seja muito bem-vindo à nossa comunidade de fé!',
     pastorText1: 'É uma imensa alegria receber você, ainda que virtualmente, em nossa amada igreja. Há mais de um século, a Igreja Cristã Evangélica Nova Vida tem sido um farol de esperança, amor e fidelidade bíblica no coração da nossa metrópole.',
     pastorText2: 'Nossa missão é simples e eterna: proclamar a verdade de Cristo, acolher a todos com graça e amor fraternal, e servir à nossa cidade com compaixão. Quer você esteja buscando respostas, um lugar para congregar ou uma família espiritual, as portas de nosso templo e nossos corações estão sempre abertas.',
     pastorSignature: 'Rev. Marcos S. Oliveira',
     pastorRole: 'Pastor Titular',
-    
+
     servicesTitle: 'Horários de Culto',
     servicesSub: 'Participe de nossas celebrações e estudos semanais',
     sundayEbdTitle: 'Domingo, 9h30',
@@ -36,11 +36,11 @@ export const DICTIONARY = {
     latestSermonName: 'A Rocha Inabalável: Fé em Tempos de Incerteza',
     latestSermonBtn: 'ASSISTIR AGORA',
     latestSermonVerse: '"O Senhor é a minha rocha, a minha fortaleza e o meu libertador; o meu Deus é o meu rochedo, em quem me refugio." — Salmo 18:2',
-    
+
     homeEventsTitle: 'Próximos Eventos',
     homeEventsSub: 'Participe das nossas atividades e integre-se na nossa comunidade',
     seeMore: 'Saiba Mais',
-    
+
     heritageTitle: 'Fidelidade Histórica desde 1912',
     heritageSub: 'Nossa Herança',
     heritageText1: 'Fundada no início do século XX, nossa igreja carrega a marca de pioneiros que sonharam com uma comunidade centrada na Palavra de Deus e relevante para a cidade de São Paulo.',
@@ -51,7 +51,7 @@ export const DICTIONARY = {
     stat2Label: 'Ano de Fundação',
     stat3Number: '50+',
     stat3Label: 'Ministérios e Ações Sociais',
-    
+
     // About View
     aboutHeroTitle: 'Nossa História, Sua Família',
     aboutHeroSub: 'Conheça nossos valores históricos e nossa liderança pastoral',
@@ -61,7 +61,7 @@ export const DICTIONARY = {
     visionText: 'Ser uma comunidade de fé vibrante, teologicamente enraizada e acolhedora, que transforma vidas e inspira esperança em São Paulo.',
     values: 'Valores',
     valuesText: 'Fidelidade às Escrituras, Reverência Litúrgica, Graça e Acolhimento, Missão Integral, Amor Fraternal Intergeracional.',
-    
+
     historyTitle: 'Nossa Caminhada',
     leadershipTitle: 'Nossa Liderança',
     leadershipSub: 'Pastores e presbíteros dedicados ao cuidado espiritual da congregação',
@@ -69,7 +69,7 @@ export const DICTIONARY = {
     ctaAboutSub: 'Será um privilégio caminhar ao seu lado. Venha nos conhecer de perto neste domingo ou entre em contato direto com um de nossos pastores.',
     ctaAboutBtnVisit: 'Visite-nos no Domingo',
     ctaAboutBtnContact: 'Fale Conosco',
-    
+
     // Services View
     servicesHeroTitle: 'Nossos Cultos',
     servicesHeroSub: 'Liturgia reverente, pregação bíblica séria e comunidade acolhedora',
@@ -85,9 +85,9 @@ export const DICTIONARY = {
     expectItem4Title: 'Ministério Infantil Dedicado',
     expectItem4Desc: 'Oferecemos salas seguras e com voluntários preparados para cuidar e ensinar as crianças sobre o amor de Jesus durante o culto principal.',
     visitUsBoxTitle: 'Venha nos Fazer uma Visita',
-    visitUsBoxText: 'Ficamos localizados em uma área de fácil acesso em São Paulo, com estacionamento conveniado e recepção calorosa para você e sua família.',
+    visitUsBoxText: 'Ficamos localizados em uma área de fácil acesso em São Paulo.',
     visitUsBoxAddress: 'Rua Luis Antônio dos Santos, 54 - Santa Teresinha, São Paulo - SP',
-    
+
     // Sermons View
     sermonsHeroTitle: 'Nossos Sermões',
     sermonsHeroSub: 'Aprofunde-se na Palavra de Deus com nossa biblioteca de mensagens gravadas',
@@ -107,7 +107,7 @@ export const DICTIONARY = {
     subscribeBtn: 'Inscrever-se',
     emailPlaceholder: 'Seu e-mail principal',
     newsletterSuccess: 'Inscrição realizada com sucesso! Que Deus abençoe.',
-    
+
     // Events View
     eventsHeroTitle: 'Agenda de Eventos',
     eventsHeroSub: 'Participe ativamente de nossos retiros, conferências e reuniões comunitárias',
@@ -125,7 +125,7 @@ export const DICTIONARY = {
     registerModalTitle: 'Inscrição Confirmada!',
     registerModalText: 'Sua inscrição para o evento foi registrada com sucesso. Enviamos os detalhes e o código de acesso para o seu e-mail.',
     closeBtn: 'Fechar',
-    
+
     // Contact View
     contactHeroTitle: 'Fale Conosco',
     contactHeroSub: 'Tem alguma dúvida, pedido de oração ou quer conversar? Nossa equipe está pronta para lhe atender',
@@ -144,7 +144,7 @@ export const DICTIONARY = {
     formSuccessDesc: 'Agradecemos o seu contato. Nossa equipe ou pastores retornarão a sua mensagem muito em breve.',
     contactInfoTitle: 'Informações de Contato',
     contactAddress: 'Rua Luis Antônio dos Santos, 54 — Santa Teresinha, São Paulo - SP, CEP 02460-000',
-    contactPhone: '(11) 3284-0000',
+    contactPhone: '',
     contactEmail: 'contato@icenvsp.com.br',
     socialFollow: 'Siga-nos nas Redes Sociais',
     visitUsHeader: 'Visite-nos neste Domingo',
@@ -158,19 +158,19 @@ export const DICTIONARY = {
     navSermons: 'Sermons',
     navEvents: 'Events',
     navContact: 'Contact',
-    
+
     // Home View
     heroSub: 'Since 1912 worshipping God, edifying believers, and proclaiming the gospel to the world',
     heroBtnVisit: 'Come Visit Us',
     heroBtnSermons: 'Our Sermons',
-    
+
     pastorTitle: "A Message from Our Pastor",
     pastorGreeting: 'Welcome to our community of faith!',
     pastorText1: 'It is a huge joy to welcome you, even virtually, to our beloved church. For over a century, the New Life Evangelical Christian Church has been a beacon of hope, love, and biblical faithfulness in the heart of our metropolis.',
     pastorText2: 'Our mission is simple and eternal: to proclaim the truth of Christ, to welcome all with grace and brotherly love, and to serve our city with compassion. Whether you are seeking answers, a place to worship, or a spiritual family, the doors of our temple and our hearts are always open.',
     pastorSignature: 'Rev. Marcos S. Oliveira',
     pastorRole: 'Senior Pastor',
-    
+
     servicesTitle: 'Service Times',
     servicesSub: 'Join us for our weekly celebrations and studies',
     sundayEbdTitle: 'Sunday, 9:00 AM',
@@ -186,11 +186,11 @@ export const DICTIONARY = {
     latestSermonName: 'The Unshakable Rock: Faith in Times of Uncertainty',
     latestSermonBtn: 'WATCH NOW',
     latestSermonVerse: '"The Lord is my rock, my fortress and my deliverer; my God is my stronghold, in whom I take refuge." — Psalm 18:2',
-    
+
     homeEventsTitle: 'Upcoming Events',
     homeEventsSub: 'Take part in our activities and integrate into our community',
     seeMore: 'Learn More',
-    
+
     heritageTitle: 'Historical Faithfulness since 1912',
     heritageSub: 'Our Heritage',
     heritageText1: 'Founded at the beginning of the 20th century, our church bears the mark of pioneers who dreamed of a community centered on the Word of God and relevant to the city of São Paulo.',
@@ -201,7 +201,7 @@ export const DICTIONARY = {
     stat2Label: 'Year of Foundation',
     stat3Number: '50+',
     stat3Label: 'Ministries & Social Action',
-    
+
     // About View
     aboutHeroTitle: 'Our History, Your Family',
     aboutHeroSub: 'Discover our historical values and our pastoral leadership',
@@ -211,7 +211,7 @@ export const DICTIONARY = {
     visionText: 'To be a vibrant, theologically rooted, and welcoming community of faith that transforms lives and inspires hope in São Paulo.',
     values: 'Values',
     valuesText: 'Faithfulness to Scriptures, Liturgical Reverence, Grace and Welcome, Integral Mission, Intergenerational Brotherly Love.',
-    
+
     historyTitle: 'Our Journey',
     leadershipTitle: 'Our Leadership',
     leadershipSub: 'Pastors and elders dedicated to the spiritual care of the congregation',
@@ -219,7 +219,7 @@ export const DICTIONARY = {
     ctaAboutSub: 'It will be a privilege to walk by your side. Come meet us in person this Sunday or contact one of our pastors directly.',
     ctaAboutBtnVisit: 'Visit Us this Sunday',
     ctaAboutBtnContact: 'Contact Us',
-    
+
     // Services View
     servicesHeroTitle: 'Our Services',
     servicesHeroSub: 'Reverent liturgy, serious biblical preaching, and welcoming community',
@@ -237,7 +237,7 @@ export const DICTIONARY = {
     visitUsBoxTitle: 'Come Visit Us',
     visitUsBoxText: 'We are located in an easily accessible area of São Paulo, with partnered parking and a warm welcome for you and your family.',
     visitUsBoxAddress: 'Luis Antônio dos Santos Street, 54 - Santa Teresinha, São Paulo - SP',
-    
+
     // Sermons View
     sermonsHeroTitle: 'Our Sermons',
     sermonsHeroSub: 'Delve deeper into God’s Word with our library of recorded messages',
@@ -257,7 +257,7 @@ export const DICTIONARY = {
     subscribeBtn: 'Subscribe',
     emailPlaceholder: 'Your primary email',
     newsletterSuccess: 'Subscription successful! May God bless you.',
-    
+
     // Events View
     eventsHeroTitle: 'Events Calendar',
     eventsHeroSub: 'Get actively involved in our retreats, conferences, and community gatherings',
@@ -275,7 +275,7 @@ export const DICTIONARY = {
     registerModalTitle: 'Registration Confirmed!',
     registerModalText: 'Your registration for the event has been successfully recorded. We have sent details and the access code to your email.',
     closeBtn: 'Close',
-    
+
     // Contact View
     contactHeroTitle: 'Contact Us',
     contactHeroSub: 'Have any questions, prayer requests, or want to talk? Our team is ready to assist you',

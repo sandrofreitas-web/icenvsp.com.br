@@ -12,7 +12,7 @@ import AdminView from './components/AdminView';
 import { ArrowUp, MessageSquare } from 'lucide-react';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<ActiveTab>('home');
+  const [activeTab, setActiveTab] = useState<ActiveTab>('cultos');
   const [activeSobreSubTab, setActiveSobreSubTab] = useState<string>('historia');
   const [language, setLanguage] = useState<Language>('pt');
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -43,31 +43,7 @@ export default function App() {
   };
 
   const renderActiveView = () => {
-    switch (activeTab) {
-      case 'home':
-        return <HomeView language={language} onChangeTab={handleTabChange} />;
-      case 'sobre':
-        return (
-          <SobreView
-            language={language}
-            onChangeTab={handleTabChange}
-            activeSubTab={activeSobreSubTab}
-            setActiveSubTab={setActiveSobreSubTab}
-          />
-        );
-      case 'cultos':
-        return <CultosView language={language} onChangeTab={handleTabChange} />;
-      case 'sermoes':
-        return <SermoesView language={language} />;
-      case 'eventos':
-        return <EventosView language={language} />;
-      case 'contato':
-        return <ContatoView language={language} />;
-      case 'admin':
-        return <AdminView language={language} />;
-      default:
-        return <HomeView language={language} onChangeTab={handleTabChange} />;
-    }
+    return <CultosView language={language} onChangeTab={handleTabChange} />;
   };
 
   return (
@@ -86,16 +62,14 @@ export default function App() {
       </main>
 
       {/* Quick floating contact badge trigger */}
-      {activeTab !== 'contato' && (
-        <button
-          id="floating-contact-trigger"
-          onClick={() => handleTabChange('contato')}
-          aria-label="Fale Conosco"
-          className="fixed bottom-20 right-6 z-40 h-12 w-12 bg-amber-500 hover:bg-amber-400 text-neutral-950 rounded-full flex items-center justify-center shadow-xl shadow-amber-500/15 cursor-pointer hover:scale-105 active:scale-95 transition-all"
-        >
-          <MessageSquare className="h-5 w-5" />
-        </button>
-      )}
+      <button
+        id="floating-contact-trigger"
+        onClick={() => document.getElementById('localizacao')?.scrollIntoView({ behavior: 'smooth' })}
+        aria-label="Localização"
+        className="fixed bottom-20 right-6 z-40 h-12 w-12 bg-amber-500 hover:bg-amber-400 text-neutral-950 rounded-full flex items-center justify-center shadow-xl shadow-amber-500/15 cursor-pointer hover:scale-105 active:scale-95 transition-all"
+      >
+        <MessageSquare className="h-5 w-5" />
+      </button>
 
       {/* Smooth scroll to top button */}
       {showScrollTop && (
