@@ -193,10 +193,10 @@ export default function SermoesView({ language }: SermoesViewProps) {
                 <div className="relative aspect-video overflow-hidden bg-neutral-900">
                   <img
                     src={
-                      sermon.thumbnail_url ||
+                      sermon.image ||
                       'https://images.unsplash.com/photo-1543257580-7269da773bf5?auto=format&fit=crop&w=800&q=80'
                     }
-                    alt={sermon.title[language]}
+                    alt={sermon.title?.[language] || sermon.title?.pt || ''}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
@@ -212,7 +212,7 @@ export default function SermoesView({ language }: SermoesViewProps) {
                 <div className="p-6 flex flex-col flex-grow space-y-4">
                   <div className="flex items-center justify-between">
                     <span className="inline-block px-3 py-1 bg-surface-tint text-primary font-bold rounded-full text-xs uppercase tracking-wider">
-                      {sermon.series?.[language] || 'Mensagem'}
+                      {sermon.series?.[language] || sermon.series?.pt || 'Mensagem'}
                     </span>
                     <span className="text-xs font-mono text-text-muted">
                       {sermon.date || '2026'}
@@ -220,12 +220,14 @@ export default function SermoesView({ language }: SermoesViewProps) {
                   </div>
 
                   <h3 className="font-display font-bold text-xl text-on-background line-clamp-2 group-hover:text-primary transition-colors">
-                    {sermon.title[language]}
+                    {sermon.title?.[language] || sermon.title?.pt || ''}
                   </h3>
 
-                  <p className="text-text-muted text-sm line-clamp-2 leading-relaxed">
-                    {sermon.description[language]}
-                  </p>
+                  {sermon.verse && (
+                    <p className="text-text-muted text-sm line-clamp-2 leading-relaxed italic">
+                      "{sermon.verse}"
+                    </p>
+                  )}
 
                   <div className="mt-auto pt-4 border-t border-surface-container flex items-center justify-between text-xs text-text-muted font-medium">
                     <span className="flex items-center gap-1.5">
