@@ -1,6 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
-import { Sermon, ChurchEvent } from '../types';
-import { SERMONS, EVENTS } from '../data';
+import { Sermon, ChurchEvent, CarouselSlide } from '../types';
+import { SERMONS, EVENTS, CAROUSEL_SLIDES } from '../data';
 
 // Read from import.meta.env with safe typings
 const supabaseUrl = (import.meta as any).env?.VITE_SUPABASE_URL || '';
@@ -362,13 +362,113 @@ export async function deleteWeeklySchedule(id: string): Promise<boolean> {
 }
 
 // ==========================================
+// CAROUSEL SLIDES DATABASE HELPERS
+// ==========================================
+
+export async function getCarouselSlides(): Promise<CarouselSlide[]> {
+  if (!supabase) {
+    console.warn('Supabase is not configured. Using local mock carousel slides data.');
+    return CAROUSEL_SLIDES;
+  }
+
+  try {
+    const { data, error } = await supabase
+      .from('carousel_slides')
+      .select('*')
+      .order('sort_order', { ascending: true });
+
+    if (error) throw error;
+    if (!data || data.length === 0) return CAROUSEL_SLIDES;
+
+    return data.map((item: any) => ({
+      id: String(item.id),
+      tag: { pt: item.tag_pt || '', en: item.tag_en || '' },
+      title: { pt: item.title_pt || '', en: item.title_en || '' },
+      description: { pt: item.description_pt || '', en: item.description_en || '' },
+      buttonText: { pt: item.button_text_pt || 'Saiba Mais', en: item.button_text_en || 'Learn More' },
+      buttonLink: item.button_link || 'eventos',
+      image: item.image || '',
+      sort_order: item.sort_order || 1,
+      active: item.active !== false
+    }));
+  } catch (err) {
+    console.error('Failed to fetch carousel slides from Supabase, falling back to local data:', err);
+    return CAROUSEL_SLIDES;
+  }
+}
+
+export async function saveCarouselSlide(slide: Omit<CarouselSlide, 'id'> & { id?: string }): Promise<CarouselSlide | null> {
+  if (!supabase) throw new Error('Supabase is not configured.');
+
+  const payload = {
+    tag_pt: slide.tag.pt,
+    tag_en: slide.tag.en,
+    title_pt: slide.title.pt,
+    title_en: slide.title.en,
+    description_pt: slide.description.pt,
+    description_en: slide.description.en,
+    button_text_pt: slide.buttonText.pt,
+    button_text_en: slide.buttonText.en,
+    button_link: slide.buttonLink,
+    image: slide.image,
+    sort_order: slide.sort_order,
+    active: slide.active,
+  };
+
+  let result;
+  if (slide.id && !isNaN(Number(slide.id))) {
+    const { data, error } = await supabase
+      .from('carousel_slides')
+      .update(payload)
+      .eq('id', slide.id)
+      .select()
+      .single();
+
+    if (error) throw error;
+    result = data;
+  } else {
+    const { data, error } = await supabase
+      .from('carousel_slides')
+      .insert([payload])
+      .select()
+      .single();
+
+    if (error) throw error;
+    result = data;
+  }
+
+  return {
+    id: String(result.id),
+    tag: { pt: result.tag_pt, en: result.tag_en },
+    title: { pt: result.title_pt, en: result.title_en },
+    description: { pt: result.description_pt, en: result.description_en },
+    buttonText: { pt: result.button_text_pt, en: result.button_text_en },
+    buttonLink: result.button_link,
+    image: result.image,
+    sort_order: result.sort_order,
+    active: result.active,
+  };
+}
+
+export async function deleteCarouselSlide(id: string): Promise<boolean> {
+  if (!supabase) throw new Error('Supabase is not configured.');
+
+  const { error } = await supabase
+    .from('carousel_slides')
+    .delete()
+    .eq('id', id);
+
+  if (error) throw error;
+  return true;
+}
+
+// ==========================================
 // MEDIA STORAGE HELPERS
 // ==========================================
 
-export async function uploadImage(file: File, folder: 'sermons' | 'events'): Promise<string> {
+export async function uploadImage(file: File, folder: 'sermons' | 'events' | 'carousel'): Promise<string> {
   if (!supabase) throw new Error('Supabase is not configured.');
 
-  // Create clean, unique file path: e.g. "sermons/1721389812493-abcde.jpg"
   const fileExt = file.name.split('.').pop() || 'jpg';
   const cleanFileName = `${Date.now()}-${Math.random().toString(36).substring(2, 9)}.${fileExt}`;
   const filePath = `${folder}/${cleanFileName}`;
@@ -382,11 +482,11 @@ export async function uploadImage(file: File, folder: 'sermons' | 'events'): Pro
 
   if (error) throw error;
 
-  // Retrieve public URL
   const { data: { publicUrl } } = supabase.storage
     .from('church-media')
     .getPublicUrl(filePath);
 
   return publicUrl;
 }
+
 

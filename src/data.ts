@@ -1,4 +1,4 @@
-import { Sermon, ChurchEvent, Leader, TimelineEvent } from './types';
+import { Sermon, ChurchEvent, Leader, TimelineEvent, CarouselSlide } from './types';
 
 export const DICTIONARY = {
   pt: {
@@ -663,3 +663,49 @@ export const LEADERS: Leader[] = [
     }
   }
 ];
+
+export const CAROUSEL_SLIDES: CarouselSlide[] = [
+  {
+    id: 'slide-1',
+    tag: { pt: '25 DE MAIO', en: 'MAY 25' },
+    title: { pt: 'Retiro de Jovens 2026: Conectados na Videira', en: 'Youth Retreat 2026: Connected to the Vine' },
+    description: {
+      pt: 'Três dias de comunhão, louvor, estudo bíblico e atividades ao ar livre no Recanto da Esperança.',
+      en: 'Three days of fellowship, worship, Bible study, and outdoor activities at Recanto da Esperança.'
+    },
+    buttonText: { pt: 'Saiba Mais', en: 'Learn More' },
+    buttonLink: 'eventos',
+    image: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80',
+    sort_order: 1,
+    active: true
+  },
+  {
+    id: 'slide-2',
+    tag: { pt: '08 DE JUNHO', en: 'JUNE 08' },
+    title: { pt: 'Concerto de Inverno & Coral Clássico', en: 'Winter Concert & Classical Choir' },
+    description: {
+      pt: 'Apresentação especial do nosso Grande Coral interpretando clássicos sacros de Bach, Handel e hinos tradicionais.',
+      en: 'Special performance by our Grand Choir performing sacred classics by Bach, Handel, and traditional hymns.'
+    },
+    buttonText: { pt: 'Saiba Mais', en: 'Learn More' },
+    buttonLink: 'eventos',
+    image: 'https://images.unsplash.com/photo-1465847899084-d164df4dedc6?auto=format&fit=crop&w=1200&q=80',
+    sort_order: 2,
+    active: true
+  },
+  {
+    id: 'slide-3',
+    tag: { pt: '15 DE JUNHO', en: 'JUNE 15' },
+    title: { pt: 'Noite da Comunhão & Jantar de Ação de Graças', en: 'Communion Night & Thanksgiving Dinner' },
+    description: {
+      pt: 'Jantar comunitário especial no salão social para celebrar a providência de Deus e fortalecer os laços fraternos.',
+      en: 'Special community dinner in the social hall to celebrate God’s providence and strengthen brotherly bonds.'
+    },
+    buttonText: { pt: 'Saiba Mais', en: 'Learn More' },
+    buttonLink: 'eventos',
+    image: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1200&q=80',
+    sort_order: 3,
+    active: true
+  }
+];
+

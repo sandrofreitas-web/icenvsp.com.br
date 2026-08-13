@@ -42,3 +42,16 @@ export interface TimelineEvent {
   description: { pt: string; en: string };
   image?: string;
 }
+
+export interface CarouselSlide {
+  id: string;
+  tag: { pt: string; en: string };
+  title: { pt: string; en: string };
+  description: { pt: string; en: string };
+  buttonText: { pt: string; en: string };
+  buttonLink: string;
+  image: string;
+  sort_order: number;
+  active: boolean;
+}
+
