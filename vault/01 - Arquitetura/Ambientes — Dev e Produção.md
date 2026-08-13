@@ -9,12 +9,11 @@ related: [[🏠 Início]] · [[Git — Branches e Histórico]] · [[Docker — C
 
 | Atributo | 🟢 Desenvolvimento | 🟡 Produção |
 |---|---|---|
-| **URL** | http://localhost:3000 | https://icenvsp.com.br |
+| **URL Local** | http://localhost:3000 | — |
+| **URL Web (Hostinger DEV)** | https://limegreen-salamander-658473.hostingersite.com | https://icenvsp.com.br |
 | **Branch Git** | `dev-full` | `main` |
-| **Commit base** | `a1a76ec` (25/Jul) | `c6ba859` (29/Jul) |
 | **Versão do site** | Completa (todas as views) | Simplificada (só Cultos) |
-| **Infraestrutura** | Docker + Vite dev server | Hostinger (static hosting) |
-| **Hot reload** | ✅ Sim | ❌ Não |
+| **Infraestrutura** | Docker (local) / Hostinger Addon (web) | Hostinger Main (static hosting) |
 | **Banco de dados** | Supabase (mesmo projeto) | Supabase (mesmo projeto) |
 | **Alterar?** | ✅ Livre | ⛔ Somente após aprovação |
 
