@@ -24,7 +24,7 @@ export default function Footer({ onChangeTab, language }: FooterProps) {
           {/* Brand Col */}
           <div className="space-y-6">
             <div className="flex items-center cursor-pointer" onClick={() => handleLinkClick('home')}>
-              <ChurchLogo language={language} isScrolled={false} className="h-16 sm:h-20 md:h-24" />
+              <ChurchLogo language={language} isScrolled={false} className="h-12 sm:h-14 md:h-16" />
             </div>
             <p className="text-sm text-gray-300 leading-relaxed">
               {language === 'pt'

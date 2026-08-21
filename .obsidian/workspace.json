@@ -11,10 +11,12 @@
             "id": "4cfc590e12bffd16",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "Nova aba"
+              "type": "image",
+              "state": {
+                "file": "public/20250420_065947.jpg"
+              },
+              "icon": "lucide-image",
+              "title": "20250420_065947"
             }
           }
         ]
@@ -37,7 +39,7 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical",
-                "autoReveal": false,
+                "autoReveal": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
@@ -95,6 +97,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "public/20250420_065947.jpg",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -184,25 +187,27 @@
   },
   "active": "4cfc590e12bffd16",
   "lastOpenFiles": [
+    "stitch_downloads/Contato.png",
+    "stitch_downloads/Agenda_de_Eventos.png",
+    "rfc-cutler-httpbis-partitioned-cookies.md",
+    "README.md",
+    "DESIGN.md",
     "vault/03 - Banco de Dados/Banco de Dados — Supabase.md",
     "vault/02 - Design System/Design System.md",
     "vault/01 - Arquitetura/Git — Branches e Histórico.md",
+    "vault/01 - Arquitetura/Estrutura do Projeto.md",
     "vault/01 - Arquitetura/Docker — Configuração Local.md",
     "vault/01 - Arquitetura/Ambientes — Dev e Produção.md",
-    "vault/01 - Arquitetura/Estrutura do Projeto.md",
     "vault/00 - Visao Geral/00 - 🏠 Início.md",
     "vault/03 - Banco de Dados",
     "vault/02 - Design System",
     "vault/01 - Arquitetura",
     "vault/00 - Visao Geral",
-    "README.md",
-    "DESIGN.md",
     "dist/20250420_065947.jpg",
     "vault/Banco de Dados — Supabase.md",
     "vault/Ambientes — Dev e Produção.md",
     "docs/v2-UPGRADE-GUIDE.md",
     "docs",
-    "rfc-cutler-httpbis-partitioned-cookies.md",
     "node_modules/ms/license.md",
     "vault/Estrutura do Projeto.md",
     "vault/Design System.md",
@@ -215,8 +220,6 @@
     "20250420_065947.jpg",
     "stitch_downloads/Sermoes_e_Mensagens.png",
     "stitch_downloads/Cultos_e_Horarios.png",
-    "stitch_downloads/Contato.png",
-    "stitch_downloads/Agenda_de_Eventos.png",
     "src/Logo_ICENV_SB_SF.png",
     "src/Logo_ICENV_SB_CF.png",
     "node_modules/@esbuild/win32-x64/README.md",
@@ -224,7 +227,6 @@
     "node_modules/@babel/helper-module-imports/README.md",
     "node_modules/@babel/helper-globals/README.md",
     "node_modules/@babel/helper-compilation-targets/README.md",
-    "node_modules/@babel/generator/README.md",
-    "node_modules/@babel/core/README.md"
+    "node_modules/@babel/generator/README.md"
   ]
 }

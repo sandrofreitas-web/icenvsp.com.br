@@ -14,15 +14,15 @@ export default function ChurchLogo({
   isScrolled = true,
   className = '',
 }: ChurchLogoProps) {
-  // If className doesn't specify a height, default to a responsive height
-  const heightClass = className.includes('h-') ? '' : 'h-10 sm:h-12 md:h-14';
+  // Default height optimized for clean navigation balance
+  const heightClass = className.includes('h-') ? '' : 'h-11 sm:h-12 md:h-13';
 
   return (
     <div className={`flex items-center select-none ${heightClass} ${className}`}>
       <img
         src={churchLogo}
         alt="Igreja Cristã Evangélica Nova Vida"
-        className="h-full w-auto object-contain transition-all duration-300"
+        className="h-full w-auto max-h-full max-w-[200px] sm:max-w-[240px] md:max-w-[280px] object-contain transition-all duration-300"
       />
     </div>
   );
