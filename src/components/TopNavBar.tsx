@@ -46,8 +46,8 @@ export default function TopNavBar({
       id="top-navbar-container"
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100 py-3'
-          : 'bg-gradient-to-b from-black/60 via-black/30 to-transparent text-white py-5'
+          ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100 py-2 sm:py-2.5'
+          : 'bg-gradient-to-b from-black/60 via-black/30 to-transparent text-white py-3 sm:py-4'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

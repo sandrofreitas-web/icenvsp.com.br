@@ -1,11 +1,12 @@
 import { Language } from '../types';
-import churchLogo from '../Logo_simples_CF_rev01.png';
+import churchLogo from '../Logo simples_SF_r1.png';
 
 interface ChurchLogoProps {
-  language: Language;
+  language?: Language;
   variant?: 'full' | 'icon';
   isScrolled?: boolean;
   className?: string;
+  theme?: 'light' | 'dark';
 }
 
 export default function ChurchLogo({
@@ -13,21 +14,22 @@ export default function ChurchLogo({
   variant = 'full',
   isScrolled = true,
   className = '',
+  theme = 'light',
 }: ChurchLogoProps) {
-  // Default height optimized for clean navigation balance
-  const heightClass = className.includes('h-') ? '' : 'h-11 sm:h-12 md:h-13';
+  // Enhanced default height for bold brand prominence with wide horizontal logo
+  const heightClass = className.includes('h-') ? '' : 'h-14 sm:h-16 md:h-20';
 
   return (
     <div className={`flex items-center select-none ${heightClass} ${className}`}>
       <img
         src={churchLogo}
         alt="Igreja Cristã Evangélica Nova Vida"
-        className="h-full w-auto max-h-full max-w-[200px] sm:max-w-[240px] md:max-w-[280px] object-contain transition-all duration-300"
+        className={`h-full w-auto max-h-full object-contain transition-all duration-300 ${
+          theme === 'dark'
+            ? 'brightness-0 invert drop-shadow-[0_4px_16px_rgba(255,255,255,0.3)]'
+            : 'drop-shadow-sm group-hover:scale-105'
+        }`}
       />
     </div>
   );
 }
-
-
-
-

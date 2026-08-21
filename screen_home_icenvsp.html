@@ -1,0 +1,516 @@
+<!DOCTYPE html><html class="light" lang="pt-BR" style=""><head></head><body class="bg-background font-body-md text-on-surface">```html
+
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>ICENVSP - Igreja Cristã Evangélica Nacional de São Paulo</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-surface": "#2f2e43",
+                    "surface-tint": "#E8F4FB",
+                    "background": "#fcf8ff",
+                    "outline": "#707882",
+                    "text-muted": "#64748B",
+                    "tertiary": "#755b00",
+                    "on-error-container": "#93000a",
+                    "on-tertiary": "#ffffff",
+                    "inverse-primary": "#98cbff",
+                    "tertiary-fixed": "#ffe08f",
+                    "on-secondary-fixed-variant": "#004a76",
+                    "surface-variant": "#e2e0fc",
+                    "on-tertiary-container": "#4f3d00",
+                    "surface-container-high": "#e8e5ff",
+                    "on-secondary-container": "#005180",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container": "#efecff",
+                    "on-secondary": "#ffffff",
+                    "on-background": "#1a1a2e",
+                    "on-primary-container": "#00050e",
+                    "inverse-on-surface": "#f2efff",
+                    "secondary": "#166397",
+                    "on-secondary-fixed": "#001d33",
+                    "secondary-container": "#86c4fe",
+                    "surface-dim": "#dad7f3",
+                    "on-primary-fixed": "#001d33",
+                    "tertiary-container": "#c8a74b",
+                    "outline-variant": "#bfc7d2",
+                    "primary-fixed": "#cfe5ff",
+                    "on-primary-fixed-variant": "#004a77",
+                    "error-container": "#ffdad6",
+                    "primary-container": "#007cc3",
+                    "secondary-fixed-dim": "#97cbff",
+                    "on-primary": "#ffffff",
+                    "surface-container-highest": "#e2e0fc",
+                    "surface": "#fcf8ff",
+                    "on-surface-variant": "#404751",
+                    "on-tertiary-fixed-variant": "#584400",
+                    "surface-bright": "#fcf8ff",
+                    "on-tertiary-fixed": "#241a00",
+                    "error": "#ba1a1a",
+                    "secondary-fixed": "#cee5ff",
+                    "surface-container-low": "#f5f2ff",
+                    "tertiary-fixed-dim": "#e6c364",
+                    "on-error": "#ffffff",
+                    "primary-fixed-dim": "#98cbff",
+                    "on-surface": "#1a1a2e",
+                    "surface-alt": "#F8FAFC",
+                    "primary": "#00629c"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "margin-desktop": "48px",
+                    "base": "8px",
+                    "margin-mobile": "16px",
+                    "container-max": "1200px",
+                    "section-gap": "80px"
+            },
+            "fontFamily": {
+                    "caption": ["Inter"],
+                    "label-md": ["Inter"],
+                    "display-lg-mobile": ["Playfair Display"],
+                    "headline-md": ["Playfair Display"],
+                    "body-md": ["Inter"],
+                    "headline-lg": ["Playfair Display"],
+                    "display-lg": ["Playfair Display"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "caption": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "display-lg-mobile": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "display-lg": ["56px", {"lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .ambient-shadow { box-shadow: 0px 10px 30px rgba(26, 26, 46, 0.05); }
+        .ambient-shadow-hover:hover { 
+            box-shadow: 0px 10px 30px rgba(26, 26, 46, 0.1); 
+            transform: translateY(-2px);
+            transition: all 0.3s ease;
+        }
+
+        .hero-overlay {
+            background: linear-gradient(rgba(0, 98, 156, 0.7), rgba(26, 26, 46, 0.8));
+        }
+
+        .carousel-container {
+            position: relative;
+            height: 90vh;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .carousel-slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            z-index: 0;
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+            z-index: 10;
+        }
+
+        .carousel-overlay {
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.2) 100%);
+        }
+    </style>
+<!-- TopNavBar -->
+<nav class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-desktop h-24 bg-secondary transition-all duration-300">
+<div class="flex items-center gap-6">
+<div class="h-16 flex items-center">
+<img alt="ICENVSP Logo" class="h-16 w-auto object-contain brightness-0 invert" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDedLVqA2xwNqJ1KX1udBIVwAIjXiPH4KsgwSR6ws72QSVC4aSJbb50-Hc-K2w7UKzVGmak4pxjQCAOJ7NqpCTzSD78BhR_ytLDhZ-YofXu3Xj-6Rc67dNVpMf6gqyCBJwSar82GJxbjv6y-xe6WszsiiwFQTiD36vPRvlPWXjKcFXJy4jbaWgFDaIEB9wW4tiN-cq8ZlPSqajQvT6-PvKbdHayNmOwMCvNdxlK0TUtg5tcmMP_BwIpySBH1U6R32wd6tW3XP1OBl4">
+</div>
+<div class="h-8 border-l border-on-secondary/30 hidden md:block"></div>
+<div class="h-8 flex items-center opacity-70 hidden md:flex">
+<img alt="Denomination Logo" class="h-8 w-auto object-contain brightness-0 invert" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzAuPRlW_gm7UnXNeoE4HQ5kw1FR011RCn_p3oCyCsZ9mcdQYTfvXbl8DeV4JkYbxK5mxv8fKe4ti1HtHgWoz-dsIv0u460glCUk7R_4qKDLVGfFAY20HP83y_uzRE0bt1bUhvNA9UIOvd_To99xA6ZF04JLjOItoiC1AcMFOFJT3C0xwjUeQHnEi_TBjiwNhnv2t3gP0F6gIlamqNuj-Cg1xE4lnlM34_-TuIagurVnnx4b3720lmcM0vcf4N2zvyvmzknsREl4M">
+</div>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="font-label-md text-label-md text-tertiary-fixed border-b-2 border-tertiary-container pb-1 transition-all opacity-100 scale-100" href="#">Home</a>
+<a class="font-label-md text-label-md text-on-secondary/80 hover:text-tertiary-fixed-dim transition-colors" href="#">Sobre</a>
+<a class="font-label-md text-label-md text-on-secondary/80 hover:text-tertiary-fixed-dim transition-colors" href="#">Cultos</a>
+<a class="font-label-md text-label-md text-on-secondary/80 hover:text-tertiary-fixed-dim transition-colors" href="#">Sermões</a>
+<a class="font-label-md text-label-md text-on-secondary/80 hover:text-tertiary-fixed-dim transition-colors" href="#">Eventos</a>
+<a class="font-label-md text-label-md text-on-secondary/80 hover:text-tertiary-fixed-dim transition-colors" href="#">Contato</a>
+</div>
+<div class="flex items-center gap-4">
+<span class="font-label-md text-label-md text-on-secondary cursor-pointer">PT | EN</span>
+<button class="md:hidden text-on-secondary">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</nav>
+<!-- Hero Carousel Section -->
+<section class="carousel-container relative" style="height: 500px; width: 100%; overflow: hidden;">
+<!-- Slide 1 -->
+<div class="carousel-slide" data-index="0">
+<div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCDqwCa_-BtBIUmB8wWHgr8yUciQHg6WFVliz1x2kni3iMlo0-DBsiW6QnUVI8Qp0SaLlWG4tKCaI3VCY38hbjpxovHA3x5QHuCUgVsfIhF6uTihn-60hTNLgnxaPYSm3v4V34Kd62TFPsDMjlmJJsf19cx_dxnUM7fp7zf1hLfMZUYWSmV_dyWATvUrQod3F4RzSR3Y2dr2PxipUCK-LwxW3mQwVvT37i1uN5d_zWq-1urDmkvdfQSFn9SXk2RQrbYM6dKTIn3rrk');"></div>
+<div class="absolute inset-0 carousel-overlay"></div>
+<div class="absolute bottom-0 left-0 w-full p-12 z-20 flex flex-col items-start justify-end h-full md:p-12">
+<span class="font-label-md text-label-md text-tertiary-fixed tracking-widest uppercase mb-4 block">25 DE MAIO</span>
+<h1 class="font-display-lg text-display-lg-mobile text-on-secondary mb-6 leading-tight max-w-4xl md:text-headline-lg">Retiro de Jovens 2024</h1>
+<a class="px-8 py-4 bg-tertiary-container text-on-tertiary-container font-label-md text-label-md rounded-lg ambient-shadow hover:brightness-110 transition-all inline-block" href="#">Saiba Mais</a>
+</div>
+</div>
+<!-- Slide 2 -->
+<div class="carousel-slide" data-index="1">
+<div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDGxNxoK48jl3RtD80JVaISU_E2a8GQMvkYuvlC1XkcWWgymkw81TR3IceYDcFY66uRwvhfyyggL7Bd7SEIGLUoZylkEYRDtYnBOIeWiAF_TqGKSj4S5wT0DYhylCq8N_xPm_AcIlXlAxyNgmGb1t1scrMQ2m4NBTeYkt1eKFXQcZQTOOGndzU-zPXKaUdeN2Kn64CurI06g8PX1ZJSz2A9YC1aDPLXZODjWuGSx9x2bJzFeNJg-uvtdeOhWYWjXcfTObYf8l6KmJo');"></div>
+<div class="absolute inset-0 carousel-overlay"></div>
+<div class="absolute bottom-0 left-0 w-full p-12 z-20 flex flex-col items-start justify-end h-full md:p-12">
+<span class="font-label-md text-label-md text-tertiary-fixed tracking-widest uppercase mb-4 block">08 DE JUNHO</span>
+<h1 class="font-display-lg text-display-lg-mobile text-on-secondary mb-6 leading-tight max-w-4xl md:text-headline-lg">Concerto de Inverno</h1>
+<a class="px-8 py-4 bg-tertiary-container text-on-tertiary-container font-label-md text-label-md rounded-lg ambient-shadow hover:brightness-110 transition-all inline-block" href="#">Saiba Mais</a>
+</div>
+</div>
+<!-- Slide 3 -->
+<div class="carousel-slide active" data-index="2">
+<div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA_3mMgZjYqQ1rTblcbhkX6qS0iTK9FMjS5HeAC1w66maNl-FtzqMBLQ8s4ff-XkHHKnU0pOnFsQAgHsCyBBRH09Mn4BrQTEcmfmUB_xJPTDHV0YiMfn81skWHRnChWOhZMe52vRyiBH4g8g-Z3luHBmMYKi5kCK92yUn_IEKbTLjbjyM8qOnpTNpUL_u5CO_-xY8BA03WzdjMMh3YXmDFnDr4BhytS3aCUddrYnJ-ZNohLhzEsqLun5z5eIotikl_II21XHIcPvVc');"></div>
+<div class="absolute inset-0 carousel-overlay"></div>
+<div class="absolute bottom-0 left-0 w-full p-12 z-20 flex flex-col items-start justify-end h-full md:p-12">
+<span class="font-label-md text-label-md text-tertiary-fixed tracking-widest uppercase mb-4 block">15 DE JUNHO</span>
+<h1 class="font-display-lg text-display-lg-mobile text-on-secondary mb-6 leading-tight max-w-4xl md:text-headline-lg">Noite da Comunhão</h1>
+<a class="px-8 py-4 bg-tertiary-container text-on-tertiary-container font-label-md text-label-md rounded-lg ambient-shadow hover:brightness-110 transition-all inline-block" href="#">Saiba Mais</a>
+</div>
+</div>
+<!-- Controls -->
+<button class="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-30 w-12 h-12 flex items-center justify-center rounded-full bg-black/20 text-white hover:bg-black/40 transition-colors backdrop-blur-sm" id="prevSlide">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-30 w-12 h-12 flex items-center justify-center rounded-full bg-black/20 text-white hover:bg-black/40 transition-colors backdrop-blur-sm" id="nextSlide">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+<!-- Indicators -->
+<div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex gap-3">
+<button class="w-3 h-3 rounded-full hover:bg-white transition-colors carousel-dot active bg-white/50" data-index="0"></button>
+<button class="w-3 h-3 rounded-full hover:bg-white transition-colors carousel-dot bg-white/50" data-index="1"></button>
+<button class="w-3 h-3 rounded-full hover:bg-white transition-colors carousel-dot bg-white" data-index="2"></button>
+</div>
+</section>
+<!-- Welcome Section -->
+<section class="py-section-gap px-margin-mobile md:px-margin-desktop container mx-auto max-w-container-max">
+<div class="grid-cols-1 gap-12 items-center">
+
+<div class="max-w-4xl mx-auto text-center">
+<span class="font-label-md text-label-md text-primary tracking-widest uppercase mb-4 block">Bem-vindo</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-6">Uma Mensagem do Nosso Pastor</h2>
+<div class="space-y-4 font-body-md text-body-md text-on-surface-variant leading-relaxed">
+<p class="">É com imensa alegria que acolhemos você à nossa comunidade. No coração de São Paulo, buscamos ser um refúgio de paz, reflexão e comunhão com Deus.</p>
+<p class="">Desde nossa fundação, nossa missão tem sido compartilhar o amor de Cristo e as verdades eternas das Escrituras com todas as gerações. Seja você um visitante ocasional ou alguém em busca de um novo lar espiritual, saiba que aqui há um lugar reservado para você.</p>
+</div>
+<div class="mt-8 flex flex-col items-center">
+<p class="font-headline-md text-headline-md text-on-surface italic">Rev. Marcos S. Oliveira</p>
+<p class="font-label-md text-label-md text-text-muted">Pastor Titular</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Worship Schedule -->
+<section class="bg-surface-alt py-section-gap">
+<div class="px-margin-mobile md:px-margin-desktop container mx-auto max-w-container-max text-center">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-12">Horários de Culto</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter max-w-4xl mx-auto text-center">
+<!-- Sunday 9h -->
+<div class="bg-surface p-8 rounded-xl border border-surface-variant ambient-shadow-hover">
+<div class="w-12 h-12 bg-primary-fixed flex items-center justify-center rounded-full mx-auto mb-6">
+<span class="material-symbols-outlined text-primary">calendar_today</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-2">Domingo, 9h</h3>
+<p class="font-label-md text-label-md text-text-muted mb-4">Escola Bíblica Dominical</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Um momento de ensino profundo e debate teológico para todas as idades.</p>
+</div>
+<!-- Sunday 10h30 -->
+<div class="bg-surface p-8 rounded-xl border-2 border-primary-container ambient-shadow-hover relative">
+<div class="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-primary-container text-on-primary font-label-md text-caption uppercase rounded-full">Principal</div>
+<div class="w-12 h-12 bg-primary-container flex items-center justify-center rounded-full mx-auto mb-6">
+<span class="material-symbols-outlined text-on-primary">church</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-2">Domingo, 10h30</h3>
+<p class="font-label-md text-label-md text-primary mb-4">Culto de Adoração</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Nossa principal celebração semanal com louvor, oração e pregação da Palavra.</p>
+</div>
+<!-- Wednesday 19h30 -->
+<div class="bg-surface p-8 rounded-xl border border-surface-variant ambient-shadow-hover">
+<div class="w-12 h-12 bg-primary-fixed flex items-center justify-center rounded-full mx-auto mb-6">
+<span class="material-symbols-outlined text-primary">schedule</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-2">Quarta, 19h30</h3>
+<p class="font-label-md text-label-md text-text-muted mb-4">Reunião de Oração</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Um tempo dedicado à intercessão e fortalecimento espiritual comunitário.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Featured Sermon -->
+<section class="py-section-gap px-margin-mobile md:px-margin-desktop container mx-auto max-w-container-max">
+<div class="relative rounded-2xl overflow-hidden ambient-shadow h-[500px] flex items-center">
+<div class="absolute inset-0 bg-cover bg-center max-w-4xl mx-auto text-center" data-alt="A cinematic scene of an open Bible resting on a dark wood podium under a single spotlight in a serene church sanctuary. The lighting is moody and dramatic, focusing on the texture of the pages. The aesthetic is academic yet spiritual, using deep blues and warm amber tones to create a sense of focused study and divine inspiration." style="background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuBzVbq7BAWuUMgr4Xi8Sm7eNdsQUrQ9IVgf_VQSkUG8UEfzYaSbNMVJzgCNE3kCcd8s-0EQH5YqhdcLL9QtP-M-KDt1-KVGkgc08Nehzm1gOcntW8LobDjzEUJrLxP8erEPOc-IW5a2jcF6xCWWkzZ0w1YDWXPt-33EGz-lrcjq3kghYYj60Uhc6x72D4jwHK_4hTU0jVwsfWpLHMr1WrNBJPYAq6jgs8URlwRBjywvudeWQC-aO4bd6mWtxzp9GPaKilp5BGZJrBo&quot;);"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-black/80 to-transparent max-w-4xl mx-auto text-center"></div>
+<div class="relative z-10 px-12 max-w-2xl text-on-secondary max-w-4xl mx-auto text-center">
+<span class="px-3 py-1 bg-tertiary-container text-on-tertiary-container font-label-md text-caption uppercase rounded mb-6 inline-block">Último Sermão</span>
+<h2 class="font-headline-lg text-headline-lg mb-4">A Rocha Inabalável: Fé em Tempos de Incerteza</h2>
+<p class="font-body-md text-body-md text-on-secondary/80 mb-8">Série: Salmos para a Alma. Pregado em 12 de Maio de 2024 pelo Rev. Marcos S. Oliveira.</p>
+<button class="flex items-center gap-4 group">
+<div class="w-16 h-16 bg-on-secondary text-primary rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+<span class="font-label-md text-label-md uppercase tracking-wider">Assistir Agora</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Upcoming Events Strip -->
+<section class="bg-surface-alt py-section-gap overflow-hidden">
+<div class="px-margin-mobile md:px-margin-desktop container mx-auto max-w-container-max">
+<div class="flex justify-between items-end mb-8 max-w-4xl mx-auto text-center">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Próximos Eventos</h2>
+<p class="text-text-muted mt-2">Participe da vida ativa de nossa comunidade.</p>
+</div>
+<button class="hidden md:flex items-center gap-2 text-primary font-label-md">
+                    Ver todos <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+<div class="flex gap-gutter overflow-x-auto hide-scrollbar pb-8 -mx-4 px-4 md:mx-0 md:px-0 max-w-4xl mx-auto text-center">
+<!-- Event 1 -->
+<div class="min-w-[300px] md:min-w-[400px] bg-surface rounded-xl border border-surface-variant overflow-hidden ambient-shadow-hover">
+<div class="h-48 relative">
+<img class="w-full h-full object-cover" data-alt="A group of young people engaged in a joyful and respectful community service activity, outdoors under soft afternoon sunlight. The scene is bright and energetic, with a focus on connection and purposeful work. The color palette is natural and warm, emphasizing the 'Modern Community' aspect of the church's identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDqwCa_-BtBIUmB8wWHgr8yUciQHg6WFVliz1x2kni3iMlo0-DBsiW6QnUVI8Qp0SaLlWG4tKCaI3VCY38hbjpxovHA3x5QHuCUgVsfIhF6uTihn-60hTNLgnxaPYSm3v4V34Kd62TFPsDMjlmJJsf19cx_dxnUM7fp7zf1hLfMZUYWSmV_dyWATvUrQod3F4RzSR3Y2dr2PxipUCK-LwxW3mQwVvT37i1uN5d_zWq-1urDmkvdfQSFn9SXk2RQrbYM6dKTIn3rrk">
+<div class="absolute top-4 left-4 bg-white px-3 py-2 rounded text-center min-w-[50px]">
+<span class="block font-bold text-headline-md leading-none">25</span>
+<span class="block text-caption uppercase text-text-muted">MAI</span>
+</div>
+</div>
+<div class="p-6">
+<h4 class="font-headline-md text-headline-md mb-2">Retiro de Jovens 2024</h4>
+<p class="text-text-muted mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">location_on</span> Sede Campestre
+                        </p>
+<button class="text-primary font-label-md uppercase text-sm border-b border-primary">Saiba Mais</button>
+</div>
+</div>
+<!-- Event 2 -->
+<div class="min-w-[300px] md:min-w-[400px] bg-surface rounded-xl border border-surface-variant overflow-hidden ambient-shadow-hover">
+<div class="h-48 relative">
+<img class="w-full h-full object-cover" data-alt="A dignified choral group singing in a historic church setting, with high-quality musical instruments visible. The lighting is elegant and formal, highlighting the solemnity of the performance. The composition reflects a balance between traditional heritage and musical excellence, using a sophisticated palette of deep navy and ivory." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGxNxoK48jl3RtD80JVaISU_E2a8GQMvkYuvlC1XkcWWgymkw81TR3IceYDcFY66uRwvhfyyggL7Bd7SEIGLUoZylkEYRDtYnBOIeWiAF_TqGKSj4S5wT0DYhylCq8N_xPm_AcIlXlAxyNgmGb1t1scrMQ2m4NBTeYkt1eKFXQcZQTOOGndzU-zPXKaUdeN2Kn64CurI06g8PX1ZJSz2A9YC1aDPLXZODjWuGSx9x2bJzFeNJg-uvtdeOhWYWjXcfTObYf8l6KmJo">
+<div class="absolute top-4 left-4 bg-white px-3 py-2 rounded text-center min-w-[50px]">
+<span class="block font-bold text-headline-md leading-none">08</span>
+<span class="block text-caption uppercase text-text-muted">JUN</span>
+</div>
+</div>
+<div class="p-6">
+<h4 class="font-headline-md text-headline-md mb-2">Concerto de Inverno</h4>
+<p class="text-text-muted mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">location_on</span> Nave Principal
+                        </p>
+<button class="text-primary font-label-md uppercase text-sm border-b border-primary">Saiba Mais</button>
+</div>
+</div>
+<!-- Event 3 -->
+<div class="min-w-[300px] md:min-w-[400px] bg-surface rounded-xl border border-surface-variant overflow-hidden ambient-shadow-hover">
+<div class="h-48 relative">
+<img class="w-full h-full object-cover" data-alt="A warm, community-style dinner table with families sharing a meal in a welcoming church hall. The atmosphere is festive and intimate, with decorative lighting and a sense of belonging. The visual style is hospitable and bright, capturing the spirit of 'welcoming fellowship' that defines the congregation's social life." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_3mMgZjYqQ1rTblcbhkX6qS0iTK9FMjS5HeAC1w66maNl-FtzqMBLQ8s4ff-XkHHKnU0pOnFsQAgHsCyBBRH09Mn4BrQTEcmfmUB_xJPTDHV0YiMfn81skWHRnChWOhZMe52vRyiBH4g8g-Z3luHBmMYKi5kCK92yUn_IEKbTLjbjyM8qOnpTNpUL_u5CO_-xY8BA03WzdjMMh3YXmDFnDr4BhytS3aCUddrYnJ-ZNohLhzEsqLun5z5eIotikl_II21XHIcPvVc">
+<div class="absolute top-4 left-4 bg-white px-3 py-2 rounded text-center min-w-[50px]">
+<span class="block font-bold text-headline-md leading-none">15</span>
+<span class="block text-caption uppercase text-text-muted">JUN</span>
+</div>
+</div>
+<div class="p-6">
+<h4 class="font-headline-md text-headline-md mb-2">Noite da Comunhão</h4>
+<p class="text-text-muted mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">location_on</span> Salão Social
+                        </p>
+<button class="text-primary font-label-md uppercase text-sm border-b border-primary">Saiba Mais</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Brief About Section -->
+<section class="py-section-gap px-margin-mobile md:px-margin-desktop container mx-auto max-w-container-max">
+<div class="flex flex-col md:flex-row gap-16 items-center">
+<div class="flex-1 order-2 md:order-1 max-w-4xl mx-auto text-center">
+<span class="font-label-md text-label-md text-tertiary tracking-widest uppercase mb-4 block">Nossa Herança</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-6">Fidelidade Histórica desde 1912</h2>
+<div class="font-body-md text-body-md text-on-surface-variant leading-relaxed space-y-4">
+<p class="">Há mais de um século, a ICENVSP tem sido um marco de fé e serviço em São Paulo. Fundada em 1912, nossa história se entrelaça com o crescimento desta metrópole, mantendo-se sempre fiel ao Evangelho.</p>
+<p class="">Valorizamos a rica tradição teológica reformada, ao mesmo tempo que abraçamos o presente com uma visão renovada de comunidade e relevância social. Nossa herança não é apenas o passado, mas o alicerce sobre o qual construímos o futuro.</p>
+</div>
+<div class="grid grid-cols-2 gap-8 mt-10">
+<div>
+<div class="font-display-lg text-primary leading-tight">112</div>
+<div class="font-label-md text-label-md text-text-muted">Anos de História</div>
+</div>
+<div>
+<div class="font-display-lg text-primary leading-tight">1912</div>
+<div class="font-label-md text-label-md text-text-muted">Ano de Fundação</div>
+</div>
+</div>
+</div>
+<div class="flex-1 order-1 md:order-2 grid grid-cols-2 gap-4 max-w-4xl mx-auto text-center">
+<div class="space-y-4 pt-12">
+<div class="h-64 rounded-xl overflow-hidden ambient-shadow">
+<img class="w-full h-full object-cover" data-alt="A vintage black and white photograph of an early 20th-century church building in São Paulo, showing its classic architecture and the surrounding urban environment of the time. The image has an authentic historical texture, evoking a sense of heritage and permanence, styled with a soft museum-quality finish." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBI3df2FylK4MAwALhNZ1oi-WH4nPPTjupFFTFTFiesUOkLmB558c5dLfBcmq8m8HbDSOhuWdj5H7kfmHztppEKkMlBJT2eha_e5hTn24_cSBWUnMnb06ZiRfFXTTc0013FE9rM5S1AFtYw4jq5db8XCkLsoykZHMMIa5YVhP_buBY73pSsqV8N6IVrkHwJpmknMaqiTmaec8rggBttQD565fSG-lX8G_1mwbf-jnpeOS7C6wYGf-9ASODYT23WWUou99WfhRSgVP8">
+</div>
+<div class="h-48 rounded-xl overflow-hidden ambient-shadow bg-secondary flex items-center justify-center text-on-secondary p-6 text-center">
+<p class="font-headline-md italic">"De geração em geração celebraremos Tua fidelidade."</p>
+</div>
+</div>
+<div class="space-y-4">
+<div class="h-48 rounded-xl overflow-hidden ambient-shadow">
+<img class="w-full h-full object-cover" data-alt="An archival document or a weathered old Bible with handwritten notes in the margins, suggesting deep theological study and historical continuity. The lighting is focused and warm, highlighting the texture of the antique paper. The style is editorial and respectful of the past." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNsx9HC9t6r0fHmWz7nSqnNTYzgiemNBielLyn7QH10xuzFgOOT7C9R9HPYxVUB_Mwj5dV_TjwH_8jhEq5F6y0fKS7afbrZb9uo4x1bwEYhGuX2ZUv5wf0w48nhZxwo7GH6NVNwwbQFew771f_dXvIQA0GZpvmTC8NG8Jg5PpfeHWj6DqdQpn4eoM-VmCc1eWR4qdchvO8Q_58YVWng83fb-PyOJeOIdRJexKVt9CX5PSlILFv9Q6n8w4PU87uhdc2GtCsLWf88Tg">
+</div>
+<div class="h-64 rounded-xl overflow-hidden ambient-shadow">
+<img class="w-full h-full object-cover" data-alt="A detail of a historic stained glass window inside a church, with light beaming through the colors and casting patterns on a stone wall. The image is artistic and solemn, symbolizing the spiritual light that has guided the community for over a century. High contrast and rich color saturation." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB86M6Zz-bP9fJcjnUdb-TS3dem3SKt2aKovWSO-0-UuIlocYET-Kal84nWoMZ510OpV-DrwY6P2OLxBr_clZJ7KpvkDKD7cNFIMBejDy81VaoiTECkUozexuW3JabfxiM8JrMdCNWUM4kJn2EHF0xUsuL0z55hs1wj9rfQ6yhSav6qja7mHBsW7PlaGL3uYEWbMsvmyK6bCsA8d6CFO96bTmDfzgLrI64lKkRbk0cQnzre1y6HKvcuVkDqL5QkRnj7OtUi_yPiR0Q">
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="w-full py-section-gap px-margin-desktop bg-secondary text-on-secondary">
+<div class="container mx-auto max-w-container-max grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<div class="flex flex-col gap-6">
+<div class="flex flex-col gap-4">
+<div class="h-20 flex items-start">
+<img alt="ICENVSP Logo" class="h-20 w-auto object-contain brightness-0 invert" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDedLVqA2xwNqJ1KX1udBIVwAIjXiPH4KsgwSR6ws72QSVC4aSJbb50-Hc-K2w7UKzVGmak4pxjQCAOJ7NqpCTzSD78BhR_ytLDhZ-YofXu3Xj-6Rc67dNVpMf6gqyCBJwSar82GJxbjv6y-xe6WszsiiwFQTiD36vPRvlPWXjKcFXJy4jbaWgFDaIEB9wW4tiN-cq8ZlPSqajQvT6-PvKbdHayNmOwMCvNdxlK0TUtg5tcmMP_BwIpySBH1U6R32wd6tW3XP1OBl4">
+</div>
+<div class="flex items-center gap-3 mt-2 opacity-80">
+<span class="text-caption font-label-md uppercase tracking-widest text-on-secondary/60">Afiliada à</span>
+<img alt="Denomination Logo" class="h-6 w-auto object-contain brightness-0 invert" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzAuPRlW_gm7UnXNeoE4HQ5kw1FR011RCn_p3oCyCsZ9mcdQYTfvXbl8DeV4JkYbxK5mxv8fKe4ti1HtHgWoz-dsIv0u460glCUk7R_4qKDLVGfFAY20HP83y_uzRE0bt1bUhvNA9UIOvd_To99xA6ZF04JLjOItoiC1AcMFOFJT3C0xwjUeQHnEi_TBjiwNhnv2t3gP0F6gIlamqNuj-Cg1xE4lnlM34_-TuIagurVnnx4b3720lmcM0vcf4N2zvyvmzknsREl4M">
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-secondary/80 max-w-xs">Promovendo a glória de Deus e o serviço ao próximo através do Evangelho de Cristo desde 1912.</p>
+<div class="flex gap-4">
+<a class="w-10 h-10 border border-on-secondary/30 rounded-full flex items-center justify-center hover:bg-tertiary-fixed hover:text-secondary transition-colors" href="#">
+<span class="material-symbols-outlined text-xl">share</span>
+</a>
+<a class="w-10 h-10 border border-on-secondary/30 rounded-full flex items-center justify-center hover:bg-tertiary-fixed hover:text-secondary transition-colors" href="#">
+<span class="material-symbols-outlined text-xl">video_library</span>
+</a>
+</div>
+</div>
+<div class="flex flex-col gap-6">
+<h4 class="font-label-md text-label-md text-tertiary-fixed uppercase tracking-widest">Links Úteis</h4>
+<ul class="grid grid-cols-2 gap-4">
+<li class=""><a class="text-on-secondary/80 hover:text-tertiary-fixed transition-colors hover:underline" href="#">Home</a></li>
+<li class=""><a class="text-on-secondary/80 hover:text-tertiary-fixed transition-colors hover:underline" href="#">Sobre</a></li>
+<li class=""><a class="text-on-secondary/80 hover:text-tertiary-fixed transition-colors hover:underline" href="#">Cultos</a></li>
+<li class=""><a class="text-on-secondary/80 hover:text-tertiary-fixed transition-colors hover:underline" href="#">Sermões</a></li>
+<li class=""><a class="text-on-secondary/80 hover:text-tertiary-fixed transition-colors hover:underline" href="#">Eventos</a></li>
+<li class=""><a class="text-on-secondary/80 hover:text-tertiary-fixed transition-colors hover:underline" href="#">Contato</a></li>
+</ul>
+</div>
+<div class="flex flex-col gap-6">
+<h4 class="font-label-md text-label-md text-tertiary-fixed uppercase tracking-widest">Contato</h4>
+<div class="space-y-4 font-body-md text-body-md text-on-secondary/80">
+<p class="flex items-start gap-3">
+<span class="material-symbols-outlined">location_on</span>
+<span class="">Rua Exemplo, 123 - Centro<br>São Paulo - SP, 01000-000</span>
+</p>
+<p class="flex items-center gap-3">
+<span class="material-symbols-outlined">phone</span>
+<span class="">(11) 3214-0000</span>
+</p>
+<p class="flex items-center gap-3">
+<span class="material-symbols-outlined">mail</span>
+<span class="">contato@icenvsp.org.br</span>
+</p>
+</div>
+</div>
+</div>
+<div class="border-t border-outline-variant/30 pt-8 mt-12 text-center text-caption text-on-secondary/60">
+            © 2024 ICENVSP. Todos os direitos reservados.
+</div>
+</footer>
+<script>
+        // Transparent to solid navbar logic
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.classList.replace('bg-transparent', 'bg-secondary');
+                nav.classList.replace('h-24', 'h-20');
+                nav.classList.add('shadow-lg');
+            } else {
+                nav.classList.replace('bg-secondary', 'bg-transparent');
+                nav.classList.replace('h-20', 'h-24');
+                nav.classList.remove('shadow-lg');
+            }
+        });
+        
+        // Initial state
+        document.querySelector('nav').classList.add('bg-transparent');
+
+        // Carousel logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const slides = document.querySelectorAll('.carousel-slide');
+            const dots = document.querySelectorAll('.carousel-dot');
+            const prevBtn = document.getElementById('prevSlide');
+            const nextBtn = document.getElementById('nextSlide');
+            let currentSlide = 0;
+
+            function showSlide(index) {
+                slides.forEach(slide => slide.classList.remove('active'));
+                dots.forEach(dot => {
+                    dot.classList.remove('bg-white');
+                    dot.classList.add('bg-white/50');
+                });
+                
+                slides[index].classList.add('active');
+                dots[index].classList.remove('bg-white/50');
+                dots[index].classList.add('bg-white');
+            }
+
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % slides.length;
+                showSlide(currentSlide);
+            }
+
+            function prevSlideFunc() {
+                currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                showSlide(currentSlide);
+            }
+
+            nextBtn.addEventListener('click', nextSlide);
+            prevBtn.addEventListener('click', prevSlideFunc);
+
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    currentSlide = index;
+                    showSlide(currentSlide);
+                });
+            });
+
+            // Auto advance
+            setInterval(nextSlide, 5000);
+        });
+    </script>
+
+</body></html>
