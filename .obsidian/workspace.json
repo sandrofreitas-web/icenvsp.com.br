@@ -11,12 +11,14 @@
             "id": "4cfc590e12bffd16",
             "type": "leaf",
             "state": {
-              "type": "image",
+              "type": "markdown",
               "state": {
-                "file": "public/20250420_065947.jpg"
+                "file": "DESIGN.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-image",
-              "title": "20250420_065947"
+              "icon": "lucide-file",
+              "title": "DESIGN"
             }
           }
         ]
@@ -97,7 +99,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "public/20250420_065947.jpg",
+                "file": "DESIGN.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -185,48 +187,53 @@
       "bases:Criar nova base": false
     }
   },
-  "active": "4cfc590e12bffd16",
+  "active": "8b2847f39f0b9009",
   "lastOpenFiles": [
-    "stitch_downloads/Contato.png",
-    "stitch_downloads/Agenda_de_Eventos.png",
+    "_archive/assets",
+    "_archive/stitch_downloads/Sermoes_e_Mensagens.png",
+    "_archive/stitch_downloads/Sermoes_e_Mensagens.html",
+    "_archive/stitch_downloads/Cultos_e_Horarios.png",
+    "_archive/stitch_downloads/Cultos_e_Horarios.html",
+    "_archive/stitch_downloads/Contato.html",
+    "_archive/stitch_downloads/Contato.png",
+    "_archive/stitch_downloads/Agenda_de_Eventos.png",
+    "_archive/stitch_downloads/Agenda_de_Eventos.html",
+    "_archive/stitch_downloads",
+    "_archive/zips/dist_20260813_202200.zip",
+    "_archive/zips/dist_20260813_201200.zip",
+    "_archive/public/20250420_065947.jpg",
+    "_archive/root/rfc-cutler-httpbis-partitioned-cookies.md",
+    "_archive/root/bun.lock",
+    "_archive/root/download_stitch.py",
+    "_archive/root/screen_home_icenvsp.png",
+    "_archive/root/screen_home_icenvsp.html",
+    "_archive/root/20250420_v1.jpg",
+    "_archive/root/20250420_065947.jpg",
+    "_archive/root/Logo simples_CF_rev01.png",
+    "_archive/src/hero-bg.jpg",
+    "vault/03 - Banco de Dados/Banco de Dados — Supabase.md",
+    "vault/02 - Design System/Design System.md",
+    "vault/01 - Arquitetura/Ambientes — Dev e Produção.md",
+    "vault/01 - Arquitetura/Docker — Configuração Local.md",
+    "vault/01 - Arquitetura/Estrutura do Projeto.md",
+    "vault/01 - Arquitetura/Git — Branches e Histórico.md",
+    "vault/00 - Visao Geral/00 - 🏠 Início.md",
     "rfc-cutler-httpbis-partitioned-cookies.md",
     "README.md",
     "DESIGN.md",
-    "vault/03 - Banco de Dados/Banco de Dados — Supabase.md",
-    "vault/02 - Design System/Design System.md",
-    "vault/01 - Arquitetura/Git — Branches e Histórico.md",
-    "vault/01 - Arquitetura/Estrutura do Projeto.md",
-    "vault/01 - Arquitetura/Docker — Configuração Local.md",
-    "vault/01 - Arquitetura/Ambientes — Dev e Produção.md",
-    "vault/00 - Visao Geral/00 - 🏠 Início.md",
-    "vault/03 - Banco de Dados",
-    "vault/02 - Design System",
-    "vault/01 - Arquitetura",
-    "vault/00 - Visao Geral",
-    "dist/20250420_065947.jpg",
     "vault/Banco de Dados — Supabase.md",
     "vault/Ambientes — Dev e Produção.md",
     "docs/v2-UPGRADE-GUIDE.md",
-    "docs",
     "node_modules/ms/license.md",
     "vault/Estrutura do Projeto.md",
     "vault/Design System.md",
     "vault/Docker — Configuração Local.md",
     "vault/Git — Branches e Histórico.md",
     "vault/🏠 Início.md",
-    "vault",
-    "Logo_ICENova_Vida_old.png",
-    "20250420_v1.jpg",
-    "20250420_065947.jpg",
-    "stitch_downloads/Sermoes_e_Mensagens.png",
-    "stitch_downloads/Cultos_e_Horarios.png",
-    "src/Logo_ICENV_SB_SF.png",
-    "src/Logo_ICENV_SB_CF.png",
     "node_modules/@esbuild/win32-x64/README.md",
     "node_modules/@babel/helpers/README.md",
     "node_modules/@babel/helper-module-imports/README.md",
     "node_modules/@babel/helper-globals/README.md",
-    "node_modules/@babel/helper-compilation-targets/README.md",
-    "node_modules/@babel/generator/README.md"
+    "node_modules/@babel/helper-compilation-targets/README.md"
   ]
 }
