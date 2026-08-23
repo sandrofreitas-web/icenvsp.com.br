@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { 
   Lock, Mail, Eye, EyeOff, LayoutDashboard, Calendar, Video, 
   Clock, Plus, Trash2, Edit2, LogOut, CheckCircle, AlertTriangle, 
-  Database, RefreshCw, X, Save, ArrowLeft, Globe, ArrowUpRight, Upload, Layers
+  Database, RefreshCw, X, Save, ArrowLeft, Globe, ArrowUpRight, Upload, Layers,
+  Inbox, MessageSquare, Phone, Send, CheckCircle2, Archive, MessageCircle, ExternalLink, Check, Filter
 } from 'lucide-react';
-import { Language, Sermon, ChurchEvent, CarouselSlide } from '../types';
+import { Language, Sermon, ChurchEvent, CarouselSlide, ContactMessage, MessageStatus, MessageSubject } from '../types';
 import { 
   supabase, 
   isSupabaseConfigured, 
@@ -21,14 +22,23 @@ import {
   getCarouselSlides,
   saveCarouselSlide,
   deleteCarouselSlide,
-  uploadImage
+  uploadImage,
+  getMessages,
+  updateMessageStatus,
+  deleteMessage
 } from '../lib/supabase';
+import { 
+  generateWhatsAppResponseUrl, 
+  generateMailtoResponseUrl, 
+  SUBJECT_LABELS, 
+  sanitizeWhatsAppNumber 
+} from '../lib/notifications';
 
 interface AdminViewProps {
   language: Language;
 }
 
-type AdminSubTab = 'sermons' | 'events' | 'schedules' | 'carousel';
+type AdminSubTab = 'sermons' | 'events' | 'schedules' | 'carousel' | 'messages';
 
 
 export default function AdminView({ language }: AdminViewProps) {
@@ -49,8 +59,14 @@ export default function AdminView({ language }: AdminViewProps) {
   const [events, setEvents] = useState<ChurchEvent[]>([]);
   const [schedules, setSchedules] = useState<WeeklySchedule[]>([]);
   const [carouselSlides, setCarouselSlides] = useState<CarouselSlide[]>([]);
+  const [messages, setMessages] = useState<ContactMessage[]>([]);
   const [loadingData, setLoadingData] = useState(false);
   const [actionLoading, setActionLoading] = useState<string | null>(null); // holds action id during save/delete
+
+  // Messages specific state
+  const [selectedMessage, setSelectedMessage] = useState<ContactMessage | null>(null);
+  const [messageFilter, setMessageFilter] = useState<'all' | 'unread' | 'prayer' | 'pastoral' | 'info' | 'admin' | 'ministries'>('all');
+  const [messageNotes, setMessageNotes] = useState<string>('');
 
   // Editing/Creating Modals States
   const [activeModal, setActiveModal] = useState<'sermon' | 'event' | 'schedule' | 'carousel' | null>(null);
@@ -139,6 +155,8 @@ export default function AdminView({ language }: AdminViewProps) {
   useEffect(() => {
     if (session) {
       fetchCurrentTab();
+      // Always keep messages in sync for unread badge
+      getMessages().then(setMessages).catch(() => {});
     }
   }, [session, subTab]);
 
@@ -157,12 +175,73 @@ export default function AdminView({ language }: AdminViewProps) {
       } else if (subTab === 'carousel') {
         const data = await getCarouselSlides();
         setCarouselSlides(data);
+      } else if (subTab === 'messages') {
+        const data = await getMessages();
+        setMessages(data);
       }
     } catch (err: any) {
       console.error(err);
       triggerToast('error', 'Erro ao buscar dados do Supabase. Verifique a tabela e RLS.');
     } finally {
       setLoadingData(false);
+    }
+  };
+
+  // ==========================================
+  // MESSAGE INBOX OPERATIONS
+  // ==========================================
+  const handleOpenMessageModal = async (msg: ContactMessage) => {
+    setSelectedMessage(msg);
+    setMessageNotes(msg.notes || '');
+
+    // Auto mark as read if it was unread
+    if (msg.status === 'unread') {
+      try {
+        await updateMessageStatus(msg.id, 'read');
+        setMessages((prev) =>
+          prev.map((m) => (m.id === msg.id ? { ...m, status: 'read' } : m))
+        );
+      } catch (err) {
+        console.warn('Failed to auto-update unread status:', err);
+      }
+    }
+  };
+
+  const handleUpdateMessageStatus = async (id: string, newStatus: MessageStatus, notesToSave?: string) => {
+    setActionLoading(`status_${id}`);
+    try {
+      const finalNotes = notesToSave !== undefined ? notesToSave : messageNotes;
+      await updateMessageStatus(id, newStatus, finalNotes);
+      setMessages((prev) =>
+        prev.map((m) => (m.id === id ? { ...m, status: newStatus, notes: finalNotes } : m))
+      );
+      if (selectedMessage && selectedMessage.id === id) {
+        setSelectedMessage((prev) => prev ? { ...prev, status: newStatus, notes: finalNotes } : null);
+      }
+      triggerToast('success', `Status da mensagem atualizado para "${newStatus}".`);
+    } catch (err: any) {
+      console.error(err);
+      triggerToast('error', `Falha ao atualizar status: ${err.message || err}`);
+    } finally {
+      setActionLoading(null);
+    }
+  };
+
+  const handleDeleteMessage = async (id: string) => {
+    if (!window.confirm('Tem certeza que deseja excluir permanentemente esta mensagem?')) return;
+    setActionLoading(`delete_msg_${id}`);
+    try {
+      await deleteMessage(id);
+      setMessages((prev) => prev.filter((m) => m.id !== id));
+      if (selectedMessage && selectedMessage.id === id) {
+        setSelectedMessage(null);
+      }
+      triggerToast('success', 'Mensagem excluída.');
+    } catch (err: any) {
+      console.error(err);
+      triggerToast('error', `Falha ao excluir: ${err.message || err}`);
+    } finally {
+      setActionLoading(null);
     }
   };
 
@@ -720,6 +799,24 @@ export default function AdminView({ language }: AdminViewProps) {
             <Layers className="h-4 w-4" />
             <span>Carrossel Home</span>
           </button>
+          <button
+            onClick={() => setSubTab('messages')}
+            className={`flex items-center space-x-2 px-4 py-2.5 rounded-lg text-xs font-mono font-bold uppercase tracking-wider transition-all cursor-pointer ${
+              subTab === 'messages'
+                ? 'bg-[#28166f] text-white'
+                : 'text-gray-500 hover:text-gray-800 hover:bg-gray-50'
+            }`}
+          >
+            <Inbox className="h-4 w-4" />
+            <span>Mensagens</span>
+            {messages.filter(m => m.status === 'unread').length > 0 && (
+              <span className={`ml-1 px-1.5 py-0.5 rounded-full text-[10px] font-bold ${
+                subTab === 'messages' ? 'bg-amber-400 text-gray-950' : 'bg-[#007cc3] text-white'
+              }`}>
+                {messages.filter(m => m.status === 'unread').length}
+              </span>
+            )}
+          </button>
         </div>
 
         {/* Main Database Table & Operations Section */}
@@ -732,12 +829,14 @@ export default function AdminView({ language }: AdminViewProps) {
                 {subTab === 'events' && 'Gerenciador de Eventos'}
                 {subTab === 'schedules' && 'Gerenciador da Programação Semanal'}
                 {subTab === 'carousel' && 'Gerenciador do Carrossel (Home)'}
+                {subTab === 'messages' && 'Caixa de Entrada / Mensagens Recebidas'}
               </h2>
               <p className="text-xs text-gray-500 mt-0.5">
                 {subTab === 'sermons' && 'Publique novos sermões ou gerencie as gravações bíblicas existentes.'}
                 {subTab === 'events' && 'Organize congressos, ações e reuniões de ministério.'}
                 {subTab === 'schedules' && 'Defina os horários e descrições dos cultos da semana.'}
                 {subTab === 'carousel' && 'Cadastre e edite os banners do carrossel principal exibidos na página inicial.'}
+                {subTab === 'messages' && 'Acompanhe pedidos de oração, atendimentos pastorais e mensagens enviadas pelos visitantes.'}
               </p>
             </div>
 
@@ -750,18 +849,20 @@ export default function AdminView({ language }: AdminViewProps) {
               >
                 <RefreshCw className={`h-4 w-4 ${loadingData ? 'animate-spin' : ''}`} />
               </button>
-              <button
-                onClick={() => {
-                  if (subTab === 'sermons') handleOpenSermonModal();
-                  else if (subTab === 'events') handleOpenEventModal();
-                  else if (subTab === 'schedules') handleOpenScheduleModal();
-                  else if (subTab === 'carousel') handleOpenCarouselModal();
-                }}
-                className="bg-[#007cc3] hover:bg-[#007cc3]/90 text-white px-3.5 py-2 rounded-xl text-xs font-bold transition-all shadow-sm flex items-center space-x-1.5 cursor-pointer"
-              >
-                <Plus className="h-4 w-4" />
-                <span className="hidden sm:inline">Adicionar</span>
-              </button>
+              {subTab !== 'messages' && (
+                <button
+                  onClick={() => {
+                    if (subTab === 'sermons') handleOpenSermonModal();
+                    else if (subTab === 'events') handleOpenEventModal();
+                    else if (subTab === 'schedules') handleOpenScheduleModal();
+                    else if (subTab === 'carousel') handleOpenCarouselModal();
+                  }}
+                  className="bg-[#007cc3] hover:bg-[#007cc3]/90 text-white px-3.5 py-2 rounded-xl text-xs font-bold transition-all shadow-sm flex items-center space-x-1.5 cursor-pointer"
+                >
+                  <Plus className="h-4 w-4" />
+                  <span className="hidden sm:inline">Adicionar</span>
+                </button>
+              )}
             </div>
           </div>
 
@@ -1055,6 +1156,256 @@ export default function AdminView({ language }: AdminViewProps) {
                     </table>
                   </div>
                 )
+              )}
+
+              {/* ==================== MESSAGES INBOX LIST ==================== */}
+              {subTab === 'messages' && (
+                <div className="space-y-4">
+                  {/* Filter Toolbar */}
+                  <div className="flex items-center gap-1.5 flex-wrap pb-3 border-b border-gray-100 text-xs">
+                    <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider mr-1 flex items-center gap-1">
+                      <Filter className="h-3 w-3" /> Filtrar:
+                    </span>
+                    <button
+                      onClick={() => setMessageFilter('all')}
+                      className={`px-3 py-1 rounded-lg font-medium transition-colors cursor-pointer ${
+                        messageFilter === 'all'
+                          ? 'bg-[#28166f] text-white shadow-sm'
+                          : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
+                      }`}
+                    >
+                      Todas ({messages.length})
+                    </button>
+                    <button
+                      onClick={() => setMessageFilter('unread')}
+                      className={`px-3 py-1 rounded-lg font-medium transition-colors cursor-pointer ${
+                        messageFilter === 'unread'
+                          ? 'bg-amber-600 text-white shadow-sm'
+                          : 'bg-amber-50 hover:bg-amber-100 text-amber-800'
+                      }`}
+                    >
+                      Não Lidas ({messages.filter((m) => m.status === 'unread').length})
+                    </button>
+                    <button
+                      onClick={() => setMessageFilter('prayer')}
+                      className={`px-3 py-1 rounded-lg font-medium transition-colors cursor-pointer ${
+                        messageFilter === 'prayer'
+                          ? 'bg-purple-700 text-white shadow-sm'
+                          : 'bg-purple-50 hover:bg-purple-100 text-purple-700'
+                      }`}
+                    >
+                      Oração ({messages.filter((m) => m.subject === 'prayer').length})
+                    </button>
+                    <button
+                      onClick={() => setMessageFilter('pastoral')}
+                      className={`px-3 py-1 rounded-lg font-medium transition-colors cursor-pointer ${
+                        messageFilter === 'pastoral'
+                          ? 'bg-amber-700 text-white shadow-sm'
+                          : 'bg-amber-50 hover:bg-amber-100 text-amber-800'
+                      }`}
+                    >
+                      Pastoral ({messages.filter((m) => m.subject === 'pastoral').length})
+                    </button>
+                    <button
+                      onClick={() => setMessageFilter('admin')}
+                      className={`px-3 py-1 rounded-lg font-medium transition-colors cursor-pointer ${
+                        messageFilter === 'admin'
+                          ? 'bg-emerald-700 text-white shadow-sm'
+                          : 'bg-emerald-50 hover:bg-emerald-100 text-emerald-800'
+                      }`}
+                    >
+                      Secretaria ({messages.filter((m) => m.subject === 'admin').length})
+                    </button>
+                    <button
+                      onClick={() => setMessageFilter('info')}
+                      className={`px-3 py-1 rounded-lg font-medium transition-colors cursor-pointer ${
+                        messageFilter === 'info'
+                          ? 'bg-blue-700 text-white shadow-sm'
+                          : 'bg-blue-50 hover:bg-blue-100 text-blue-700'
+                      }`}
+                    >
+                      Geral ({messages.filter((m) => m.subject === 'info').length})
+                    </button>
+                  </div>
+
+                  {/* Messages Table */}
+                  {messages.filter((m) => {
+                    if (messageFilter === 'all') return true;
+                    if (messageFilter === 'unread') return m.status === 'unread';
+                    return m.subject === messageFilter;
+                  }).length === 0 ? (
+                    <div className="text-center py-16 text-gray-400">
+                      <Inbox className="h-12 w-12 mx-auto mb-2 text-gray-300" />
+                      <p className="text-sm font-medium">Nenhuma mensagem encontrada nesta categoria.</p>
+                      <p className="text-xs text-gray-400 mt-1">
+                        As mensagens enviadas pelo formulário de contato do site aparecerão aqui.
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="overflow-x-auto rounded-xl border border-gray-100">
+                      <table className="w-full text-left border-collapse">
+                        <thead>
+                          <tr className="border-b border-gray-100 text-[10px] font-mono font-bold text-gray-500 uppercase tracking-wider bg-slate-50">
+                            <th className="py-3.5 px-4 text-center w-24">Status</th>
+                            <th className="py-3.5 px-4">Remetente</th>
+                            <th className="py-3.5 px-4">Assunto</th>
+                            <th className="py-3.5 px-4">Prévia da Mensagem</th>
+                            <th className="py-3.5 px-4">Data/Hora</th>
+                            <th className="py-3.5 px-4 text-right">Ações Rápidas</th>
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y divide-gray-50 text-xs">
+                          {messages
+                            .filter((m) => {
+                              if (messageFilter === 'all') return true;
+                              if (messageFilter === 'unread') return m.status === 'unread';
+                              return m.subject === messageFilter;
+                            })
+                            .map((msg) => {
+                              const subjectInfo = SUBJECT_LABELS[msg.subject] || {
+                                pt: msg.subject,
+                                color: 'bg-gray-100 text-gray-700 border-gray-200'
+                              };
+                              const waUrl = generateWhatsAppResponseUrl(msg.phone, msg.name);
+                              const mailUrl = generateMailtoResponseUrl(msg.email, msg.name, subjectInfo.pt);
+
+                              return (
+                                <tr
+                                  key={msg.id}
+                                  className={`hover:bg-slate-50/80 transition-colors ${
+                                    msg.status === 'unread' ? 'bg-amber-50/25 font-medium' : ''
+                                  }`}
+                                >
+                                  {/* Status */}
+                                  <td className="py-3.5 px-4 text-center">
+                                    {msg.status === 'unread' && (
+                                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-900 border border-amber-300">
+                                        <span className="h-1.5 w-1.5 rounded-full bg-amber-600 animate-pulse" />
+                                        Nova
+                                      </span>
+                                    )}
+                                    {msg.status === 'read' && (
+                                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium bg-gray-100 text-gray-600">
+                                        Lida
+                                      </span>
+                                    )}
+                                    {msg.status === 'answered' && (
+                                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">
+                                        <CheckCircle2 className="h-2.5 w-2.5" />
+                                        Respondida
+                                      </span>
+                                    )}
+                                    {msg.status === 'archived' && (
+                                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium bg-slate-100 text-slate-500">
+                                        <Archive className="h-2.5 w-2.5" />
+                                        Arquivada
+                                      </span>
+                                    )}
+                                  </td>
+
+                                  {/* Sender info */}
+                                  <td className="py-3.5 px-4">
+                                    <div className="font-bold text-gray-900 leading-tight">{msg.name}</div>
+                                    <div className="text-[11px] text-gray-500 font-mono mt-0.5">{msg.email}</div>
+                                    {msg.phone && (
+                                      <div className="text-[11px] text-emerald-700 font-mono flex items-center gap-1 mt-0.5">
+                                        <Phone className="h-2.5 w-2.5" />
+                                        {msg.phone}
+                                      </div>
+                                    )}
+                                  </td>
+
+                                  {/* Subject */}
+                                  <td className="py-3.5 px-4">
+                                    <span
+                                      className={`inline-block px-2.5 py-1 rounded-md text-[11px] font-semibold border ${subjectInfo.color}`}
+                                    >
+                                      {subjectInfo.pt}
+                                    </span>
+                                  </td>
+
+                                  {/* Message snippet */}
+                                  <td className="py-3.5 px-4 max-w-xs">
+                                    <p className="text-gray-700 line-clamp-2 leading-relaxed">
+                                      {msg.message}
+                                    </p>
+                                    {msg.notes && (
+                                      <span className="inline-block mt-1 text-[10px] bg-yellow-100 text-yellow-800 px-1.5 py-0.5 rounded border border-yellow-200">
+                                        Nota: {msg.notes}
+                                      </span>
+                                    )}
+                                  </td>
+
+                                  {/* Date */}
+                                  <td className="py-3.5 px-4 text-[11px] font-mono text-gray-500 whitespace-nowrap">
+                                    {new Date(msg.createdAt).toLocaleDateString('pt-BR', {
+                                      day: '2-digit',
+                                      month: '2-digit',
+                                      year: 'numeric',
+                                      hour: '2-digit',
+                                      minute: '2-digit'
+                                    })}
+                                  </td>
+
+                                  {/* Quick Action Buttons */}
+                                  <td className="py-3.5 px-4 text-right whitespace-nowrap">
+                                    <div className="flex items-center justify-end space-x-1.5">
+                                      {/* WhatsApp Response */}
+                                      {waUrl ? (
+                                        <a
+                                          href={waUrl}
+                                          target="_blank"
+                                          rel="noopener noreferrer"
+                                          onClick={() => handleUpdateMessageStatus(msg.id, 'answered')}
+                                          className="p-1.5 bg-emerald-50 hover:bg-emerald-600 text-emerald-700 hover:text-white rounded-lg transition-colors cursor-pointer"
+                                          title="Responder no WhatsApp"
+                                        >
+                                          <MessageCircle className="h-3.5 w-3.5" />
+                                        </a>
+                                      ) : null}
+
+                                      {/* Email Response */}
+                                      <a
+                                        href={mailUrl}
+                                        onClick={() => handleUpdateMessageStatus(msg.id, 'answered')}
+                                        className="p-1.5 bg-blue-50 hover:bg-blue-600 text-blue-700 hover:text-white rounded-lg transition-colors cursor-pointer"
+                                        title="Responder por E-mail"
+                                      >
+                                        <Mail className="h-3.5 w-3.5" />
+                                      </a>
+
+                                      {/* View / Detail */}
+                                      <button
+                                        onClick={() => handleOpenMessageModal(msg)}
+                                        className="p-1.5 bg-slate-100 hover:bg-[#28166f] text-gray-700 hover:text-white rounded-lg transition-colors cursor-pointer"
+                                        title="Ver detalhes completos"
+                                      >
+                                        <Eye className="h-3.5 w-3.5" />
+                                      </button>
+
+                                      {/* Delete */}
+                                      <button
+                                        onClick={() => handleDeleteMessage(msg.id)}
+                                        disabled={actionLoading === `delete_msg_${msg.id}`}
+                                        className="p-1.5 bg-gray-100 hover:bg-red-600 text-gray-600 hover:text-white rounded-lg transition-colors cursor-pointer"
+                                        title="Excluir Mensagem"
+                                      >
+                                        {actionLoading === `delete_msg_${msg.id}` ? (
+                                          <RefreshCw className="h-3.5 w-3.5 animate-spin" />
+                                        ) : (
+                                          <Trash2 className="h-3.5 w-3.5" />
+                                        )}
+                                      </button>
+                                    </div>
+                                  </td>
+                                </tr>
+                              );
+                            })}
+                        </tbody>
+                      </table>
+                    </div>
+                  )}
+                </div>
               )}
 
             </div>
@@ -1883,7 +2234,244 @@ export default function AdminView({ language }: AdminViewProps) {
         </div>
       )}
 
+      {/* =======================================================
+          MODAL: MESSAGE DETAILS & LEADERSHIP RESPONSE
+          ======================================================= */}
+      {selectedMessage && (
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+          <div className="bg-white rounded-2xl w-full max-w-2xl shadow-2xl border border-gray-100 overflow-hidden max-h-[90vh] flex flex-col animate-in zoom-in-95 duration-200">
+            {/* Modal Header */}
+            <div className="bg-[#28166f] p-5 text-white flex justify-between items-center shrink-0">
+              <div className="flex items-center space-x-2.5">
+                <div className="p-2 bg-white/10 rounded-xl">
+                  <Inbox className="h-5 w-5 text-amber-400" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-lg font-sans leading-tight">Detalhes do Contato</h3>
+                  <p className="text-[11px] text-neutral-300">
+                    Enviado em {new Date(selectedMessage.createdAt).toLocaleString('pt-BR')}
+                  </p>
+                </div>
+              </div>
+              <button
+                onClick={() => setSelectedMessage(null)}
+                className="text-white/80 hover:text-white p-1 hover:bg-white/10 rounded-lg transition-colors cursor-pointer"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+
+            {/* Modal Body */}
+            <div className="p-6 space-y-6 overflow-y-auto">
+              {/* Sender Info Card */}
+              <div className="bg-slate-50 border border-slate-100 rounded-xl p-4 grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                <div>
+                  <span className="text-gray-400 font-bold uppercase text-[10px] block mb-1">Nome do Visitante</span>
+                  <span className="font-bold text-gray-900 text-sm">{selectedMessage.name}</span>
+                </div>
+
+                <div>
+                  <span className="text-gray-400 font-bold uppercase text-[10px] block mb-1">Assunto</span>
+                  <span
+                    className={`inline-block px-2.5 py-0.5 rounded-md font-semibold border ${
+                      SUBJECT_LABELS[selectedMessage.subject]?.color || 'bg-gray-100 text-gray-700'
+                    }`}
+                  >
+                    {SUBJECT_LABELS[selectedMessage.subject]?.pt || selectedMessage.subject}
+                  </span>
+                </div>
+
+                <div>
+                  <span className="text-gray-400 font-bold uppercase text-[10px] block mb-1">E-mail</span>
+                  <a
+                    href={`mailto:${selectedMessage.email}`}
+                    className="font-mono text-blue-700 hover:underline flex items-center gap-1"
+                  >
+                    <Mail className="h-3 w-3" />
+                    {selectedMessage.email}
+                  </a>
+                </div>
+
+                <div>
+                  <span className="text-gray-400 font-bold uppercase text-[10px] block mb-1">Telefone / WhatsApp</span>
+                  {selectedMessage.phone ? (
+                    <span className="font-mono text-emerald-800 font-semibold flex items-center gap-1">
+                      <Phone className="h-3 w-3" />
+                      {selectedMessage.phone}
+                    </span>
+                  ) : (
+                    <span className="text-gray-400 italic">Não informado</span>
+                  )}
+                </div>
+              </div>
+
+              {/* Message Content Box */}
+              <div>
+                <label className="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-2">
+                  Mensagem Completa
+                </label>
+                <div className="bg-white p-4 rounded-xl border border-gray-200 text-sm text-gray-800 leading-relaxed whitespace-pre-wrap shadow-inner font-sans">
+                  {selectedMessage.message}
+                </div>
+              </div>
+
+              {/* Leadership 1-Click Direct Response Actions */}
+              <div className="bg-amber-50/50 border border-amber-200/60 rounded-xl p-4 space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-bold text-amber-900 uppercase tracking-wide flex items-center gap-1.5">
+                    <Send className="h-3.5 w-3.5" /> Opções de Resposta da Liderança
+                  </span>
+                  <span className="text-[10px] text-amber-700 font-medium">1-Clique</span>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {/* WhatsApp Direct Reply */}
+                  {selectedMessage.phone ? (
+                    <a
+                      href={generateWhatsAppResponseUrl(selectedMessage.phone, selectedMessage.name) || '#'}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => handleUpdateMessageStatus(selectedMessage.id, 'answered')}
+                      className="py-2.5 px-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold text-xs flex items-center justify-center gap-2 shadow-sm transition-all cursor-pointer"
+                    >
+                      <MessageCircle className="h-4 w-4" />
+                      <span>Responder via WhatsApp</span>
+                      <ExternalLink className="h-3 w-3 opacity-70" />
+                    </a>
+                  ) : (
+                    <button
+                      disabled
+                      className="py-2.5 px-4 bg-gray-200 text-gray-400 rounded-xl font-bold text-xs flex items-center justify-center gap-2 cursor-not-allowed"
+                    >
+                      <MessageCircle className="h-4 w-4" />
+                      <span>WhatsApp não informado</span>
+                    </button>
+                  )}
+
+                  {/* Email Direct Reply */}
+                  <a
+                    href={generateMailtoResponseUrl(
+                      selectedMessage.email,
+                      selectedMessage.name,
+                      SUBJECT_LABELS[selectedMessage.subject]?.pt
+                    )}
+                    onClick={() => handleUpdateMessageStatus(selectedMessage.id, 'answered')}
+                    className="py-2.5 px-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-xs flex items-center justify-center gap-2 shadow-sm transition-all cursor-pointer"
+                  >
+                    <Mail className="h-4 w-4" />
+                    <span>Responder via E-mail</span>
+                    <ExternalLink className="h-3 w-3 opacity-70" />
+                  </a>
+                </div>
+              </div>
+
+              {/* Status Switcher Buttons */}
+              <div>
+                <label className="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-2">
+                  Status de Atendimento
+                </label>
+                <div className="flex items-center gap-2 flex-wrap">
+                  <button
+                    type="button"
+                    onClick={() => handleUpdateMessageStatus(selectedMessage.id, 'unread')}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                      selectedMessage.status === 'unread'
+                        ? 'bg-amber-500 text-white shadow-sm'
+                        : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                    }`}
+                  >
+                    Não Lida
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => handleUpdateMessageStatus(selectedMessage.id, 'read')}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                      selectedMessage.status === 'read'
+                        ? 'bg-blue-600 text-white shadow-sm'
+                        : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                    }`}
+                  >
+                    Lida
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => handleUpdateMessageStatus(selectedMessage.id, 'answered')}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1 ${
+                      selectedMessage.status === 'answered'
+                        ? 'bg-emerald-600 text-white shadow-sm'
+                        : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                    }`}
+                  >
+                    <CheckCircle2 className="h-3.5 w-3.5" />
+                    Respondida
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => handleUpdateMessageStatus(selectedMessage.id, 'archived')}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1 ${
+                      selectedMessage.status === 'archived'
+                        ? 'bg-slate-600 text-white shadow-sm'
+                        : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                    }`}
+                  >
+                    <Archive className="h-3.5 w-3.5" />
+                    Arquivada
+                  </button>
+                </div>
+              </div>
+
+              {/* Internal Notes Section */}
+              <div>
+                <label className="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-1.5">
+                  Anotações Internas da Liderança / Secretaria
+                </label>
+                <div className="space-y-2">
+                  <textarea
+                    rows={3}
+                    placeholder="Ex: Pr. Marcos realizou a visita pastoral em 24/08. Pedido de oração encaminhado ao grupo da liderança."
+                    value={messageNotes}
+                    onChange={(e) => setMessageNotes(e.target.value)}
+                    className="w-full px-3 py-2 border border-gray-200 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-[#28166f]"
+                  />
+                  <div className="flex justify-end">
+                    <button
+                      type="button"
+                      onClick={() => handleUpdateMessageStatus(selectedMessage.id, selectedMessage.status, messageNotes)}
+                      className="px-3.5 py-1.5 bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold rounded-lg flex items-center gap-1.5 transition-colors cursor-pointer"
+                    >
+                      <Save className="h-3 w-3" />
+                      <span>Salvar Anotação</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Modal Footer */}
+            <div className="p-4 bg-slate-50 border-t border-gray-100 flex justify-between items-center shrink-0">
+              <button
+                type="button"
+                onClick={() => handleDeleteMessage(selectedMessage.id)}
+                className="text-red-600 hover:text-red-800 text-xs font-bold flex items-center gap-1 px-3 py-1.5 hover:bg-red-50 rounded-lg transition-colors cursor-pointer"
+              >
+                <Trash2 className="h-3.5 w-3.5" />
+                <span>Excluir Mensagem</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setSelectedMessage(null)}
+                className="px-5 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded-lg text-xs font-bold transition-colors cursor-pointer"
+              >
+                Fechar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }
+
 

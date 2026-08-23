@@ -55,3 +55,18 @@ export interface CarouselSlide {
   active: boolean;
 }
 
+export type MessageSubject = 'info' | 'prayer' | 'pastoral' | 'admin' | 'ministries';
+export type MessageStatus = 'unread' | 'read' | 'answered' | 'archived';
+
+export interface ContactMessage {
+  id: string;
+  createdAt: string;
+  name: string;
+  email: string;
+  phone?: string;
+  subject: MessageSubject;
+  message: string;
+  status: MessageStatus;
+  notes?: string;
+}
+

@@ -128,7 +128,7 @@ export const DICTIONARY = {
     
     // Contact View
     contactHeroTitle: 'Fale Conosco',
-    contactHeroSub: 'Tem alguma dúvida, pedido de oração ou quer conversar? Nossa equipe está pronta para lhe atender',
+    contactHeroSub: 'Tem alguma dúvida, pedido de oração ou quer conversar? Nos envie uma mensagem.',
     contactFormTitle: 'Envie uma mensagem',
     formName: 'Nome Completo',
     formEmail: 'Endereço de E-mail',
@@ -278,7 +278,7 @@ export const DICTIONARY = {
     
     // Contact View
     contactHeroTitle: 'Contact Us',
-    contactHeroSub: 'Have any questions, prayer requests, or want to talk? Our team is ready to assist you',
+    contactHeroSub: 'Have a question, prayer request, or want to talk? Send us a message.',
     contactFormTitle: 'Send a message',
     formName: 'Full Name',
     formEmail: 'Email Address',

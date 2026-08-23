@@ -1,7 +1,9 @@
 import { useState, FormEvent } from 'react';
-import { Mail, Phone, MapPin, Send, Check, Youtube, Facebook, Instagram, Share2, Compass, Building, Landmark, PhoneCall } from 'lucide-react';
-import { Language } from '../types';
+import { Send, Check, AlertCircle, Phone } from 'lucide-react';
+import { Language, MessageSubject } from '../types';
 import { DICTIONARY } from '../data';
+import { sendMessage } from '../lib/supabase';
+import churchFrontImg from './church_front_set12.jpg';
 
 interface ContatoViewProps {
   language: Language;
@@ -13,34 +15,63 @@ export default function ContatoView({ language }: ContatoViewProps) {
   // States
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [subject, setSubject] = useState('info');
+  const [phone, setPhone] = useState('');
+  const [subject, setSubject] = useState<MessageSubject>('info');
   const [message, setMessage] = useState('');
   const [isSending, setIsSending] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   // Form submit handler
-  const handleFormSubmit = (e: FormEvent) => {
+  const handleFormSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (name.trim() && email.trim() && message.trim()) {
-      setIsSending(true);
-      setTimeout(() => {
-        setIsSending(false);
-        setIsSuccess(true);
-        setName('');
-        setEmail('');
-        setMessage('');
-        setSubject('info');
-      }, 1200);
+    setErrorMessage(null);
+
+    if (!name.trim() || !email.trim() || !message.trim()) {
+      setErrorMessage(
+        language === 'pt'
+          ? 'Por favor, preencha todos os campos obrigatórios.'
+          : 'Please fill in all required fields.'
+      );
+      return;
+    }
+
+    setIsSending(true);
+
+    try {
+      await sendMessage({
+        name,
+        email,
+        phone: phone.trim() || undefined,
+        subject,
+        message
+      });
+
+      setIsSuccess(true);
+      setName('');
+      setEmail('');
+      setPhone('');
+      setMessage('');
+      setSubject('info');
+    } catch (err: any) {
+      console.error('Error sending message:', err);
+      setErrorMessage(
+        language === 'pt'
+          ? 'Ocorreu um erro ao enviar sua mensagem. Por favor, tente novamente ou entre em contato pelo e-mail contato@icenvsp.com.br.'
+          : 'An error occurred while sending your message. Please try again or contact us at contato@icenvsp.com.br.'
+      );
+    } finally {
+      setIsSending(false);
     }
   };
 
   return (
     <div id="contato-view" className="animate-fade-in pt-20 bg-background text-on-surface min-h-screen">
       {/* Hero Map Section */}
-      <section className="relative w-full h-[400px] sm:h-[450px] overflow-hidden border-b-4 border-primary">
+      <section id="contato-map-section" className="relative w-full h-[400px] sm:h-[450px] overflow-hidden border-b-4 border-primary">
         <iframe
-          title="Google Maps Location"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d58509.3094038165!2d-46.68065054179688!3d-23.57448839999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce59a688975765%3A0x6b4047b1988ef11b!2zU8OjbyBQYXVsbywgU1A!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr"
+          title="Localização da Igreja Cristã Evangélica Nova Vida no Google Maps"
+          src="https://maps.google.com/maps?q=Rua+Lu%C3%ADs+Ant%C3%B4nio+dos+Santos%2C+54+-+Santa+Teresinha%2C+S%C3%A3o+Paulo+-+SP%2C+02460-000&t=&z=16&ie=UTF8&iwloc=&output=embed"
           className="w-full h-full border-none"
           loading="lazy"
         />
@@ -64,53 +95,17 @@ export default function ContatoView({ language }: ContatoViewProps) {
       </section>
 
       {/* Traditional Layout: Details & Form */}
-      <section className="pb-20 px-4 sm:px-6 lg:px-12">
+      <section id="contato-content-section" className="pb-20 px-4 sm:px-6 lg:px-12">
         <div className="max-w-container-max mx-auto space-y-16">
-          {/* Contact Details Row */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 text-center border-b border-outline-variant/40 pb-16">
-            <div className="space-y-4 p-6 bg-white rounded-2xl border border-surface-tint shadow-sm">
-              <Building className="h-10 w-10 text-primary mx-auto" />
-              <h3 className="font-display text-xl font-bold text-on-surface">
-                {language === 'pt' ? 'Sede Administrativa' : 'Administrative Headquarters'}
-              </h3>
-              <p className="text-text-muted text-sm leading-relaxed">
-                Rua Luis Antônio dos Santos, 54<br />
-                Santana, São Paulo - SP
-              </p>
-            </div>
-
-            <div className="space-y-4 p-6 bg-white rounded-2xl border border-surface-tint shadow-sm">
-              <PhoneCall className="h-10 w-10 text-primary mx-auto" />
-              <h3 className="font-display text-xl font-bold text-on-surface">
-                {language === 'pt' ? 'Secretaria Geral' : 'General Office'}
-              </h3>
-              <p className="text-text-muted text-sm leading-relaxed">
-                +55 (11) 2977-8899<br />
-                {language === 'pt' ? 'Segunda a Sexta, 09h às 18h' : 'Monday to Friday, 9am to 6pm'}
-              </p>
-            </div>
-
-            <div className="space-y-4 p-6 bg-white rounded-2xl border border-surface-tint shadow-sm">
-              <Landmark className="h-10 w-10 text-primary mx-auto" />
-              <h3 className="font-display text-xl font-bold text-on-surface">
-                {language === 'pt' ? 'Chancelaria' : 'Chancellery'}
-              </h3>
-              <p className="text-text-muted text-sm leading-relaxed">
-                contato@icenvsp.org.br<br />
-                expediente@icenvsp.org.br
-              </p>
-            </div>
-          </div>
-
           {/* Form & Image Section */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          <div id="contato-form-grid" className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             {/* Left Context Image */}
             <div className="lg:col-span-5 space-y-6">
               <div className="relative overflow-hidden rounded-3xl border border-outline-variant shadow-lg group">
                 <img
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuC23L17Q5rdxvbiuOwrNuimDvoCVaqEykFn2PceuxUZ9c9uCG1hSc9QKAKOTvB7ZjzuTEnsHZGbui9VXQVo5InEV3inkDrVyQy2uU2IHS6QPCVHa0M9J2oCyxMjE8BY6L3ZD-KZagoxbWIt_Bu7YQ9gBUoE9hvUPt2Y5R_GVD6qEhZwVUNuuxKNpojoVEiNRaeLfQm5rIuPrtd4vla60Qh7bGUp2_wtgeSOUcWhvMLje9tPaULiTv_sOEXfGcF0XatOXF1rMCzK5Ek"
-                  alt="Igreja Histórica"
-                  className="w-full h-80 object-cover sepia-effect group-hover:scale-105 transition-transform duration-700"
+                  src={churchFrontImg}
+                  alt="Fachada da Igreja"
+                  className="w-full h-80 object-cover object-center group-hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute bottom-0 left-0 right-0 p-4 bg-primary/90 text-white text-xs uppercase tracking-widest font-mono text-center">
                   {language === 'pt' ? 'Fachada Histórica — Preservando Valores' : 'Historic Facade — Preserving Values'}
@@ -123,8 +118,8 @@ export default function ContatoView({ language }: ContatoViewProps) {
                 </h4>
                 <p className="text-text-muted text-xs leading-relaxed">
                   {language === 'pt'
-                    ? 'Agendamentos para atendimento pastoral individual ou familiar podem ser solicitados através do formulário ou diretamente na secretaria.'
-                    : 'Appointments for individual or family pastoral counseling can be requested through this form or at the office.'}
+                    ? 'Agendamentos para atendimento pastoral individual ou familiar podem ser solicitados através do formulário.'
+                    : 'Appointments for individual or family pastoral counseling can be requested through this form.'}
                 </p>
               </div>
             </div>
@@ -154,11 +149,18 @@ export default function ContatoView({ language }: ContatoViewProps) {
                   </button>
                 </div>
               ) : (
-                <form onSubmit={handleFormSubmit} className="space-y-6">
+                <form id="contato-form" onSubmit={handleFormSubmit} className="space-y-6">
+                  {errorMessage && (
+                    <div className="p-4 bg-red-50 border border-red-200 text-red-700 text-xs rounded-xl flex items-start gap-2.5 animate-in fade-in duration-200">
+                      <AlertCircle className="h-4 w-4 shrink-0 mt-0.5" />
+                      <span>{errorMessage}</span>
+                    </div>
+                  )}
+
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div>
+                    <div className="sm:col-span-2">
                       <label className="block text-xs font-bold uppercase text-gray-700 mb-2">
-                        {language === 'pt' ? 'Seu Nome Completo' : 'Your Full Name'}
+                        {language === 'pt' ? 'Seu Nome Completo *' : 'Your Full Name *'}
                       </label>
                       <input
                         type="text"
@@ -172,7 +174,7 @@ export default function ContatoView({ language }: ContatoViewProps) {
 
                     <div>
                       <label className="block text-xs font-bold uppercase text-gray-700 mb-2">
-                        {language === 'pt' ? 'Seu E-mail' : 'Your Email Address'}
+                        {language === 'pt' ? 'Seu E-mail *' : 'Your Email Address *'}
                       </label>
                       <input
                         type="email"
@@ -183,27 +185,44 @@ export default function ContatoView({ language }: ContatoViewProps) {
                         className="w-full px-4 py-3 bg-surface-alt border border-outline rounded-xl focus:border-primary outline-none text-sm transition-all"
                       />
                     </div>
+
+                    <div>
+                      <label className="block text-xs font-bold uppercase text-gray-700 mb-2 flex items-center justify-between">
+                        <span>{language === 'pt' ? 'WhatsApp / Telefone' : 'WhatsApp / Phone'}</span>
+                        <span className="text-[10px] text-gray-400 font-normal lowercase tracking-normal">
+                          {language === 'pt' ? '(opcional)' : '(optional)'}
+                        </span>
+                      </label>
+                      <input
+                        type="tel"
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                        placeholder="(11) 98765-4321"
+                        className="w-full px-4 py-3 bg-surface-alt border border-outline rounded-xl focus:border-primary outline-none text-sm transition-all"
+                      />
+                    </div>
                   </div>
 
                   <div>
                     <label className="block text-xs font-bold uppercase text-gray-700 mb-2">
-                      {language === 'pt' ? 'Assunto' : 'Subject'}
+                      {language === 'pt' ? 'Assunto *' : 'Subject *'}
                     </label>
                     <select
                       value={subject}
-                      onChange={(e) => setSubject(e.target.value)}
+                      onChange={(e) => setSubject(e.target.value as MessageSubject)}
                       className="w-full px-4 py-3 bg-surface-alt border border-outline rounded-xl focus:border-primary outline-none text-sm cursor-pointer text-on-surface"
                     >
                       <option value="info">{language === 'pt' ? 'Informações Gerais' : 'General Information'}</option>
                       <option value="prayer">{language === 'pt' ? 'Pedido de Oração' : 'Prayer Request'}</option>
                       <option value="pastoral">{language === 'pt' ? 'Aconselhamento Pastoral' : 'Pastoral Counseling'}</option>
                       <option value="admin">{language === 'pt' ? 'Secretaria / Administração' : 'Secretary / Admin'}</option>
+                      <option value="ministries">{language === 'pt' ? 'Dúvidas sobre Ministérios' : 'Ministry Inquiries'}</option>
                     </select>
                   </div>
 
                   <div>
                     <label className="block text-xs font-bold uppercase text-gray-700 mb-2">
-                      {language === 'pt' ? 'Sua Mensagem' : 'Your Message'}
+                      {language === 'pt' ? 'Sua Mensagem *' : 'Your Message *'}
                     </label>
                     <textarea
                       rows={5}
@@ -221,7 +240,10 @@ export default function ContatoView({ language }: ContatoViewProps) {
                     className="w-full py-4 bg-primary text-white font-bold text-sm rounded-xl hover:bg-primary-container transition-all flex items-center justify-center gap-2 shadow cursor-pointer disabled:opacity-50"
                   >
                     {isSending ? (
-                      <span>{language === 'pt' ? 'Enviando...' : 'Sending...'}</span>
+                      <span className="flex items-center gap-2">
+                        <span className="h-4 w-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                        <span>{language === 'pt' ? 'Enviando mensagem...' : 'Sending message...'}</span>
+                      </span>
                     ) : (
                       <>
                         <span>{language === 'pt' ? 'Enviar Mensagem' : 'Send Message'}</span>

@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "DESIGN.md",
+                "file": "vault/01 - Arquitetura/Ambientes — Dev e Produção.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "DESIGN"
+              "title": "Ambientes — Dev e Produção"
             }
           }
         ]
@@ -99,7 +99,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "DESIGN.md",
+                "file": "vault/01 - Arquitetura/Ambientes — Dev e Produção.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -174,7 +174,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 575.23779296875
+    "width": 575.23779296875,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -187,8 +188,11 @@
       "bases:Criar nova base": false
     }
   },
-  "active": "8b2847f39f0b9009",
+  "active": "4cfc590e12bffd16",
   "lastOpenFiles": [
+    "vault/00 - Visao Geral/00 - 🏠 Início.md",
+    "README.md",
+    "DESIGN.md",
     "_archive/assets",
     "_archive/stitch_downloads/Sermoes_e_Mensagens.png",
     "_archive/stitch_downloads/Sermoes_e_Mensagens.html",
@@ -206,7 +210,6 @@
     "_archive/root/bun.lock",
     "_archive/root/download_stitch.py",
     "_archive/root/screen_home_icenvsp.png",
-    "_archive/root/screen_home_icenvsp.html",
     "_archive/root/20250420_v1.jpg",
     "_archive/root/20250420_065947.jpg",
     "_archive/root/Logo simples_CF_rev01.png",
@@ -217,10 +220,7 @@
     "vault/01 - Arquitetura/Docker — Configuração Local.md",
     "vault/01 - Arquitetura/Estrutura do Projeto.md",
     "vault/01 - Arquitetura/Git — Branches e Histórico.md",
-    "vault/00 - Visao Geral/00 - 🏠 Início.md",
     "rfc-cutler-httpbis-partitioned-cookies.md",
-    "README.md",
-    "DESIGN.md",
     "vault/Banco de Dados — Supabase.md",
     "vault/Ambientes — Dev e Produção.md",
     "docs/v2-UPGRADE-GUIDE.md",

@@ -1,6 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
-import { Sermon, ChurchEvent, CarouselSlide } from '../types';
+import { Sermon, ChurchEvent, CarouselSlide, ContactMessage, MessageStatus } from '../types';
 import { SERMONS, EVENTS, CAROUSEL_SLIDES } from '../data';
+import { triggerNotificationEngines } from './notifications';
 
 // Read from import.meta.env with safe typings
 const supabaseUrl = (import.meta as any).env?.VITE_SUPABASE_URL || '';
@@ -487,6 +488,178 @@ export async function uploadImage(file: File, folder: 'sermons' | 'events' | 'ca
     .getPublicUrl(filePath);
 
   return publicUrl;
+}
+
+// ==========================================
+// CONTACT MESSAGES HELPERS
+// ==========================================
+
+const LOCAL_MESSAGES_KEY = 'icenv_local_messages';
+
+function getLocalMessages(): ContactMessage[] {
+  try {
+    const raw = localStorage.getItem(LOCAL_MESSAGES_KEY);
+    if (!raw) return [];
+    return JSON.parse(raw);
+  } catch {
+    return [];
+  }
+}
+
+function saveLocalMessages(msgs: ContactMessage[]) {
+  try {
+    localStorage.setItem(LOCAL_MESSAGES_KEY, JSON.stringify(msgs));
+  } catch (e) {
+    console.warn('Failed to persist to localStorage', e);
+  }
+}
+
+export async function sendMessage(
+  msg: Omit<ContactMessage, 'id' | 'createdAt' | 'status' | 'notes'>
+): Promise<ContactMessage> {
+  const payload = {
+    name: msg.name.trim(),
+    email: msg.email.trim().toLowerCase(),
+    phone: msg.phone?.trim() || null,
+    subject: msg.subject || 'info',
+    message: msg.message.trim(),
+    status: 'unread' as MessageStatus
+  };
+
+  let savedMessage: ContactMessage;
+
+  if (supabase) {
+    try {
+      const { data, error } = await supabase
+        .from('messages')
+        .insert([payload])
+        .select()
+        .single();
+
+      if (error) throw error;
+
+      savedMessage = {
+        id: String(data.id),
+        createdAt: data.created_at,
+        name: data.name,
+        email: data.email,
+        phone: data.phone || undefined,
+        subject: data.subject,
+        message: data.message,
+        status: data.status,
+        notes: data.notes || undefined
+      };
+    } catch (err) {
+      console.warn('Supabase insert failed (table may not be created yet). Falling back to local storage:', err);
+      savedMessage = {
+        id: String(Date.now()),
+        createdAt: new Date().toISOString(),
+        name: payload.name,
+        email: payload.email,
+        phone: payload.phone || undefined,
+        subject: payload.subject as any,
+        message: payload.message,
+        status: 'unread'
+      };
+      const local = getLocalMessages();
+      saveLocalMessages([savedMessage, ...local]);
+    }
+  } else {
+    // Local fallback for offline/development demo
+    savedMessage = {
+      id: String(Date.now()),
+      createdAt: new Date().toISOString(),
+      name: payload.name,
+      email: payload.email,
+      phone: payload.phone || undefined,
+      subject: payload.subject as any,
+      message: payload.message,
+      status: 'unread'
+    };
+    const local = getLocalMessages();
+    saveLocalMessages([savedMessage, ...local]);
+  }
+
+  // Trigger optional background notifications (WhatsApp webhook, email webhook)
+  triggerNotificationEngines(savedMessage).catch((err) =>
+    console.warn('Background notification error:', err)
+  );
+
+  return savedMessage;
+}
+
+export async function getMessages(): Promise<ContactMessage[]> {
+  if (!supabase) {
+    return getLocalMessages();
+  }
+
+  try {
+    const { data, error } = await supabase
+      .from('messages')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (error) throw error;
+    if (!data) return [];
+
+    return data.map((item: any) => ({
+      id: String(item.id),
+      createdAt: item.created_at,
+      name: item.name,
+      email: item.email,
+      phone: item.phone || undefined,
+      subject: item.subject,
+      message: item.message,
+      status: item.status || 'unread',
+      notes: item.notes || undefined
+    }));
+  } catch (err) {
+    console.error('Failed to fetch messages from Supabase:', err);
+    return getLocalMessages();
+  }
+}
+
+export async function updateMessageStatus(
+  id: string,
+  status: MessageStatus,
+  notes?: string
+): Promise<boolean> {
+  if (!supabase) {
+    const local = getLocalMessages();
+    const updated = local.map((m) => (m.id === id ? { ...m, status, notes: notes ?? m.notes } : m));
+    saveLocalMessages(updated);
+    return true;
+  }
+
+  const payload: any = { status };
+  if (notes !== undefined) {
+    payload.notes = notes;
+  }
+
+  const { error } = await supabase
+    .from('messages')
+    .update(payload)
+    .eq('id', id);
+
+  if (error) throw error;
+  return true;
+}
+
+export async function deleteMessage(id: string): Promise<boolean> {
+  if (!supabase) {
+    const local = getLocalMessages();
+    const filtered = local.filter((m) => m.id !== id);
+    saveLocalMessages(filtered);
+    return true;
+  }
+
+  const { error } = await supabase
+    .from('messages')
+    .delete()
+    .eq('id', id);
+
+  if (error) throw error;
+  return true;
 }
 
 
