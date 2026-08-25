@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Shield, Target, Award, ArrowRight, UserCheck, BookOpen, Heart, Globe, Coins, Users, Building2, Compass, FileText } from 'lucide-react';
+import { Shield, Target, Award, ArrowRight, UserCheck, BookOpen, Heart, Globe, Coins, Users, Building2, Compass, FileText, Landmark, ShieldCheck, User } from 'lucide-react';
 import { Language, ActiveTab, Leader, TimelineEvent } from '../types';
-import { DICTIONARY, LEADERS, TIMELINE } from '../data';
+import { DICTIONARY, LEADERS, LEADERSHIP_BIENNIUM, TIMELINE } from '../data';
 
 interface SobreViewProps {
   language: Language;
@@ -334,53 +334,147 @@ export default function SobreView({ language, onChangeTab, activeSubTab, setActi
 
           {/* TAB CONTENT: LIDERANÇA */}
           {activeSubTab === 'lideranca' && (
-            <div className="space-y-12 animate-in fade-in duration-200">
-              <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
-                <span className="text-amber-700 uppercase font-mono text-xs font-bold tracking-widest block">
-                  {language === 'pt' ? 'Corpo Pastoral e Conselho' : 'Pastoral Council'}
+            <div className="space-y-16 animate-in fade-in duration-200">
+              {/* Header */}
+              <div className="text-center max-w-2xl mx-auto space-y-3">
+                <span className="inline-block text-amber-700 uppercase font-mono text-xs font-bold tracking-widest bg-amber-50 px-3.5 py-1 rounded-full border border-amber-200">
+                  {LEADERSHIP_BIENNIUM.mandate[language]}
                 </span>
-                <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight">
-                  {dict.leadershipTitle}
+                <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight">
+                  {LEADERSHIP_BIENNIUM.period[language]}
                 </h2>
-                <p className="text-sm text-gray-500">
-                  {dict.leadershipSub}
+                <p className="text-sm text-gray-500 max-w-xl mx-auto">
+                  {language === 'pt'
+                    ? 'Homens e mulheres eleitos em Assembleia Geral para o pastoreio, governo eclesiástico, administração e serviço diaconal da igreja.'
+                    : 'Men and women elected to pastoral care, church governance, administration, and diaconal service.'}
                 </p>
-                <div className="h-1 w-12 bg-amber-500 rounded mx-auto" />
+                <div className="h-1 w-16 bg-amber-500 rounded mx-auto mt-4" />
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                {leaders.map((leader) => (
-                  <div
-                    key={leader.id}
-                    id={`leader-card-${leader.id}`}
-                    className="bg-gray-50 rounded-2xl overflow-hidden border border-gray-100 group flex flex-col justify-between hover:shadow-md hover:bg-white transition-all duration-200"
-                  >
-                    <div>
-                      <div className="relative aspect-square bg-gray-200 overflow-hidden">
-                        <img
-                          src={leader.image}
-                          alt={leader.name}
-                          className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-300"
-                          referrerPolicy="no-referrer"
-                        />
-                        <div className="absolute top-3 right-3 bg-white/95 backdrop-blur p-1.5 rounded-lg text-amber-700 shadow-sm">
-                          <UserCheck className="h-4 w-4" />
+              {/* 1. MESA ADMINISTRATIVA */}
+              <div className="space-y-6">
+                <div className="flex items-center gap-3 border-b border-gray-200 pb-3">
+                  <div className="h-9 w-9 rounded-xl bg-[#007CC3]/10 text-[#007CC3] flex items-center justify-center">
+                    <Landmark className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <h3 className="font-sans font-extrabold text-xl text-gray-900 leading-tight">
+                      {language === 'pt' ? 'Mesa Administrativa' : 'Administrative Board'}
+                    </h3>
+                    <span className="text-xs text-gray-500 font-mono">
+                      {language === 'pt' ? 'Cargos Definitivos' : 'Executive Officers'}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {LEADERSHIP_BIENNIUM.board.map((member, idx) => (
+                    <div
+                      key={`board-${idx}`}
+                      className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm border-l-4 border-l-[#007CC3] hover:shadow-md hover:translate-y-[-2px] transition-all duration-200 flex flex-col justify-between space-y-3"
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="text-[11px] font-mono font-bold text-[#007CC3] uppercase tracking-wider bg-blue-50 px-2.5 py-1 rounded-md border border-blue-100">
+                          {member.role[language]}
+                        </span>
+                        <div className="h-7 w-7 rounded-full bg-gray-50 flex items-center justify-center text-gray-400">
+                          {idx <= 1 ? (
+                            <Shield className="h-3.5 w-3.5 text-[#007CC3]" />
+                          ) : idx <= 3 ? (
+                            <FileText className="h-3.5 w-3.5 text-emerald-600" />
+                          ) : (
+                            <Coins className="h-3.5 w-3.5 text-amber-600" />
+                          )}
                         </div>
                       </div>
-                      <div className="p-5 space-y-2">
-                        <h3 className="font-sans font-bold text-base text-gray-900 leading-tight">
-                          {leader.name}
-                        </h3>
-                        <span className="inline-block text-xs font-mono font-bold text-amber-700 uppercase tracking-wider">
-                          {leader.role[language]}
-                        </span>
-                        <p className="text-xs text-gray-500 leading-relaxed pt-2 border-t border-gray-100/60">
-                          {leader.bio[language]}
-                        </p>
+                      <div>
+                        <h4 className="font-sans font-bold text-base sm:text-lg text-gray-900 leading-snug">
+                          {member.name}
+                        </h4>
                       </div>
                     </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* 2. PRESBÍTEROS ELEITOS */}
+              <div className="space-y-6">
+                <div className="flex items-center gap-3 border-b border-gray-200 pb-3">
+                  <div className="h-9 w-9 rounded-xl bg-amber-500/10 text-amber-700 flex items-center justify-center">
+                    <ShieldCheck className="h-5 w-5" />
                   </div>
-                ))}
+                  <div>
+                    <h3 className="font-sans font-extrabold text-xl text-gray-900 leading-tight">
+                      {language === 'pt' ? 'Presbíteros Eleitos' : 'Elected Elders'}
+                    </h3>
+                    <span className="text-xs text-gray-500 font-mono">
+                      {language === 'pt' ? 'Conselho de Presbíteros' : 'Presbytery / Session'}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  {LEADERSHIP_BIENNIUM.elders.map((member, idx) => (
+                    <div
+                      key={`elder-${idx}`}
+                      className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm border-l-4 border-l-amber-500 hover:shadow-md hover:translate-y-[-2px] transition-all duration-200 flex flex-col justify-between space-y-3"
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="text-[11px] font-mono font-bold text-amber-800 uppercase tracking-wider bg-amber-50 px-2.5 py-1 rounded-md border border-amber-200">
+                          {member.role[language]}
+                        </span>
+                        <div className="h-7 w-7 rounded-full bg-amber-50 flex items-center justify-center text-amber-700">
+                          <UserCheck className="h-3.5 w-3.5" />
+                        </div>
+                      </div>
+                      <div>
+                        <h4 className="font-sans font-bold text-base sm:text-lg text-gray-900 leading-snug">
+                          {member.name}
+                        </h4>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* 3. DIÁCONOS ELEITOS */}
+              <div className="space-y-6">
+                <div className="flex items-center gap-3 border-b border-gray-200 pb-3">
+                  <div className="h-9 w-9 rounded-xl bg-emerald-600/10 text-emerald-700 flex items-center justify-center">
+                    <Heart className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <h3 className="font-sans font-extrabold text-xl text-gray-900 leading-tight">
+                      {language === 'pt' ? 'Diáconos Eleitos' : 'Elected Deacons'}
+                    </h3>
+                    <span className="text-xs text-gray-500 font-mono">
+                      {language === 'pt' ? 'Corpo Diaconal e Acolhimento' : 'Diaconate & Welcome'}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {LEADERSHIP_BIENNIUM.deacons.map((member, idx) => (
+                    <div
+                      key={`deacon-${idx}`}
+                      className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm border-l-4 border-l-emerald-500 hover:shadow-md hover:translate-y-[-2px] transition-all duration-200 flex flex-col justify-between space-y-3"
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="text-[11px] font-mono font-bold text-emerald-800 uppercase tracking-wider bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200">
+                          {member.role[language]}
+                        </span>
+                        <div className="h-7 w-7 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-700">
+                          <Users className="h-3.5 w-3.5" />
+                        </div>
+                      </div>
+                      <div>
+                        <h4 className="font-sans font-bold text-base text-gray-900 leading-snug">
+                          {member.name}
+                        </h4>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           )}

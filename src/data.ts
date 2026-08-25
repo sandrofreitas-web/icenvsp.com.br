@@ -609,6 +609,84 @@ export const TIMELINE: TimelineEvent[] = [
   }
 ];
 
+export interface LeadershipMember {
+  role: { pt: string; en: string };
+  name: string;
+}
+
+export interface LeadershipStructure {
+  period: { pt: string; en: string };
+  mandate: { pt: string; en: string };
+  board: LeadershipMember[];
+  elders: LeadershipMember[];
+  deacons: LeadershipMember[];
+}
+
+export const LEADERSHIP_BIENNIUM: LeadershipStructure = {
+  period: {
+    pt: 'Liderança — Biênio 2026 / 2027',
+    en: 'Leadership — 2026 / 2027 Biennium'
+  },
+  mandate: {
+    pt: 'Mandato até 31/12/2027',
+    en: 'Term until 12/31/2027'
+  },
+  board: [
+    {
+      role: { pt: 'Presidente', en: 'President' },
+      name: 'Vinicius Araújo Ferreira'
+    },
+    {
+      role: { pt: 'Vice-Presidente', en: 'Vice-President' },
+      name: 'Cesar Augusto Figueiredo'
+    },
+    {
+      role: { pt: 'Primeira Secretária', en: 'First Secretary' },
+      name: 'Mercia Santos Campos'
+    },
+    {
+      role: { pt: 'Segunda Secretária', en: 'Second Secretary' },
+      name: 'Gabriele Ramos Costa da Silva'
+    },
+    {
+      role: { pt: 'Primeiro Tesoureiro', en: 'First Treasurer' },
+      name: "Sandro D'Almeida Freitas"
+    },
+    {
+      role: { pt: 'Segundo Tesoureiro', en: 'Second Treasurer' },
+      name: 'Marcelo José Santos de Campos'
+    }
+  ],
+  elders: [
+    {
+      role: { pt: 'Presbítero', en: 'Ruling Elder' },
+      name: 'Edeilton Salustiano dos Santos Junior'
+    },
+    {
+      role: { pt: 'Presbítero', en: 'Ruling Elder' },
+      name: 'Cesar Augusto Figueiredo'
+    }
+  ],
+  deacons: [
+    {
+      role: { pt: 'Diaconisa', en: 'Deaconess' },
+      name: 'Glaucia Oliani Chaves Leão'
+    },
+    {
+      role: { pt: 'Diácono', en: 'Deacon' },
+      name: 'Filipe Carlos Barbosa'
+    },
+    {
+      role: { pt: 'Diácono', en: 'Deacon' },
+      name: 'Fabio'
+    },
+    {
+      role: { pt: 'Diácono', en: 'Deacon' },
+      name: 'Odezanir Pires de Oliveira'
+    }
+  ]
+};
+
 export const LEADERS: Leader[] = [
   {
     id: 'leader-1',
@@ -621,45 +699,6 @@ export const LEADERS: Leader[] = [
     bio: {
       pt: 'Bacharel em Teologia pela Faculdade Teológica Reformada e Mestre em Divindade. Atua no pastorado há mais de 20 anos, focado em teologia bíblica e aconselhamento familiar.',
       en: 'Bachelor of Theology from the Reformed Theological Seminary and Master of Divinity. Serving in pastoral ministry for over 20 years, focusing on biblical theology and family counseling.'
-    }
-  },
-  {
-    id: 'leader-2',
-    name: 'Pr. André Silva',
-    role: {
-      pt: 'Pastor Auxiliar (Jovens e Família)',
-      en: 'Assistant Pastor (Youth & Family)'
-    },
-    image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&h=400&q=80',
-    bio: {
-      pt: 'Graduado em Teologia com ênfase em ministério de juventude. Lidera as ações de comunhão de jovens, adolescentes e o ministério de integração comunitária.',
-      en: 'Graduated in Theology with emphasis on youth ministry. Leads youth fellowship, adolescents, and the community integration ministry.'
-    }
-  },
-  {
-    id: 'leader-3',
-    name: 'Ricardo Mendes',
-    role: {
-      pt: 'Presbítero Regente',
-      en: 'Ruling Elder'
-    },
-    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=400&h=400&q=80',
-    bio: {
-      pt: 'Administrador de empresas, serve no Conselho da Igreja há 15 anos, sendo responsável pela gestão administrativa, financeira e apoio aos ministérios sociais.',
-      en: 'Business administrator, serving on the Church Session for 15 years, responsible for administrative and financial management and supporting social ministries.'
-    }
-  },
-  {
-    id: 'leader-4',
-    name: 'Dra. Helena Costa',
-    role: {
-      pt: 'Conselho Educacional e EBD',
-      en: 'Educational Board & EBD Director'
-    },
-    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&h=400&q=80',
-    bio: {
-      pt: 'Doutora em Pedagogia pela USP, supervisiona o currículo pedagógico da Escola Bíblica Dominical e coordena o treinamento contínuo de nossos professores e educadores.',
-      en: 'Doctor in Pedagogy from USP, supervises the pedagogical curriculum of the Sunday School and coordinates the continuous training of our teachers and educators.'
     }
   }
 ];
