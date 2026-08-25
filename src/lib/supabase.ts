@@ -496,6 +496,15 @@ export async function uploadImage(file: File, folder: 'sermons' | 'events' | 'ca
 
 const LOCAL_MESSAGES_KEY = 'icenv_local_messages';
 
+export function clearLocalMessages(): void {
+  try {
+    localStorage.removeItem(LOCAL_MESSAGES_KEY);
+    localStorage.removeItem('icenv_messages');
+  } catch (e) {
+    console.warn('Failed to clear local messages:', e);
+  }
+}
+
 function getLocalMessages(): ContactMessage[] {
   try {
     const raw = localStorage.getItem(LOCAL_MESSAGES_KEY);
@@ -530,24 +539,23 @@ export async function sendMessage(
 
   if (supabase) {
     try {
-      const { data, error } = await supabase
+      // Direct insert into Supabase table without .select()
+      // This allows anonymous public visitors to send messages without RLS SELECT policy errors
+      const { error } = await supabase
         .from('messages')
-        .insert([payload])
-        .select()
-        .single();
+        .insert([payload]);
 
       if (error) throw error;
 
       savedMessage = {
-        id: String(data.id),
-        createdAt: data.created_at,
-        name: data.name,
-        email: data.email,
-        phone: data.phone || undefined,
-        subject: data.subject,
-        message: data.message,
-        status: data.status,
-        notes: data.notes || undefined
+        id: String(Date.now()),
+        createdAt: new Date().toISOString(),
+        name: payload.name,
+        email: payload.email,
+        phone: payload.phone || undefined,
+        subject: payload.subject as any,
+        message: payload.message,
+        status: 'unread'
       };
     } catch (err) {
       console.warn('Supabase insert failed (table may not be created yet). Falling back to local storage:', err);
@@ -589,8 +597,10 @@ export async function sendMessage(
 }
 
 export async function getMessages(): Promise<ContactMessage[]> {
+  const local = getLocalMessages();
+
   if (!supabase) {
-    return getLocalMessages();
+    return local;
   }
 
   try {
@@ -599,10 +609,17 @@ export async function getMessages(): Promise<ContactMessage[]> {
       .select('*')
       .order('created_at', { ascending: false });
 
-    if (error) throw error;
-    if (!data) return [];
+    if (error) {
+      console.warn('Could not fetch messages from Supabase (table might not exist yet):', error.message);
+      return local;
+    }
 
-    return data.map((item: any) => ({
+    if (!data) return local;
+
+    // Clear outdated local storage buffer since Supabase is active and responding
+    clearLocalMessages();
+
+    const supabaseList: ContactMessage[] = data.map((item: any) => ({
       id: String(item.id),
       createdAt: item.created_at,
       name: item.name,
@@ -613,9 +630,11 @@ export async function getMessages(): Promise<ContactMessage[]> {
       status: item.status || 'unread',
       notes: item.notes || undefined
     }));
+
+    return supabaseList;
   } catch (err) {
     console.error('Failed to fetch messages from Supabase:', err);
-    return getLocalMessages();
+    return local;
   }
 }
 
@@ -624,41 +643,59 @@ export async function updateMessageStatus(
   status: MessageStatus,
   notes?: string
 ): Promise<boolean> {
+  // Always update local storage
+  const local = getLocalMessages();
+  const updated = local.map((m) => (m.id === id ? { ...m, status, notes: notes ?? m.notes } : m));
+  saveLocalMessages(updated);
+
   if (!supabase) {
-    const local = getLocalMessages();
-    const updated = local.map((m) => (m.id === id ? { ...m, status, notes: notes ?? m.notes } : m));
-    saveLocalMessages(updated);
     return true;
   }
 
-  const payload: any = { status };
-  if (notes !== undefined) {
-    payload.notes = notes;
+  try {
+    const payload: any = { status };
+    if (notes !== undefined) {
+      payload.notes = notes;
+    }
+
+    const { error } = await supabase
+      .from('messages')
+      .update(payload)
+      .eq('id', id);
+
+    if (error) {
+      console.warn('Could not update status in Supabase:', error.message);
+    }
+  } catch (e) {
+    console.warn('Supabase status update error:', e);
   }
 
-  const { error } = await supabase
-    .from('messages')
-    .update(payload)
-    .eq('id', id);
-
-  if (error) throw error;
   return true;
 }
 
 export async function deleteMessage(id: string): Promise<boolean> {
+  // Always update local storage
+  const local = getLocalMessages();
+  const filtered = local.filter((m) => m.id !== id);
+  saveLocalMessages(filtered);
+
   if (!supabase) {
-    const local = getLocalMessages();
-    const filtered = local.filter((m) => m.id !== id);
-    saveLocalMessages(filtered);
     return true;
   }
 
-  const { error } = await supabase
-    .from('messages')
-    .delete()
-    .eq('id', id);
+  try {
+    const { error } = await supabase
+      .from('messages')
+      .delete()
+      .eq('id', id);
 
-  if (error) throw error;
+    if (error) {
+      console.warn('Could not delete in Supabase:', error.message);
+    }
+  } catch (e) {
+    console.warn('Supabase delete error:', e);
+  }
+
   return true;
 }
 

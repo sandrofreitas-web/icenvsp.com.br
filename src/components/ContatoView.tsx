@@ -3,7 +3,7 @@ import { Send, Check, AlertCircle, Phone } from 'lucide-react';
 import { Language, MessageSubject } from '../types';
 import { DICTIONARY } from '../data';
 import { sendMessage } from '../lib/supabase';
-import churchFrontImg from './church_front_set12.jpg';
+import churchFrontImg from '../20260823_174032 (2).png';
 
 interface ContatoViewProps {
   language: Language;
