@@ -6,3 +6,10 @@ coverage/
 *.log
 .env*
 !.env.example
+
+# Skills compiladas
+.claude/skills/
+.cursor/rules/
+.gemini/
+.windsurf/rules/
+.github/copilot-instructions.md
