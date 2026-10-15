@@ -13,3 +13,5 @@ coverage/
 .gemini/
 .windsurf/rules/
 .github/copilot-instructions.md
+*credenciais*
+docs/*.txt
