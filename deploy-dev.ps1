@@ -24,7 +24,7 @@ Get-ChildItem -Path $distPath -Recurse -File | ForEach-Object {
     $encodedRelative = [System.Uri]::EscapeUriString($relative)
     $url = "$ftpBase/$encodedRelative"
     Write-Host "  -> Uploading: $relative"
-    curl.exe --user $user -T $_.FullName $url
+    curl.exe --ftp-create-dirs --user $user -T $_.FullName $url
 }
 
 Write-Host "✅ Deploy concluído com sucesso!" -ForegroundColor Green

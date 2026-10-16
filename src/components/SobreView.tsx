@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Shield, Target, Award, ArrowRight, UserCheck, BookOpen, Heart, Globe, Coins, Users, Building2, Compass, FileText, Landmark, ShieldCheck, User } from 'lucide-react';
 import { Language, ActiveTab, Leader, TimelineEvent } from '../types';
 import { DICTIONARY, LEADERS, LEADERSHIP_BIENNIUM, TIMELINE } from '../data';
+import selo1912 from '../assets/icenv-selo-circular-1912-colorido.png';
 
 interface SobreViewProps {
   language: Language;
@@ -104,7 +105,7 @@ export default function SobreView({ language, onChangeTab, activeSubTab, setActi
               onClick={() => setActiveSubTab('historia')}
               className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-mono font-bold uppercase tracking-wider transition-all ${
                 activeSubTab === 'historia'
-                  ? 'bg-[#28166f] text-white shadow-md'
+                  ? 'bg-[#0c3945] text-white shadow-md'
                   : 'bg-white hover:bg-amber-50 text-gray-700 border border-gray-100'
               }`}
             >
@@ -116,7 +117,7 @@ export default function SobreView({ language, onChangeTab, activeSubTab, setActi
               onClick={() => setActiveSubTab('confissao')}
               className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-mono font-bold uppercase tracking-wider transition-all ${
                 activeSubTab === 'confissao'
-                  ? 'bg-[#28166f] text-white shadow-md'
+                  ? 'bg-[#0c3945] text-white shadow-md'
                   : 'bg-white hover:bg-amber-50 text-gray-700 border border-gray-100'
               }`}
             >
@@ -128,7 +129,7 @@ export default function SobreView({ language, onChangeTab, activeSubTab, setActi
               onClick={() => setActiveSubTab('lideranca')}
               className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-mono font-bold uppercase tracking-wider transition-all ${
                 activeSubTab === 'lideranca'
-                  ? 'bg-[#28166f] text-white shadow-md'
+                  ? 'bg-[#0c3945] text-white shadow-md'
                   : 'bg-white hover:bg-amber-50 text-gray-700 border border-gray-100'
               }`}
             >
@@ -140,7 +141,7 @@ export default function SobreView({ language, onChangeTab, activeSubTab, setActi
               onClick={() => setActiveSubTab('ebd')}
               className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-mono font-bold uppercase tracking-wider transition-all ${
                 activeSubTab === 'ebd'
-                  ? 'bg-[#28166f] text-white shadow-md'
+                  ? 'bg-[#0c3945] text-white shadow-md'
                   : 'bg-white hover:bg-amber-50 text-gray-700 border border-gray-100'
               }`}
             >
@@ -152,7 +153,7 @@ export default function SobreView({ language, onChangeTab, activeSubTab, setActi
               onClick={() => setActiveSubTab('dizimos')}
               className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-mono font-bold uppercase tracking-wider transition-all ${
                 activeSubTab === 'dizimos'
-                  ? 'bg-[#28166f] text-white shadow-md'
+                  ? 'bg-[#0c3945] text-white shadow-md'
                   : 'bg-white hover:bg-amber-50 text-gray-700 border border-gray-100'
               }`}
             >
@@ -164,7 +165,7 @@ export default function SobreView({ language, onChangeTab, activeSubTab, setActi
               onClick={() => setActiveSubTab('denominacao')}
               className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-mono font-bold uppercase tracking-wider transition-all ${
                 activeSubTab === 'denominacao'
-                  ? 'bg-[#28166f] text-white shadow-md'
+                  ? 'bg-[#0c3945] text-white shadow-md'
                   : 'bg-white hover:bg-amber-50 text-gray-700 border border-gray-100'
               }`}
             >
@@ -176,7 +177,7 @@ export default function SobreView({ language, onChangeTab, activeSubTab, setActi
               onClick={() => setActiveSubTab('missionarios')}
               className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-mono font-bold uppercase tracking-wider transition-all ${
                 activeSubTab === 'missionarios'
-                  ? 'bg-[#28166f] text-white shadow-md'
+                  ? 'bg-[#0c3945] text-white shadow-md'
                   : 'bg-white hover:bg-amber-50 text-gray-700 border border-gray-100'
               }`}
             >
@@ -188,7 +189,7 @@ export default function SobreView({ language, onChangeTab, activeSubTab, setActi
               onClick={() => setActiveSubTab('grupos')}
               className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-mono font-bold uppercase tracking-wider transition-all ${
                 activeSubTab === 'grupos'
-                  ? 'bg-[#28166f] text-white shadow-md'
+                  ? 'bg-[#0c3945] text-white shadow-md'
                   : 'bg-white hover:bg-amber-50 text-gray-700 border border-gray-100'
               }`}
             >
@@ -200,7 +201,7 @@ export default function SobreView({ language, onChangeTab, activeSubTab, setActi
               onClick={() => setActiveSubTab('ministerios')}
               className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-mono font-bold uppercase tracking-wider transition-all ${
                 activeSubTab === 'ministerios'
-                  ? 'bg-[#28166f] text-white shadow-md'
+                  ? 'bg-[#0c3945] text-white shadow-md'
                   : 'bg-white hover:bg-amber-50 text-gray-700 border border-gray-100'
               }`}
             >
@@ -219,14 +220,17 @@ export default function SobreView({ language, onChangeTab, activeSubTab, setActi
           {/* TAB CONTENT: TIMELINE/HISTORIA */}
           {activeSubTab === 'historia' && (
             <div className="space-y-12 animate-in fade-in duration-200">
-              <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
-                <span className="text-amber-700 uppercase font-mono text-xs font-bold tracking-widest block">
-                  {language === 'pt' ? 'Nossa Jornada' : 'Our Journey'}
+              <div className="text-center max-w-2xl mx-auto mb-16 space-y-4">
+                <div className="inline-flex items-center justify-center p-2 rounded-2xl bg-[#0c3945]/5 border border-[#2a8182]/20 shadow-xs mb-1">
+                  <img src={selo1912} alt="ICENV Desde 1912" className="h-20 sm:h-24 w-auto object-contain drop-shadow-xs" />
+                </div>
+                <span className="text-[#2a8182] uppercase font-mono text-xs font-bold tracking-widest block">
+                  {language === 'pt' ? 'Mais de um Século de Fidelidade' : 'Over a Century of Faithfulness'}
                 </span>
-                <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight">
+                <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight font-sans">
                   {dict.historyTitle}
                 </h2>
-                <div className="h-1 w-12 bg-amber-500 rounded mx-auto" />
+                <div className="h-1 w-16 bg-[#2a8182] rounded mx-auto" />
               </div>
 
               {/* Timeline layout */}
@@ -354,7 +358,7 @@ export default function SobreView({ language, onChangeTab, activeSubTab, setActi
               {/* 1. MESA ADMINISTRATIVA */}
               <div className="space-y-6">
                 <div className="flex items-center gap-3 border-b border-gray-200 pb-3">
-                  <div className="h-9 w-9 rounded-xl bg-[#007CC3]/10 text-[#007CC3] flex items-center justify-center">
+                  <div className="h-9 w-9 rounded-xl bg-secondary/15 text-primary flex items-center justify-center">
                     <Landmark className="h-5 w-5" />
                   </div>
                   <div>
@@ -371,15 +375,15 @@ export default function SobreView({ language, onChangeTab, activeSubTab, setActi
                   {LEADERSHIP_BIENNIUM.board.map((member, idx) => (
                     <div
                       key={`board-${idx}`}
-                      className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm border-l-4 border-l-[#007CC3] hover:shadow-md hover:translate-y-[-2px] transition-all duration-200 flex flex-col justify-between space-y-3"
+                      className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm border-l-4 border-l-primary hover:shadow-md hover:translate-y-[-2px] transition-all duration-200 flex flex-col justify-between space-y-3"
                     >
                       <div className="flex items-center justify-between">
-                        <span className="text-[11px] font-mono font-bold text-[#007CC3] uppercase tracking-wider bg-blue-50 px-2.5 py-1 rounded-md border border-blue-100">
+                        <span className="text-[11px] font-mono font-bold text-primary uppercase tracking-wider bg-secondary/10 px-2.5 py-1 rounded-md border border-secondary/20">
                           {member.role[language]}
                         </span>
                         <div className="h-7 w-7 rounded-full bg-gray-50 flex items-center justify-center text-gray-400">
                           {idx <= 1 ? (
-                            <Shield className="h-3.5 w-3.5 text-[#007CC3]" />
+                            <Shield className="h-3.5 w-3.5 text-secondary" />
                           ) : idx <= 3 ? (
                             <FileText className="h-3.5 w-3.5 text-emerald-600" />
                           ) : (
@@ -578,7 +582,7 @@ export default function SobreView({ language, onChangeTab, activeSubTab, setActi
                     <div className="bg-neutral-950 rounded-2xl p-4 border border-neutral-800 space-y-3 font-mono text-xs text-neutral-300">
                       <div>
                         <span className="block text-[10px] text-neutral-500 font-bold uppercase">{language === 'pt' ? 'CHAVE PIX (CNPJ)' : 'PIX KEY (CNPJ)'}</span>
-                        <span className="text-[#007cc3] font-bold text-sm select-all">60.123.456/0001-77</span>
+                        <span className="text-secondary-container font-bold text-sm select-all">60.123.456/0001-77</span>
                       </div>
                       <div className="pt-2 border-t border-neutral-900 grid grid-cols-2 gap-2">
                         <div>
@@ -650,7 +654,7 @@ export default function SobreView({ language, onChangeTab, activeSubTab, setActi
                   </div>
                 </div>
                 <div className="md:col-span-4 bg-white border border-gray-100 rounded-2xl p-6 shadow-sm text-center space-y-3">
-                  <Building2 className="h-12 w-12 text-[#28166f] mx-auto" />
+                  <Building2 className="h-12 w-12 text-[#0c3945] mx-auto" />
                   <div className="space-y-1">
                     <span className="block font-sans font-black text-gray-900 text-base">ICEB</span>
                     <span className="block text-[10px] font-mono text-gray-400 uppercase tracking-widest">{language === 'pt' ? 'FUNDADA EM 1901' : 'ESTABLISHED IN 1901'}</span>
@@ -681,7 +685,7 @@ export default function SobreView({ language, onChangeTab, activeSubTab, setActi
                 {/* Mission Card 1 */}
                 <div className="bg-gray-50 border border-gray-100 rounded-3xl p-6 flex flex-col justify-between space-y-4">
                   <div className="space-y-3">
-                    <span className="text-[#28166f] font-mono text-[10px] font-bold uppercase tracking-wider block">{language === 'pt' ? 'Campo Nacional — Nordeste' : 'National Field — Northeast'}</span>
+                    <span className="text-[#0c3945] font-mono text-[10px] font-bold uppercase tracking-wider block">{language === 'pt' ? 'Campo Nacional — Nordeste' : 'National Field — Northeast'}</span>
                     <h3 className="font-sans font-bold text-gray-950 text-base">{language === 'pt' ? 'Família Silva' : 'Silva Family'}</h3>
                     <p className="text-xs text-gray-500 leading-relaxed">
                       {language === 'pt'
@@ -697,7 +701,7 @@ export default function SobreView({ language, onChangeTab, activeSubTab, setActi
                 {/* Mission Card 2 */}
                 <div className="bg-gray-50 border border-gray-100 rounded-3xl p-6 flex flex-col justify-between space-y-4">
                   <div className="space-y-3">
-                    <span className="text-[#28166f] font-mono text-[10px] font-bold uppercase tracking-wider block">{language === 'pt' ? 'Campo Transcultural — Ásia' : 'Cross-Cultural — Asia'}</span>
+                    <span className="text-[#0c3945] font-mono text-[10px] font-bold uppercase tracking-wider block">{language === 'pt' ? 'Campo Transcultural — Ásia' : 'Cross-Cultural — Asia'}</span>
                     <h3 className="font-sans font-bold text-gray-950 text-base">{language === 'pt' ? 'Pr. Jonathan & Clara' : 'Pr. Jonathan & Clara'}</h3>
                     <p className="text-xs text-gray-500 leading-relaxed">
                       {language === 'pt'
@@ -713,7 +717,7 @@ export default function SobreView({ language, onChangeTab, activeSubTab, setActi
                 {/* Mission Card 3 */}
                 <div className="bg-gray-50 border border-gray-100 rounded-3xl p-6 flex flex-col justify-between space-y-4">
                   <div className="space-y-3">
-                    <span className="text-[#28166f] font-mono text-[10px] font-bold uppercase tracking-wider block">{language === 'pt' ? 'Parceria Institucional' : 'Institutional Partnership'}</span>
+                    <span className="text-[#0c3945] font-mono text-[10px] font-bold uppercase tracking-wider block">{language === 'pt' ? 'Parceria Institucional' : 'Institutional Partnership'}</span>
                     <h3 className="font-sans font-bold text-gray-950 text-base">{language === 'pt' ? 'Departamento de Missões ICEB' : 'ICEB Missions Department'}</h3>
                     <p className="text-xs text-gray-500 leading-relaxed">
                       {language === 'pt'
@@ -761,7 +765,7 @@ export default function SobreView({ language, onChangeTab, activeSubTab, setActi
                   <div className="pt-2">
                     <button
                       onClick={() => onChangeTab('contato')}
-                      className="px-5 py-2.5 bg-[#28166f] hover:bg-[#1e1054] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all"
+                      className="px-5 py-2.5 bg-[#0c3945] hover:bg-[#2a8182] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all"
                     >
                       {language === 'pt' ? 'Quero fazer parte de um grupo' : 'I want to join a group'}
                     </button>
@@ -796,7 +800,7 @@ export default function SobreView({ language, onChangeTab, activeSubTab, setActi
                 
                 {/* Ministry 1 */}
                 <div className="bg-gray-50 border border-gray-100 rounded-2xl p-6 space-y-3 hover:shadow-md transition-shadow">
-                  <div className="h-10 w-10 bg-[#28166f]/10 text-[#28166f] rounded-xl flex items-center justify-center">
+                  <div className="h-10 w-10 bg-[#0c3945]/10 text-[#0c3945] rounded-xl flex items-center justify-center">
                     <Compass className="h-5 w-5" />
                   </div>
                   <h3 className="font-sans font-black text-gray-950 text-base uppercase tracking-tight">{language === 'pt' ? 'Adoração & Música' : 'Worship & Music'}</h3>
@@ -809,7 +813,7 @@ export default function SobreView({ language, onChangeTab, activeSubTab, setActi
 
                 {/* Ministry 2 */}
                 <div className="bg-gray-50 border border-gray-100 rounded-2xl p-6 space-y-3 hover:shadow-md transition-shadow">
-                  <div className="h-10 w-10 bg-[#28166f]/10 text-[#28166f] rounded-xl flex items-center justify-center">
+                  <div className="h-10 w-10 bg-[#0c3945]/10 text-[#0c3945] rounded-xl flex items-center justify-center">
                     <Heart className="h-5 w-5" />
                   </div>
                   <h3 className="font-sans font-black text-gray-950 text-base uppercase tracking-tight">{language === 'pt' ? 'Nova Vida Kids (Infantil)' : 'Nova Vida Kids (Children)'}</h3>
@@ -822,7 +826,7 @@ export default function SobreView({ language, onChangeTab, activeSubTab, setActi
 
                 {/* Ministry 3 */}
                 <div className="bg-gray-50 border border-gray-100 rounded-2xl p-6 space-y-3 hover:shadow-md transition-shadow">
-                  <div className="h-10 w-10 bg-[#28166f]/10 text-[#28166f] rounded-xl flex items-center justify-center">
+                  <div className="h-10 w-10 bg-[#0c3945]/10 text-[#0c3945] rounded-xl flex items-center justify-center">
                     <Users className="h-5 w-5" />
                   </div>
                   <h3 className="font-sans font-black text-gray-950 text-base uppercase tracking-tight">{language === 'pt' ? 'Mocidade & Adolescentes' : 'Youth & Teens'}</h3>
@@ -835,7 +839,7 @@ export default function SobreView({ language, onChangeTab, activeSubTab, setActi
 
                 {/* Ministry 4 */}
                 <div className="bg-gray-50 border border-gray-100 rounded-2xl p-6 space-y-3 hover:shadow-md transition-shadow">
-                  <div className="h-10 w-10 bg-[#28166f]/10 text-[#28166f] rounded-xl flex items-center justify-center">
+                  <div className="h-10 w-10 bg-[#0c3945]/10 text-[#0c3945] rounded-xl flex items-center justify-center">
                     <Target className="h-5 w-5" />
                   </div>
                   <h3 className="font-sans font-black text-gray-950 text-base uppercase tracking-tight">{language === 'pt' ? 'Famílias & Casais' : 'Couples & Families'}</h3>
@@ -848,7 +852,7 @@ export default function SobreView({ language, onChangeTab, activeSubTab, setActi
 
                 {/* Ministry 5 */}
                 <div className="bg-gray-50 border border-gray-100 rounded-2xl p-6 space-y-3 hover:shadow-md transition-shadow">
-                  <div className="h-10 w-10 bg-[#28166f]/10 text-[#28166f] rounded-xl flex items-center justify-center">
+                  <div className="h-10 w-10 bg-[#0c3945]/10 text-[#0c3945] rounded-xl flex items-center justify-center">
                     <Coins className="h-5 w-5" />
                   </div>
                   <h3 className="font-sans font-black text-gray-950 text-base uppercase tracking-tight">{language === 'pt' ? 'Ação Social & Compaixão' : 'Social Action & Mercy'}</h3>

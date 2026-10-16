@@ -73,11 +73,11 @@ export default function TopNavBar({
                   className={`px-3 py-2 rounded-md text-sm font-medium transition-all ${
                     isActive
                       ? isScrolled
-                        ? 'bg-[#007cc3]/10 text-[#28166f]'
-                        : 'bg-white/15 text-white shadow-sm'
+                        ? 'bg-secondary/15 text-primary font-bold'
+                        : 'bg-white/20 text-white shadow-xs font-bold'
                       : isScrolled
-                      ? 'text-gray-600 hover:text-[#007cc3] hover:bg-gray-50'
-                      : 'text-white/80 hover:text-white hover:bg-white/5'
+                      ? 'text-neutral-dark hover:text-secondary hover:bg-surface'
+                      : 'text-white/80 hover:text-white hover:bg-white/10'
                   }`}
                 >
                   {item.label}
@@ -86,9 +86,9 @@ export default function TopNavBar({
             })}
 
             {/* Language Switcher */}
-            <div className="h-5 w-[1px] bg-gray-300 mx-3 self-center hidden lg:block" />
+            <div className="h-5 w-[1px] bg-gray-200 mx-3 self-center hidden lg:block" />
             <div className="flex items-center space-x-1 pl-2">
-              <Globe className={`h-4 w-4 ${isScrolled ? 'text-gray-500' : 'text-white/60'}`} />
+              <Globe className={`h-4 w-4 ${isScrolled ? 'text-secondary' : 'text-white/80'}`} />
               <div className="flex items-center text-xs font-mono font-bold">
                 <button
                   id="lang-toggle-pt"
@@ -96,11 +96,11 @@ export default function TopNavBar({
                   className={`px-1.5 py-0.5 rounded transition-all ${
                     language === 'pt'
                       ? isScrolled
-                        ? 'text-[#007cc3] font-extrabold'
-                        : 'text-[#007cc3] font-extrabold'
+                        ? 'text-secondary font-extrabold'
+                        : 'text-accent font-extrabold'
                       : isScrolled
-                      ? 'text-gray-400 hover:text-gray-600'
-                      : 'text-white/40 hover:text-white'
+                      ? 'text-neutral-dark/60 hover:text-neutral-dark'
+                      : 'text-white/50 hover:text-white'
                   }`}
                 >
                   PT
@@ -112,11 +112,11 @@ export default function TopNavBar({
                   className={`px-1.5 py-0.5 rounded transition-all ${
                     language === 'en'
                       ? isScrolled
-                        ? 'text-[#007cc3] font-extrabold'
-                        : 'text-[#007cc3] font-extrabold'
+                        ? 'text-secondary font-extrabold'
+                        : 'text-accent font-extrabold'
                       : isScrolled
-                      ? 'text-gray-400 hover:text-gray-600'
-                      : 'text-white/40 hover:text-white'
+                      ? 'text-neutral-dark/60 hover:text-neutral-dark'
+                      : 'text-white/50 hover:text-white'
                   }`}
                 >
                   EN
@@ -172,8 +172,8 @@ export default function TopNavBar({
                   onClick={() => handleTabClick(item.id)}
                   className={`w-full text-left block px-4 py-2.5 rounded-md text-base font-medium transition-all ${
                     isActive
-                      ? 'bg-[#007cc3]/10 text-[#28166f] font-semibold'
-                      : 'text-gray-600 hover:text-[#007cc3] hover:bg-gray-50'
+                      ? 'bg-secondary/15 text-primary font-bold'
+                      : 'text-neutral-dark hover:text-secondary hover:bg-surface'
                   }`}
                 >
                   {item.label}

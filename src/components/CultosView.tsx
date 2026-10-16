@@ -77,7 +77,7 @@ export default function CultosView({ language, onChangeTab }: CultosViewProps) {
 
           {loading ? (
             <div className="py-16 flex flex-col items-center justify-center">
-              <RefreshCw className="h-8 w-8 text-[#007cc3] animate-spin mb-3" />
+              <RefreshCw className="h-8 w-8 text-[#2a8182] animate-spin mb-3" />
               <span className="text-xs text-gray-400 font-mono">
                 {language === 'pt' ? 'Carregando horários...' : 'Loading schedule...'}
               </span>
@@ -91,7 +91,7 @@ export default function CultosView({ language, onChangeTab }: CultosViewProps) {
                   return (
                     <div
                       key={sch.id}
-                      className="bg-gradient-to-b from-[#28166f] to-[#1e1054] text-white p-8 sm:p-9 rounded-2xl flex flex-col justify-between relative shadow-xl border border-[#28166f]/40 group hover:-translate-y-1 transition-all duration-300"
+                      className="bg-gradient-to-b from-[#0c3945] to-[#164f5e] text-white p-8 sm:p-9 rounded-2xl flex flex-col justify-between relative shadow-xl border border-[#2a8182]/40 group hover:-translate-y-1 transition-all duration-300"
                     >
                       <div className="absolute top-4 right-4">
                         <span className="bg-amber-400 text-neutral-950 text-[10px] px-3 py-1 rounded-full font-mono font-bold uppercase tracking-wider shadow">
@@ -174,7 +174,7 @@ export default function CultosView({ language, onChangeTab }: CultosViewProps) {
                       </div>
                       <button
                         onClick={() => onChangeTab('contato')}
-                        className="p-2.5 rounded-xl bg-slate-100 hover:bg-[#28166f] text-gray-600 hover:text-white transition-colors cursor-pointer"
+                        className="p-2.5 rounded-xl bg-slate-100 hover:bg-[#0c3945] text-gray-600 hover:text-white transition-colors cursor-pointer"
                         title={language === 'pt' ? 'Saiba como participar' : 'Learn how to attend'}
                       >
                         <ArrowRight className="h-4 w-4" />
@@ -301,7 +301,7 @@ export default function CultosView({ language, onChangeTab }: CultosViewProps) {
           <div className="pt-4 flex justify-center">
             <button
               onClick={() => onChangeTab('contato')}
-              className="px-8 py-3.5 rounded-xl font-bold text-sm bg-[#28166f] hover:bg-[#28166f]/90 text-white transition-all shadow-md flex items-center gap-2 cursor-pointer"
+              className="px-8 py-3.5 rounded-xl font-bold text-sm bg-[#0c3945] hover:bg-[#2a8182] text-white transition-all shadow-md flex items-center gap-2 cursor-pointer"
             >
               <span>{language === 'pt' ? 'Abrir Mapa & Fale Conosco' : 'Open Map & Contact Us'}</span>
               <ArrowRight className="h-4 w-4" />

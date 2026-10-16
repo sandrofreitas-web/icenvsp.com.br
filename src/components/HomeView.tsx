@@ -522,9 +522,9 @@ export default function HomeView({ language, onChangeTab }: HomeViewProps) {
         >
           <div className="relative w-full max-w-2xl bg-white rounded-2xl overflow-hidden shadow-2xl border border-gray-100 flex flex-col max-h-[85vh] sm:max-h-[90vh]">
             {/* Header - Compact */}
-            <div className="flex items-center justify-between p-4 sm:p-5 bg-gradient-to-r from-[#28166f] to-[#1e1054] text-white">
+            <div className="flex items-center justify-between p-4 sm:p-5 bg-gradient-to-r from-[#0c3945] to-[#2a8182] text-white">
               <div className="space-y-0.5">
-                <span className="text-amber-400 font-mono text-[9px] uppercase tracking-widest font-black block leading-none">
+                <span className="text-accent font-mono text-[9px] uppercase tracking-widest font-black block leading-none">
                   {language === 'pt' ? 'Guia do Visitante' : 'Visitor\'s Guide'}
                 </span>
                 <h4 className="font-sans font-black text-base sm:text-lg text-white leading-tight">
@@ -554,7 +554,7 @@ export default function HomeView({ language, onChangeTab }: HomeViewProps) {
                 {/* Step 1 */}
                 <div className="bg-[#fcfaf5] border border-amber-100/70 rounded-xl p-3.5 space-y-2 hover:border-amber-200/90 transition-all">
                   <div className="flex items-center gap-2.5">
-                    <div className="h-7 w-7 bg-[#28166f]/10 text-[#28166f] rounded-lg flex items-center justify-center font-black text-xs shrink-0">
+                    <div className="h-7 w-7 bg-[#0c3945]/10 text-[#0c3945] rounded-lg flex items-center justify-center font-black text-xs shrink-0">
                       1
                     </div>
                     <h5 className="font-sans font-black text-xs text-gray-900 uppercase tracking-tight">
@@ -571,7 +571,7 @@ export default function HomeView({ language, onChangeTab }: HomeViewProps) {
                       setIsIntegrationOpen(false);
                       onChangeTab('cultos');
                     }}
-                    className="inline-flex items-center text-[10px] font-bold text-[#b59a57] hover:text-[#a18746]"
+                    className="inline-flex items-center text-[10px] font-bold text-[#2a8182] hover:text-[#0c3945]"
                   >
                     <span>{language === 'pt' ? 'Ver horários e local' : 'View times and location'}</span>
                     <ChevronRight className="h-3 w-3 ml-0.5" />
@@ -581,7 +581,7 @@ export default function HomeView({ language, onChangeTab }: HomeViewProps) {
                 {/* Step 2 */}
                 <div className="bg-[#fcfaf5] border border-amber-100/70 rounded-xl p-3.5 space-y-2 hover:border-amber-200/90 transition-all">
                   <div className="flex items-center gap-2.5">
-                    <div className="h-7 w-7 bg-[#28166f]/10 text-[#28166f] rounded-lg flex items-center justify-center font-black text-xs shrink-0">
+                    <div className="h-7 w-7 bg-[#0c3945]/10 text-[#0c3945] rounded-lg flex items-center justify-center font-black text-xs shrink-0">
                       2
                     </div>
                     <h5 className="font-sans font-black text-xs text-gray-900 uppercase tracking-tight">
@@ -602,7 +602,7 @@ export default function HomeView({ language, onChangeTab }: HomeViewProps) {
                         el?.scrollIntoView({ behavior: 'smooth' });
                       }, 200);
                     }}
-                    className="inline-flex items-center text-[10px] font-bold text-[#b59a57] hover:text-[#a18746]"
+                    className="inline-flex items-center text-[10px] font-bold text-[#2a8182] hover:text-[#0c3945]"
                   >
                     <span>{language === 'pt' ? 'Encontrar Pequeno Grupo' : 'Find a Small Group'}</span>
                     <ChevronRight className="h-3 w-3 ml-0.5" />
@@ -612,7 +612,7 @@ export default function HomeView({ language, onChangeTab }: HomeViewProps) {
                 {/* Step 3 */}
                 <div className="bg-[#fcfaf5] border border-amber-100/70 rounded-xl p-3.5 space-y-2 hover:border-amber-200/90 transition-all">
                   <div className="flex items-center gap-2.5">
-                    <div className="h-7 w-7 bg-[#28166f]/10 text-[#28166f] rounded-lg flex items-center justify-center font-black text-xs shrink-0">
+                    <div className="h-7 w-7 bg-[#0c3945]/10 text-[#0c3945] rounded-lg flex items-center justify-center font-black text-xs shrink-0">
                       3
                     </div>
                     <h5 className="font-sans font-black text-xs text-gray-900 uppercase tracking-tight">
@@ -629,7 +629,7 @@ export default function HomeView({ language, onChangeTab }: HomeViewProps) {
                       setIsIntegrationOpen(false);
                       onChangeTab('contato');
                     }}
-                    className="inline-flex items-center text-[10px] font-bold text-[#b59a57] hover:text-[#a18746]"
+                    className="inline-flex items-center text-[10px] font-bold text-[#2a8182] hover:text-[#0c3945]"
                   >
                     <span>{language === 'pt' ? 'Inscrever-se na classe' : 'Sign up for class'}</span>
                     <ChevronRight className="h-3 w-3 ml-0.5" />
@@ -639,7 +639,7 @@ export default function HomeView({ language, onChangeTab }: HomeViewProps) {
                 {/* Step 4 */}
                 <div className="bg-[#fcfaf5] border border-amber-100/70 rounded-xl p-3.5 space-y-2 hover:border-amber-200/90 transition-all">
                   <div className="flex items-center gap-2.5">
-                    <div className="h-7 w-7 bg-[#28166f]/10 text-[#28166f] rounded-lg flex items-center justify-center font-black text-xs shrink-0">
+                    <div className="h-7 w-7 bg-[#0c3945]/10 text-[#0c3945] rounded-lg flex items-center justify-center font-black text-xs shrink-0">
                       4
                     </div>
                     <h5 className="font-sans font-black text-xs text-gray-900 uppercase tracking-tight">
@@ -660,7 +660,7 @@ export default function HomeView({ language, onChangeTab }: HomeViewProps) {
                         el?.scrollIntoView({ behavior: 'smooth' });
                       }, 200);
                     }}
-                    className="inline-flex items-center text-[10px] font-bold text-[#b59a57] hover:text-[#a18746]"
+                    className="inline-flex items-center text-[10px] font-bold text-[#2a8182] hover:text-[#0c3945]"
                   >
                     <span>{language === 'pt' ? 'Ver todos os ministérios' : 'View all ministries'}</span>
                     <ChevronRight className="h-3 w-3 ml-0.5" />
@@ -680,7 +680,7 @@ export default function HomeView({ language, onChangeTab }: HomeViewProps) {
                   setIsIntegrationOpen(false);
                   onChangeTab('contato');
                 }}
-                className="w-full sm:w-auto px-4 py-2 bg-[#28166f] text-white hover:bg-[#1e1054] text-xs font-bold uppercase tracking-wider rounded-lg transition-all text-center"
+                className="w-full sm:w-auto px-4 py-2 bg-[#0c3945] text-white hover:bg-[#2a8182] text-xs font-bold uppercase tracking-wider rounded-lg transition-all text-center"
               >
                 {language === 'pt' ? 'Falar com um Pastor' : 'Speak with a Pastor'}
               </button>

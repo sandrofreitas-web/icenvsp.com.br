@@ -18,7 +18,7 @@ export default function Footer({ onChangeTab, language }: FooterProps) {
   };
 
   return (
-    <footer id="footer-container" className="bg-gradient-to-br from-[#1e1054] to-[#0a0421] text-gray-200 border-t-2 border-[#b59a57]/30 shadow-2xl relative overflow-hidden">
+    <footer id="footer-container" className="bg-gradient-to-br from-[#0c3945] via-[#07252d] to-[#04161b] text-gray-200 border-t-2 border-[#2a8182]/40 shadow-2xl relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12">
           {/* Brand Col */}
@@ -26,13 +26,13 @@ export default function Footer({ onChangeTab, language }: FooterProps) {
             <div className="flex items-center cursor-pointer" onClick={() => handleLinkClick('home')}>
               <ChurchLogo language={language} isScrolled={false} className="h-16 sm:h-20 md:h-24" theme="dark" />
             </div>
-            <p className="text-sm text-gray-300 leading-relaxed">
+            <p className="text-sm text-gray-300 leading-relaxed font-sans">
               {language === 'pt'
                 ? 'Uma igreja de teologia bíblica reformada, liturgia acolhedora e compromisso profundo com o testemunho cristão no coração de São Paulo.'
                 : 'A church of reformed biblical theology, welcoming liturgy, and deep commitment to Christian witness in the heart of São Paulo.'}
             </p>
             <div className="pt-2">
-              <span className="text-xs uppercase tracking-wider font-bold text-gray-400 block mb-2">
+              <span className="text-xs uppercase tracking-wider font-bold text-[#bbd2d0] block mb-2 font-mono">
                 {language === 'pt' ? 'Filiação Denominacional' : 'Denominational Affiliation'}
               </span>
               <p className="text-xs text-gray-300 mb-3">
@@ -46,14 +46,14 @@ export default function Footer({ onChangeTab, language }: FooterProps) {
 
           {/* Navigation Links Col */}
           <div>
-            <h3 className="text-base font-bold tracking-wider uppercase text-amber-400 mb-6 font-sans">
+            <h3 className="text-base font-bold tracking-wider uppercase text-[#bbd2d0] mb-6 font-sans">
               {language === 'pt' ? 'Links Úteis' : 'Useful Links'}
             </h3>
             <ul className="space-y-2.5 text-sm">
               <li>
                 <button
                   onClick={() => handleLinkClick('home')}
-                  className="hover:text-amber-400 transition-colors focus:outline-none"
+                  className="hover:text-white transition-colors focus:outline-none"
                 >
                   {dict.navHome}
                 </button>
@@ -112,31 +112,31 @@ export default function Footer({ onChangeTab, language }: FooterProps) {
 
           {/* Schedule Col */}
           <div>
-            <h3 className="text-base font-bold tracking-wider uppercase text-amber-400 mb-6 font-sans">
+            <h3 className="text-base font-bold tracking-wider uppercase text-[#bbd2d0] mb-6 font-sans">
               {language === 'pt' ? 'Nossos Horários' : 'Our Services'}
             </h3>
             <div className="space-y-4 text-sm">
               <div>
-                <span className="font-medium text-amber-400 block">
+                <span className="font-medium text-[#bbd2d0] block">
                   {language === 'pt' ? 'Domingo — 9h30' : 'Sunday — 9:30 AM'}
                 </span>
-                <span className="text-neutral-400 text-xs">
+                <span className="text-slate-300 text-xs">
                   {language === 'pt' ? 'Escola Bíblica Dominical (EBD)' : 'Sunday School (EBD)'}
                 </span>
               </div>
               <div>
-                <span className="font-medium text-amber-400 block">
+                <span className="font-medium text-[#bbd2d0] block">
                   {language === 'pt' ? 'Domingo — 18h00' : 'Sunday — 6:00 PM'}
                 </span>
-                <span className="text-neutral-400 text-xs">
+                <span className="text-slate-300 text-xs">
                   {language === 'pt' ? 'Culto de Adoração Principal' : 'Primary Worship Service'}
                 </span>
               </div>
               <div>
-                <span className="font-medium text-amber-400 block">
+                <span className="font-medium text-[#bbd2d0] block">
                   {language === 'pt' ? 'Terça-feira — 20h00' : 'Tuesday — 8:00 PM'}
                 </span>
-                <span className="text-neutral-400 text-xs">
+                <span className="text-slate-300 text-xs">
                   {language === 'pt' ? 'Reunião de Oração e Estudo' : 'Prayer & Bible Study'}
                 </span>
               </div>
@@ -145,25 +145,25 @@ export default function Footer({ onChangeTab, language }: FooterProps) {
 
           {/* Contact details Col */}
           <div>
-            <h3 className="text-base font-bold tracking-wider uppercase text-amber-400 mb-6 font-sans">
+            <h3 className="text-base font-bold tracking-wider uppercase text-[#bbd2d0] mb-6 font-sans">
               {language === 'pt' ? 'Contate-nos' : 'Get in Touch'}
             </h3>
             <ul className="space-y-3.5 text-sm text-gray-300">
               <li className="flex items-start">
-                <MapPin className="h-5 w-5 text-amber-400 mr-2.5 mt-0.5 shrink-0" />
+                <MapPin className="h-5 w-5 text-[#2a8182] mr-2.5 mt-0.5 shrink-0" />
                 <span>{dict.contactAddress}</span>
               </li>
               <li className="flex items-center">
-                <Phone className="h-4 w-4 text-amber-400 mr-2.5 shrink-0" />
-                <a href="tel:1132840000" className="hover:text-amber-400 transition-colors">
+                <Phone className="h-4 w-4 text-[#2a8182] mr-2.5 shrink-0" />
+                <a href="tel:1132840000" className="hover:text-white transition-colors">
                   {dict.contactPhone}
                 </a>
               </li>
               <li className="flex items-center">
-                <Mail className="h-4 w-4 text-amber-400 mr-2.5 shrink-0" />
+                <Mail className="h-4 w-4 text-[#2a8182] mr-2.5 shrink-0" />
                 <a
                   href="mailto:contato@icenvsp.com.br"
-                  className="hover:text-amber-400 transition-colors break-all"
+                  className="hover:text-white transition-colors break-all"
                 >
                   {dict.contactEmail}
                 </a>

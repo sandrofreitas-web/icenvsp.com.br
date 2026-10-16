@@ -61,7 +61,7 @@ Portal web oficial da **Igreja Cristã Evangélica Nova Vida em São Paulo** (fu
    ```
 
 4. **Acessar no navegador:**
-   - **Ambiente Local:** [http://localhost:3000](http://localhost:3000)
+   - **Ambiente Local:** [http://localhost:3070](http://localhost:3070)
 
 ---
 
