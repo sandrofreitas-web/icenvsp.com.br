@@ -10,9 +10,10 @@ import EventosView from './components/EventosView';
 import ContatoView from './components/ContatoView';
 import AdminView from './components/AdminView';
 import { ArrowUp, MessageSquare } from 'lucide-react';
+import { IS_LIMITED_MODE } from './config';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<ActiveTab>('home');
+  const [activeTab, setActiveTab] = useState<ActiveTab>(IS_LIMITED_MODE ? 'cultos' : 'home');
   const [activeSobreSubTab, setActiveSobreSubTab] = useState<string>('historia');
   const [language, setLanguage] = useState<Language>('pt');
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -31,7 +32,11 @@ export default function App() {
   }, []);
 
   const handleTabChange = (tab: ActiveTab, subTab?: string) => {
-    setActiveTab(tab);
+    if (IS_LIMITED_MODE && tab !== 'cultos' && tab !== 'sermoes') {
+      setActiveTab('cultos');
+    } else {
+      setActiveTab(tab);
+    }
     if (subTab) {
       setActiveSobreSubTab(subTab);
     }
@@ -43,6 +48,19 @@ export default function App() {
   };
 
   const renderActiveView = () => {
+    if (IS_LIMITED_MODE) {
+      if (activeTab === 'sermoes') {
+        return (
+          <SermoesView
+            language={language}
+            hideDownload={true}
+            hideRecordings={true}
+          />
+        );
+      }
+      return <CultosView language={language} onChangeTab={handleTabChange} />;
+    }
+
     switch (activeTab) {
       case 'home':
         return <HomeView language={language} onChangeTab={handleTabChange} />;
@@ -85,13 +103,32 @@ export default function App() {
         {renderActiveView()}
       </main>
 
-      {/* Quick floating contact badge trigger */}
-      {activeTab !== 'contato' && (
+      {/* Quick floating contact / schedule badge trigger */}
+      {!IS_LIMITED_MODE && activeTab !== 'contato' && (
         <button
           id="floating-contact-trigger"
           onClick={() => handleTabChange('contato')}
           aria-label="Fale Conosco"
           className="fixed bottom-20 right-6 z-40 h-12 w-12 bg-amber-500 hover:bg-amber-400 text-neutral-950 rounded-full flex items-center justify-center shadow-xl shadow-amber-500/15 cursor-pointer hover:scale-105 active:scale-95 transition-all"
+        >
+          <MessageSquare className="h-5 w-5" />
+        </button>
+      )}
+      {IS_LIMITED_MODE && (
+        <button
+          id="floating-schedule-trigger"
+          onClick={() => {
+            if (activeTab !== 'cultos') {
+              handleTabChange('cultos');
+              setTimeout(() => {
+                document.getElementById('horarios')?.scrollIntoView({ behavior: 'smooth' });
+              }, 100);
+            } else {
+              document.getElementById('horarios')?.scrollIntoView({ behavior: 'smooth' });
+            }
+          }}
+          aria-label="Ver Horários dos Cultos"
+          className="fixed bottom-20 right-6 z-40 h-12 w-12 bg-[#2a8182] hover:bg-[#0c3945] text-white rounded-full flex items-center justify-center shadow-xl shadow-[#0c3945]/20 cursor-pointer hover:scale-105 active:scale-95 transition-all"
         >
           <MessageSquare className="h-5 w-5" />
         </button>

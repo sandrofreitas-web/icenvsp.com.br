@@ -7,6 +7,7 @@ import {
 import { Language, ActiveTab } from '../types';
 import { DICTIONARY } from '../data';
 import { getWeeklySchedules, WeeklySchedule } from '../lib/supabase';
+import { IS_LIMITED_MODE } from '../config';
 
 interface CultosViewProps {
   language: Language;
@@ -299,13 +300,25 @@ export default function CultosView({ language, onChangeTab }: CultosViewProps) {
           </div>
 
           <div className="pt-4 flex justify-center">
-            <button
-              onClick={() => onChangeTab('contato')}
-              className="px-8 py-3.5 rounded-xl font-bold text-sm bg-[#0c3945] hover:bg-[#2a8182] text-white transition-all shadow-md flex items-center gap-2 cursor-pointer"
-            >
-              <span>{language === 'pt' ? 'Abrir Mapa & Fale Conosco' : 'Open Map & Contact Us'}</span>
-              <ArrowRight className="h-4 w-4" />
-            </button>
+            {IS_LIMITED_MODE ? (
+              <a
+                href="https://maps.google.com/?q=Rua+dos+Tupis+154+Bela+Vista+São+Paulo+SP"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-8 py-3.5 rounded-xl font-bold text-sm bg-[#0c3945] hover:bg-[#2a8182] text-white transition-all shadow-md flex items-center gap-2 cursor-pointer"
+              >
+                <span>{language === 'pt' ? 'Como Chegar (Google Maps)' : 'Directions (Google Maps)'}</span>
+                <ArrowRight className="h-4 w-4" />
+              </a>
+            ) : (
+              <button
+                onClick={() => onChangeTab('contato')}
+                className="px-8 py-3.5 rounded-xl font-bold text-sm bg-[#0c3945] hover:bg-[#2a8182] text-white transition-all shadow-md flex items-center gap-2 cursor-pointer"
+              >
+                <span>{language === 'pt' ? 'Abrir Mapa & Fale Conosco' : 'Open Map & Contact Us'}</span>
+                <ArrowRight className="h-4 w-4" />
+              </button>
+            )}
           </div>
         </div>
       </section>

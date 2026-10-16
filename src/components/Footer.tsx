@@ -3,6 +3,7 @@ import { Language, ActiveTab } from '../types';
 import { DICTIONARY } from '../data';
 import ChurchLogo from './ChurchLogo';
 import DenominationLogo from './DenominationLogo';
+import { IS_LIMITED_MODE } from '../config';
 
 interface FooterProps {
   onChangeTab: (tab: ActiveTab) => void;
@@ -23,7 +24,7 @@ export default function Footer({ onChangeTab, language }: FooterProps) {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12">
           {/* Brand Col */}
           <div className="space-y-6">
-            <div className="flex items-center cursor-pointer" onClick={() => handleLinkClick('home')}>
+            <div className="flex items-center cursor-pointer" onClick={() => handleLinkClick(IS_LIMITED_MODE ? 'cultos' : 'home')}>
               <ChurchLogo language={language} isScrolled={false} className="h-16 sm:h-20 md:h-24" theme="dark" />
             </div>
             <p className="text-sm text-gray-300 leading-relaxed font-sans">
@@ -50,63 +51,86 @@ export default function Footer({ onChangeTab, language }: FooterProps) {
               {language === 'pt' ? 'Links Úteis' : 'Useful Links'}
             </h3>
             <ul className="space-y-2.5 text-sm">
-              <li>
-                <button
-                  onClick={() => handleLinkClick('home')}
-                  className="hover:text-white transition-colors focus:outline-none"
-                >
-                  {dict.navHome}
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => handleLinkClick('sobre')}
-                  className="hover:text-amber-400 transition-colors focus:outline-none"
-                >
-                  {dict.navAbout}
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => handleLinkClick('cultos')}
-                  className="hover:text-amber-400 transition-colors focus:outline-none"
-                >
-                  {dict.navServices}
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => handleLinkClick('sermoes')}
-                  className="hover:text-amber-400 transition-colors focus:outline-none"
-                >
-                  {dict.navSermons}
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => handleLinkClick('eventos')}
-                  className="hover:text-amber-400 transition-colors focus:outline-none"
-                >
-                  {dict.navEvents}
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => handleLinkClick('contato')}
-                  className="hover:text-amber-400 transition-colors focus:outline-none"
-                >
-                  {dict.navContact}
-                </button>
-              </li>
-              <li className="pt-1.5 border-t border-neutral-800">
-                <button
-                  onClick={() => handleLinkClick('admin')}
-                  className="text-neutral-400 hover:text-amber-400 text-xs font-semibold tracking-wide uppercase transition-colors focus:outline-none flex items-center space-x-1"
-                >
-                  <span className="inline-block h-1.5 w-1.5 rounded-full bg-amber-500 mr-1.5 animate-pulse" />
-                  <span>{language === 'pt' ? 'Painel Admin' : 'Admin Panel'}</span>
-                </button>
-              </li>
+              {IS_LIMITED_MODE ? (
+                <>
+                  <li>
+                    <button
+                      onClick={() => handleLinkClick('cultos')}
+                      className="hover:text-amber-400 transition-colors focus:outline-none"
+                    >
+                      {dict.navServices}
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      onClick={() => handleLinkClick('sermoes')}
+                      className="hover:text-amber-400 transition-colors focus:outline-none"
+                    >
+                      {dict.navSermons}
+                    </button>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li>
+                    <button
+                      onClick={() => handleLinkClick('home')}
+                      className="hover:text-white transition-colors focus:outline-none"
+                    >
+                      {dict.navHome}
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      onClick={() => handleLinkClick('sobre')}
+                      className="hover:text-amber-400 transition-colors focus:outline-none"
+                    >
+                      {dict.navAbout}
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      onClick={() => handleLinkClick('cultos')}
+                      className="hover:text-amber-400 transition-colors focus:outline-none"
+                    >
+                      {dict.navServices}
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      onClick={() => handleLinkClick('sermoes')}
+                      className="hover:text-amber-400 transition-colors focus:outline-none"
+                    >
+                      {dict.navSermons}
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      onClick={() => handleLinkClick('eventos')}
+                      className="hover:text-amber-400 transition-colors focus:outline-none"
+                    >
+                      {dict.navEvents}
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      onClick={() => handleLinkClick('contato')}
+                      className="hover:text-amber-400 transition-colors focus:outline-none"
+                    >
+                      {dict.navContact}
+                    </button>
+                  </li>
+                  <li className="pt-1.5 border-t border-neutral-800">
+                    <button
+                      onClick={() => handleLinkClick('admin')}
+                      className="text-neutral-400 hover:text-amber-400 text-xs font-semibold tracking-wide uppercase transition-colors focus:outline-none flex items-center space-x-1"
+                    >
+                      <span className="inline-block h-1.5 w-1.5 rounded-full bg-amber-500 mr-1.5 animate-pulse" />
+                      <span>{language === 'pt' ? 'Painel Admin' : 'Admin Panel'}</span>
+                    </button>
+                  </li>
+                </>
+              )}
             </ul>
           </div>
 

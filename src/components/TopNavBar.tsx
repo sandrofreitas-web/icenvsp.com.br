@@ -3,6 +3,7 @@ import { Menu, X, Globe } from 'lucide-react';
 import { Language, ActiveTab } from '../types';
 import { DICTIONARY } from '../data';
 import ChurchLogo from './ChurchLogo';
+import { IS_LIMITED_MODE } from '../config';
 
 interface TopNavBarProps {
   currentTab: ActiveTab;
@@ -26,14 +27,19 @@ export default function TopNavBar({
     setIsScrolled(true);
   }, []);
 
-  const navItems: { id: ActiveTab; label: string }[] = [
-    { id: 'home', label: dict.navHome },
-    { id: 'sobre', label: dict.navAbout },
-    { id: 'cultos', label: dict.navServices },
-    { id: 'sermoes', label: dict.navSermons },
-    { id: 'eventos', label: dict.navEvents },
-    { id: 'contato', label: dict.navContact },
-  ];
+  const navItems: { id: ActiveTab; label: string }[] = IS_LIMITED_MODE
+    ? [
+        { id: 'cultos', label: dict.navServices },
+        { id: 'sermoes', label: dict.navSermons },
+      ]
+    : [
+        { id: 'home', label: dict.navHome },
+        { id: 'sobre', label: dict.navAbout },
+        { id: 'cultos', label: dict.navServices },
+        { id: 'sermoes', label: dict.navSermons },
+        { id: 'eventos', label: dict.navEvents },
+        { id: 'contato', label: dict.navContact },
+      ];
 
   const handleTabClick = (tabId: ActiveTab) => {
     onChangeTab(tabId);
@@ -56,7 +62,7 @@ export default function TopNavBar({
           <div
             id="brand-logo"
             className="flex items-center cursor-pointer group"
-            onClick={() => handleTabClick('home')}
+            onClick={() => handleTabClick(IS_LIMITED_MODE ? 'cultos' : 'home')}
           >
             <ChurchLogo language={language} isScrolled={isScrolled} />
           </div>

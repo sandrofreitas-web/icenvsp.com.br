@@ -23,9 +23,15 @@ import { getSermons } from '../lib/supabase';
 
 interface SermoesViewProps {
   language: Language;
+  hideDownload?: boolean;
+  hideRecordings?: boolean;
 }
 
-export default function SermoesView({ language }: SermoesViewProps) {
+export default function SermoesView({
+  language,
+  hideDownload = false,
+  hideRecordings = false,
+}: SermoesViewProps) {
   const dict = DICTIONARY[language];
 
   // View mode tab: 'sermonario' | 'videos'
@@ -153,84 +159,88 @@ export default function SermoesView({ language }: SermoesViewProps) {
             </p>
 
             {/* Quick Action Download Button */}
-            <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
-              <a
-                href="/docs/sermonario2026.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                download="sermonario2026_icenv.pdf"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-secondary hover:bg-[#329697] text-white text-xs sm:text-sm font-bold shadow-md shadow-secondary/30 transition-all duration-200 active:scale-95"
-              >
-                <Download className="w-4 h-4" />
-                <span>{language === 'pt' ? 'Baixar Sermonário Oficial (PDF)' : 'Download Official Calendar (PDF)'}</span>
-              </a>
+            {!hideDownload && (
+              <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
+                <a
+                  href="/docs/sermonario2026.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  download="sermonario2026_icenv.pdf"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-secondary hover:bg-[#329697] text-white text-xs sm:text-sm font-bold shadow-md shadow-secondary/30 transition-all duration-200 active:scale-95"
+                >
+                  <Download className="w-4 h-4" />
+                  <span>{language === 'pt' ? 'Baixar Sermonário Oficial (PDF)' : 'Download Official Calendar (PDF)'}</span>
+                </a>
 
-              <button
-                onClick={handleCopyShareLink}
-                className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-white text-xs sm:text-sm font-medium border border-white/20 transition-all active:scale-95"
-                title="Copiar link do PDF"
-              >
-                {copiedLink ? (
-                  <>
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                    <span className="text-emerald-300">{language === 'pt' ? 'Link Copiado!' : 'Link Copied!'}</span>
-                  </>
-                ) : (
-                  <>
-                    <Share2 className="w-4 h-4 text-slate-300" />
-                    <span>{language === 'pt' ? 'Compartilhar' : 'Share'}</span>
-                  </>
-                )}
-              </button>
-            </div>
+                <button
+                  onClick={handleCopyShareLink}
+                  className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-white text-xs sm:text-sm font-medium border border-white/20 transition-all active:scale-95"
+                  title="Copiar link do PDF"
+                >
+                  {copiedLink ? (
+                    <>
+                      <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                      <span className="text-emerald-300">{language === 'pt' ? 'Link Copiado!' : 'Link Copied!'}</span>
+                    </>
+                  ) : (
+                    <>
+                      <Share2 className="w-4 h-4 text-slate-300" />
+                      <span>{language === 'pt' ? 'Compartilhar' : 'Share'}</span>
+                    </>
+                  )}
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </section>
 
       {/* 2. TAB SELECTOR: SERMONÁRIO 2026 vs ACERVO EM VÍDEO */}
-      <section className="bg-white border-b border-gray-200 sticky top-16 sm:top-20 z-40 shadow-xs">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between overflow-x-auto py-2.5 gap-2 scrollbar-none">
-            <div className="inline-flex p-1 bg-surface-alt rounded-2xl border border-gray-200 shadow-inner">
-              <button
-                onClick={() => setActiveTab('sermonario')}
-                className={`flex items-center gap-2 px-4 sm:px-6 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 ${
-                  activeTab === 'sermonario'
-                    ? 'bg-primary text-white shadow-sm'
-                    : 'text-neutral-dark hover:text-primary hover:bg-white/60'
-                }`}
-              >
-                <Calendar className="w-4 h-4" />
-                <span>{language === 'pt' ? 'Sermonário 2026 (Escala Litúrgica)' : '2026 Calendar (Liturgical Scale)'}</span>
-                <span className="ml-1.5 px-2 py-0.5 rounded-full text-[10px] font-mono bg-secondary text-white font-extrabold">
-                  {SERMONARIO_2026.length}
-                </span>
-              </button>
+      {!hideRecordings && (
+        <section className="bg-white border-b border-gray-200 sticky top-16 sm:top-20 z-40 shadow-xs">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex items-center justify-between overflow-x-auto py-2.5 gap-2 scrollbar-none">
+              <div className="inline-flex p-1 bg-surface-alt rounded-2xl border border-gray-200 shadow-inner">
+                <button
+                  onClick={() => setActiveTab('sermonario')}
+                  className={`flex items-center gap-2 px-4 sm:px-6 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 ${
+                    activeTab === 'sermonario'
+                      ? 'bg-primary text-white shadow-sm'
+                      : 'text-neutral-dark hover:text-primary hover:bg-white/60'
+                  }`}
+                >
+                  <Calendar className="w-4 h-4" />
+                  <span>{language === 'pt' ? 'Sermonário 2026 (Escala Litúrgica)' : '2026 Calendar (Liturgical Scale)'}</span>
+                  <span className="ml-1.5 px-2 py-0.5 rounded-full text-[10px] font-mono bg-secondary text-white font-extrabold">
+                    {SERMONARIO_2026.length}
+                  </span>
+                </button>
 
-              <button
-                onClick={() => setActiveTab('videos')}
-                className={`flex items-center gap-2 px-4 sm:px-6 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 ${
-                  activeTab === 'videos'
-                    ? 'bg-primary text-white shadow-sm'
-                    : 'text-neutral-dark hover:text-primary hover:bg-white/60'
-                }`}
-              >
-                <Play className="w-4 h-4 fill-current" />
-                <span>{language === 'pt' ? 'Mensagens Gravadas (Vídeos)' : 'Recorded Messages (Videos)'}</span>
-                <span className="ml-1.5 px-2 py-0.5 rounded-full text-[10px] font-mono bg-slate-200 text-slate-800 font-extrabold">
-                  {sermons.length}
-                </span>
-              </button>
-            </div>
+                <button
+                  onClick={() => setActiveTab('videos')}
+                  className={`flex items-center gap-2 px-4 sm:px-6 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 ${
+                    activeTab === 'videos'
+                      ? 'bg-primary text-white shadow-sm'
+                      : 'text-neutral-dark hover:text-primary hover:bg-white/60'
+                  }`}
+                >
+                  <Play className="w-4 h-4 fill-current" />
+                  <span>{language === 'pt' ? 'Mensagens Gravadas (Vídeos)' : 'Recorded Messages (Videos)'}</span>
+                  <span className="ml-1.5 px-2 py-0.5 rounded-full text-[10px] font-mono bg-slate-200 text-slate-800 font-extrabold">
+                    {sermons.length}
+                  </span>
+                </button>
+              </div>
 
-            {/* Quick Badge */}
-            <div className="hidden md:flex items-center gap-2 text-xs text-neutral-dark font-medium font-sans">
-              <BookOpen className="w-4 h-4 text-secondary" />
-              <span>{language === 'pt' ? 'Ano Bíblico 2026 • 2º Semestre' : 'Biblical Year 2026 • 2nd Semester'}</span>
+              {/* Quick Badge */}
+              <div className="hidden md:flex items-center gap-2 text-xs text-neutral-dark font-medium font-sans">
+                <BookOpen className="w-4 h-4 text-secondary" />
+                <span>{language === 'pt' ? 'Ano Bíblico 2026 • 2º Semestre' : 'Biblical Year 2026 • 2nd Semester'}</span>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* 3. CONTENT AREA */}
       {activeTab === 'sermonario' ? (
@@ -466,40 +476,42 @@ export default function SermoesView({ language }: SermoesViewProps) {
           )}
 
           {/* Banner de Download do PDF Oficial no Rodapé */}
-          <div className="bg-[#0c3945] rounded-3xl p-6 sm:p-10 text-white relative overflow-hidden shadow-xl border border-[#2a8182]/30">
-            <div className="absolute -right-10 -bottom-10 w-64 h-64 bg-secondary/20 rounded-full blur-3xl pointer-events-none" />
+          {!hideDownload && (
+            <div className="bg-[#0c3945] rounded-3xl p-6 sm:p-10 text-white relative overflow-hidden shadow-xl border border-[#2a8182]/30">
+              <div className="absolute -right-10 -bottom-10 w-64 h-64 bg-secondary/20 rounded-full blur-3xl pointer-events-none" />
 
-            <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
-              <div className="space-y-2 text-center md:text-left">
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-[#bbd2d0] text-xs font-mono font-bold uppercase">
-                  <FileText className="w-3.5 h-3.5 text-secondary" />
-                  <span>{language === 'pt' ? 'Documento Oficial em PDF' : 'Official PDF Document'}</span>
+              <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
+                <div className="space-y-2 text-center md:text-left">
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-[#bbd2d0] text-xs font-mono font-bold uppercase">
+                    <FileText className="w-3.5 h-3.5 text-secondary" />
+                    <span>{language === 'pt' ? 'Documento Oficial em PDF' : 'Official PDF Document'}</span>
+                  </div>
+                  <h3 className="font-display text-2xl sm:text-3xl font-extrabold text-white">
+                    {language === 'pt' ? 'Tenha o Sermonário 2026 em mãos' : 'Have the 2026 Preaching Calendar at Hand'}
+                  </h3>
+                  <p className="text-slate-300 text-xs sm:text-sm max-w-xl font-sans">
+                    {language === 'pt'
+                      ? 'Baixe a versão original em PDF para imprimir ou salvar em seu dispositivo móvel, contendo toda a escala de sermões de Mateus e a Série de Advento.'
+                      : 'Download the original PDF version to print or keep on your phone, covering Matthew expository schedule and the Advent Series.'}
+                  </p>
                 </div>
-                <h3 className="font-display text-2xl sm:text-3xl font-extrabold text-white">
-                  {language === 'pt' ? 'Tenha o Sermonário 2026 em mãos' : 'Have the 2026 Preaching Calendar at Hand'}
-                </h3>
-                <p className="text-slate-300 text-xs sm:text-sm max-w-xl font-sans">
-                  {language === 'pt'
-                    ? 'Baixe a versão original em PDF para imprimir ou salvar em seu dispositivo móvel, contendo toda a escala de sermões de Mateus e a Série de Advento.'
-                    : 'Download the original PDF version to print or keep on your phone, covering Matthew expository schedule and the Advent Series.'}
-                </p>
-              </div>
 
-              <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0">
-                <a
-                  href="/docs/sermonario2026.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-6 py-3 rounded-xl bg-secondary hover:bg-[#329697] text-white text-xs sm:text-sm font-bold shadow-lg shadow-black/20 transition-all flex items-center gap-2 active:scale-95"
-                >
-                  <Download className="w-4 h-4" />
-                  <span>{language === 'pt' ? 'Visualizar / Baixar PDF' : 'View / Download PDF'}</span>
-                </a>
+                <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0">
+                  <a
+                    href="/docs/sermonario2026.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-6 py-3 rounded-xl bg-secondary hover:bg-[#329697] text-white text-xs sm:text-sm font-bold shadow-lg shadow-black/20 transition-all flex items-center gap-2 active:scale-95"
+                  >
+                    <Download className="w-4 h-4" />
+                    <span>{language === 'pt' ? 'Visualizar / Baixar PDF' : 'View / Download PDF'}</span>
+                  </a>
+                </div>
               </div>
             </div>
-          </div>
+          )}
         </section>
-      ) : (
+      ) : !hideRecordings && activeTab === 'videos' ? (
         /* ========================================================================= */
         /* ABA 2: ACERVO DE VÍDEOS / GRAVAÇÕES                                       */
         /* ========================================================================= */
@@ -670,10 +682,10 @@ export default function SermoesView({ language }: SermoesViewProps) {
             )}
           </div>
         </section>
-      )}
+      ) : null}
 
       {/* 4. SERMON PLAYER MODAL */}
-      {activeSermon && (
+      {activeSermon && !hideRecordings && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
           <div className="bg-white rounded-3xl max-w-3xl w-full overflow-hidden shadow-2xl animate-in zoom-in-95 duration-200">
             <div className="p-5 bg-primary text-white flex justify-between items-center">
