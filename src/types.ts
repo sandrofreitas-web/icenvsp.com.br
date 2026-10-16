@@ -70,3 +70,18 @@ export interface ContactMessage {
   notes?: string;
 }
 
+export interface SermonarioEntry {
+  id: string;
+  dia: string;
+  mes: string;
+  mesNome: { pt: string; en: string };
+  dataIso: string;
+  textoBiblico: string;
+  serie: { pt: string; en: string };
+  tituloTema?: { pt: string; en: string };
+  tipo: 'exposicao' | 'especial' | 'advento' | 'gratidao';
+  referencias?: string;
+  destaque?: boolean;
+}
+
+
