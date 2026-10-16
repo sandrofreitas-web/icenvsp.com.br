@@ -10,15 +10,13 @@ import {
   ChevronDown,
   Download,
   FileText,
-  Bookmark,
   Sparkles,
-  ExternalLink,
   Layers,
   CheckCircle2,
   Share2,
 } from 'lucide-react';
 import { Language, Sermon, SermonarioEntry } from '../types';
-import { DICTIONARY, SERMONARIO_2026, SERMONARIO_BOOKS, SERMONS } from '../data';
+import { DICTIONARY, SERMONARIO_2026, SERMONS } from '../data';
 import { getSermons } from '../lib/supabase';
 
 interface SermoesViewProps {
@@ -154,8 +152,8 @@ export default function SermoesView({
 
             <p className="text-slate-200 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto font-sans">
               {language === 'pt'
-                ? 'Conheça o planejamento pastoral da Palavra de Deus para o 2º semestre de 2026. Acompanhe as leituras bíblicas e acesse nossa biblioteca de mensagens gravadas.'
-                : 'Explore our pastoral preaching calendar for the 2nd half of 2026. Follow weekly scripture readings and access our video library.'}
+                ? 'Conheça o planejamento pastoral da Palavra de Deus para o 2º semestre de 2026. Acompanhe a escala litúrgica de pregações aos domingos.'
+                : 'Explore our pastoral preaching calendar for the 2nd half of 2026. Follow our weekly Sunday expository preaching schedule.'}
             </p>
 
             {/* Quick Action Download Button */}
@@ -248,42 +246,6 @@ export default function SermoesView({
         /* ABA 1: SERMONÁRIO 2026                                                    */
         /* ========================================================================= */
         <section className="py-10 sm:py-14 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
-          {/* Card das Séries Oficiais e Livros Recomendados */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {SERMONARIO_BOOKS.map((book, idx) => (
-              <div
-                key={`book-${idx}`}
-                className="bg-white rounded-2xl p-6 border border-gray-200/80 shadow-xs flex flex-col justify-between space-y-4 hover:border-secondary/40 transition-colors"
-              >
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <span className="inline-block px-2.5 py-0.5 rounded-md text-[11px] font-mono font-bold uppercase tracking-wider bg-secondary/15 text-primary">
-                      {book.tag[language]}
-                    </span>
-                    <span className="text-xs font-mono text-gray-500">{book.editora}</span>
-                  </div>
-                  <h3 className="font-display text-xl font-extrabold text-primary leading-tight">
-                    {book.titulo}
-                  </h3>
-                  <p className="text-xs font-mono text-secondary font-bold">
-                    {language === 'pt' ? 'Autor:' : 'Author:'} {book.autor} • {book.serie[language]}
-                  </p>
-                  <p className="text-sm text-neutral-dark leading-relaxed font-sans">
-                    {book.descricao[language]}
-                  </p>
-                </div>
-
-                <div className="pt-3 border-t border-gray-100 flex items-center justify-between text-xs text-gray-500 font-sans">
-                  <span className="flex items-center gap-1.5">
-                    <Bookmark className="w-3.5 h-3.5 text-secondary" />
-                    <span>{language === 'pt' ? 'Acompanhamento do Membro' : 'Congregational Reading'}</span>
-                  </span>
-                  <span className="font-bold text-primary font-mono">Editora Fiel</span>
-                </div>
-              </div>
-            ))}
-          </div>
-
           {/* Filtros por Mês e Busca */}
           <div className="bg-surface-alt rounded-2xl p-4 sm:p-5 border border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4">
             {/* Seletor de Meses */}
@@ -431,43 +393,30 @@ export default function SermoesView({
                     </div>
 
                     {/* Texto Bíblico & Título */}
-                    <div className="space-y-2">
+                    <div className="space-y-1.5">
                       <div className="font-mono text-xs font-extrabold text-secondary tracking-wide">
                         📖 {item.textoBiblico}
                       </div>
 
-                      <h4 className="font-display text-lg font-bold text-gray-900 group-hover:text-primary transition-colors leading-snug">
+                      <h4 className="font-display text-base sm:text-lg font-bold text-gray-900 group-hover:text-primary transition-colors leading-snug">
                         {item.tituloTema?.[language] || item.textoBiblico}
                       </h4>
-
-                      <p className="text-xs text-neutral-dark font-sans leading-relaxed line-clamp-2">
-                        {item.serie[language]}
-                      </p>
-
-                      {item.referencias && (
-                        <div className="pt-1 text-[11px] font-mono text-gray-500 bg-white/70 px-2 py-1 rounded border border-gray-100">
-                          <span className="font-bold text-primary">Refs:</span> {item.referencias}
-                        </div>
-                      )}
                     </div>
 
-                    {/* Footer com Ações */}
+                    {/* Footer com Horário */}
                     <div className="pt-3 border-t border-gray-100 flex items-center justify-between text-xs">
                       <span className="font-mono text-[11px] text-gray-400">
                         {language === 'pt' ? 'Culto de Domingo • 18h' : 'Sunday Service • 6 PM'}
                       </span>
-
-                      <a
-                        href={`https://www.bibliaonline.com.br/nvi/${encodeURIComponent(
-                          item.textoBiblico.toLowerCase().replace('.', ' ').split(';')[0]
-                        )}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 font-bold text-primary hover:text-secondary transition-colors"
-                      >
-                        <span>{language === 'pt' ? 'Ler Texto' : 'Read Text'}</span>
-                        <ExternalLink className="w-3 h-3" />
-                      </a>
+                      <span className="text-[11px] font-sans font-medium text-secondary">
+                        {isSpecial
+                          ? (language === 'pt' ? 'Culto Especial' : 'Special Service')
+                          : isAdvent
+                          ? (language === 'pt' ? 'Série Advento' : 'Advent Series')
+                          : isGratitude
+                          ? (language === 'pt' ? 'Fim de Ano' : 'Year End')
+                          : (language === 'pt' ? 'Pregação Expositiva' : 'Expository')}
+                      </span>
                     </div>
                   </article>
                 );

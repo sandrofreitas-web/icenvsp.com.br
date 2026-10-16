@@ -748,30 +748,7 @@ export const CAROUSEL_SLIDES: CarouselSlide[] = [
   }
 ];
 
-export const SERMONARIO_BOOKS = [
-  {
-    serie: { pt: 'Exposição de Mateus (Agosto a Novembro)', en: 'Matthew Exposition (August to November)' },
-    titulo: 'Meditações no Evangelho de Mateus',
-    autor: 'J.C. Ryle',
-    editora: 'Editora Fiel',
-    descricao: {
-      pt: 'Comentário expositivo clássico, prático e pastoral para edificação pessoal e acompanhamento das mensagens bíblicas.',
-      en: 'Classic expository and pastoral commentary for personal devotion and following the Sunday biblical messages.'
-    },
-    tag: { pt: 'Leitura Recomendada', en: 'Recommended Reading' }
-  },
-  {
-    serie: { pt: 'Série Especial de Advento (Dezembro)', en: 'Advent Special Series (December)' },
-    titulo: 'O Evangelho',
-    autor: 'Greg Gilbert',
-    editora: 'Editora Fiel',
-    descricao: {
-      pt: 'Uma exposição bíblica cristalina e profunda sobre Deus, o homem, Cristo e a resposta de fé ao Reino que veio e virá.',
-      en: 'A crystal-clear biblical exposition on God, man, Christ, and our response to the Kingdom that came and will come.'
-    },
-    tag: { pt: 'Série de Advento', en: 'Advent Series' }
-  }
-];
+export const SERMONARIO_BOOKS: any[] = [];
 
 export const SERMONARIO_2026: SermonarioEntry[] = [
   // AGOSTO
@@ -782,8 +759,8 @@ export const SERMONARIO_2026: SermonarioEntry[] = [
     mesNome: { pt: 'Agosto', en: 'August' },
     dataIso: '2026-08-16',
     textoBiblico: 'Mateus 18.1-14',
-    serie: { pt: 'O Evangelho do Reino: Exposição Bíblica de Mateus', en: 'The Gospel of the Kingdom: Matthew Exposition' },
-    tituloTema: { pt: 'O Maior no Reino dos Céus e o Cuidado com os Pequeninos', en: 'The Greatest in the Kingdom and Care for Little Ones' },
+    serie: { pt: 'O evangelho do reino: uma exposição bíblica de Mateus', en: 'The Gospel of the Kingdom: Matthew Exposition' },
+    tituloTema: { pt: 'O Maior no Reino dos Céus', en: 'The Greatest in the Kingdom' },
     tipo: 'exposicao'
   },
   {
@@ -793,8 +770,8 @@ export const SERMONARIO_2026: SermonarioEntry[] = [
     mesNome: { pt: 'Agosto', en: 'August' },
     dataIso: '2026-08-23',
     textoBiblico: 'Mateus 18.15-20',
-    serie: { pt: 'O Evangelho do Reino: Exposição Bíblica de Mateus', en: 'The Gospel of the Kingdom: Matthew Exposition' },
-    tituloTema: { pt: 'A Reconciliação Fraterna e a Oração em Comunidade', en: 'Brotherly Reconciliation and Community Prayer' },
+    serie: { pt: 'O evangelho do reino: uma exposição bíblica de Mateus', en: 'The Gospel of the Kingdom: Matthew Exposition' },
+    tituloTema: { pt: 'A Reconciliação Fraterna', en: 'Brotherly Reconciliation' },
     tipo: 'exposicao'
   },
   {
@@ -804,8 +781,8 @@ export const SERMONARIO_2026: SermonarioEntry[] = [
     mesNome: { pt: 'Agosto', en: 'August' },
     dataIso: '2026-08-30',
     textoBiblico: 'Mateus 18.21-19.2',
-    serie: { pt: 'O Evangelho do Reino: Exposição Bíblica de Mateus', en: 'The Gospel of the Kingdom: Matthew Exposition' },
-    tituloTema: { pt: 'O Perdão Sem Limites: A Parábola do Credor Incompassivo', en: 'Unconditional Forgiveness: The Unmerciful Servant' },
+    serie: { pt: 'O evangelho do reino: uma exposição bíblica de Mateus', en: 'The Gospel of the Kingdom: Matthew Exposition' },
+    tituloTema: { pt: 'O Credor Incompassivo', en: 'The Unforgiving Servant' },
     tipo: 'exposicao'
   },
 
@@ -817,8 +794,8 @@ export const SERMONARIO_2026: SermonarioEntry[] = [
     mesNome: { pt: 'Setembro', en: 'September' },
     dataIso: '2026-09-06',
     textoBiblico: 'Mateus 19.3-12',
-    serie: { pt: 'O Evangelho do Reino: Exposição Bíblica de Mateus', en: 'The Gospel of the Kingdom: Matthew Exposition' },
-    tituloTema: { pt: 'O Casamento, a Fidelidade e o Propósito Original de Deus', en: 'Marriage, Faithfulness and God’s Original Purpose' },
+    serie: { pt: 'O evangelho do reino: uma exposição bíblica de Mateus', en: 'The Gospel of the Kingdom: Matthew Exposition' },
+    tituloTema: { pt: 'O Casamento e o Divórcio', en: 'Marriage and Divorce' },
     tipo: 'exposicao'
   },
   {
@@ -828,8 +805,8 @@ export const SERMONARIO_2026: SermonarioEntry[] = [
     mesNome: { pt: 'Setembro', en: 'September' },
     dataIso: '2026-09-13',
     textoBiblico: 'Mateus 19.13-30',
-    serie: { pt: 'O Evangelho do Reino: Exposição Bíblica de Mateus', en: 'The Gospel of the Kingdom: Matthew Exposition' },
-    tituloTema: { pt: 'Jesus e as Crianças: O Desafio do Jovem Rico e a Entrada no Reino', en: 'Jesus and Children: The Rich Young Ruler and the Kingdom' },
+    serie: { pt: 'O evangelho do reino: uma exposição bíblica de Mateus', en: 'The Gospel of the Kingdom: Matthew Exposition' },
+    tituloTema: { pt: 'Jesus e as Crianças • O Jovem Rico', en: 'Jesus, the Children and the Rich Young Ruler' },
     tipo: 'exposicao'
   },
   {
@@ -839,8 +816,8 @@ export const SERMONARIO_2026: SermonarioEntry[] = [
     mesNome: { pt: 'Setembro', en: 'September' },
     dataIso: '2026-09-20',
     textoBiblico: 'Mateus 20.1-16',
-    serie: { pt: 'O Evangelho do Reino: Exposição Bíblica de Mateus', en: 'The Gospel of the Kingdom: Matthew Exposition' },
-    tituloTema: { pt: 'A Graça que Escandaliza: Os Trabalhadores da Vinha', en: 'Scandalous Grace: The Workers in the Vineyard' },
+    serie: { pt: 'O evangelho do reino: uma exposição bíblica de Mateus', en: 'The Gospel of the Kingdom: Matthew Exposition' },
+    tituloTema: { pt: 'Os Trabalhadores da Vinha', en: 'The Workers in the Vineyard' },
     tipo: 'exposicao'
   },
   {
@@ -849,9 +826,9 @@ export const SERMONARIO_2026: SermonarioEntry[] = [
     mes: '09',
     mesNome: { pt: 'Setembro', en: 'September' },
     dataIso: '2026-09-27',
-    textoBiblico: 'Atos 1.8; Romanos 10.14-17',
+    textoBiblico: 'Conferência Missionária',
     serie: { pt: 'Culto Especial', en: 'Special Service' },
-    tituloTema: { pt: 'Conferência Missionária ICENV: Até os Confins da Terra', en: 'ICENV Missionary Conference: To the Ends of the Earth' },
+    tituloTema: { pt: 'Conferência Missionária', en: 'Missionary Conference' },
     tipo: 'especial',
     destaque: true
   },
@@ -864,8 +841,8 @@ export const SERMONARIO_2026: SermonarioEntry[] = [
     mesNome: { pt: 'Outubro', en: 'October' },
     dataIso: '2026-10-04',
     textoBiblico: 'Mateus 20.17-34',
-    serie: { pt: 'O Evangelho do Reino: Exposição Bíblica de Mateus', en: 'The Gospel of the Kingdom: Matthew Exposition' },
-    tituloTema: { pt: 'O Filho do Homem Veio para Servir e Dar a Vida em Resgate', en: 'The Son of Man Came to Serve and Give His Life as Ransom' },
+    serie: { pt: 'O evangelho do reino: uma exposição bíblica de Mateus', en: 'The Gospel of the Kingdom: Matthew Exposition' },
+    tituloTema: { pt: 'O Resgate do Filho do Homem', en: 'The Ransom of the Son of Man' },
     tipo: 'exposicao'
   },
   {
@@ -875,8 +852,8 @@ export const SERMONARIO_2026: SermonarioEntry[] = [
     mesNome: { pt: 'Outubro', en: 'October' },
     dataIso: '2026-10-11',
     textoBiblico: 'Mateus 21.1-17',
-    serie: { pt: 'O Evangelho do Reino: Exposição Bíblica de Mateus', en: 'The Gospel of the Kingdom: Matthew Exposition' },
-    tituloTema: { pt: 'Hosana ao Filho de Davi: A Entrada Triunfal e a Casa de Oração', en: 'Hosanna to the Son of David: The Triumphal Entry and House of Prayer' },
+    serie: { pt: 'O evangelho do reino: uma exposição bíblica de Mateus', en: 'The Gospel of the Kingdom: Matthew Exposition' },
+    tituloTema: { pt: 'A Entrada Triunfal em Jerusalém', en: 'The Triumphal Entry into Jerusalem' },
     tipo: 'exposicao'
   },
   {
@@ -885,9 +862,9 @@ export const SERMONARIO_2026: SermonarioEntry[] = [
     mes: '10',
     mesNome: { pt: 'Outubro', en: 'October' },
     dataIso: '2026-10-18',
-    textoBiblico: '1 Samuel 7.12; Salmo 100',
-    serie: { pt: 'Culto Comemorativo Solene', en: 'Solemn Commemorative Service' },
-    tituloTema: { pt: 'Culto de Aniversário da Igreja — Centenário ICEB: Firmados na Rocha', en: 'Church Anniversary Service — ICEB Centennial: Rooted in the Rock' },
+    textoBiblico: 'Aniversário da igreja',
+    serie: { pt: 'Culto Especial', en: 'Special Service' },
+    tituloTema: { pt: 'Aniversário da igreja', en: 'Church Anniversary' },
     tipo: 'especial',
     destaque: true
   },
@@ -898,8 +875,8 @@ export const SERMONARIO_2026: SermonarioEntry[] = [
     mesNome: { pt: 'Outubro', en: 'October' },
     dataIso: '2026-10-25',
     textoBiblico: 'Mateus 21.18-32',
-    serie: { pt: 'O Evangelho do Reino: Exposição Bíblica de Mateus', en: 'The Gospel of the Kingdom: Matthew Exposition' },
-    tituloTema: { pt: 'A Figueira Seca, o Poder da Fé e a Autoridade de Cristo', en: 'The Withered Fig Tree, the Power of Faith and Christ’s Authority' },
+    serie: { pt: 'O evangelho do reino: uma exposição bíblica de Mateus', en: 'The Gospel of the Kingdom: Matthew Exposition' },
+    tituloTema: { pt: 'A Figueira Seca • Os Dois Filhos', en: 'The Withered Fig Tree • The Two Sons' },
     tipo: 'exposicao'
   },
 
@@ -911,8 +888,8 @@ export const SERMONARIO_2026: SermonarioEntry[] = [
     mesNome: { pt: 'Novembro', en: 'November' },
     dataIso: '2026-11-01',
     textoBiblico: 'Mateus 21.33-46',
-    serie: { pt: 'O Evangelho do Reino: Exposição Bíblica de Mateus', en: 'The Gospel of the Kingdom: Matthew Exposition' },
-    tituloTema: { pt: 'A Parábola dos Lavradores Maus e a Pedra Angular Rejeitada', en: 'The Parable of the Wicked Tenants and the Rejected Cornerstone' },
+    serie: { pt: 'O evangelho do reino: uma exposição bíblica de Mateus', en: 'The Gospel of the Kingdom: Matthew Exposition' },
+    tituloTema: { pt: 'Os Lavradores Maus', en: 'The Wicked Tenants' },
     tipo: 'exposicao'
   },
   {
@@ -922,8 +899,8 @@ export const SERMONARIO_2026: SermonarioEntry[] = [
     mesNome: { pt: 'Novembro', en: 'November' },
     dataIso: '2026-11-08',
     textoBiblico: 'Mateus 22.1-14',
-    serie: { pt: 'O Evangelho do Reino: Exposição Bíblica de Mateus', en: 'The Gospel of the Kingdom: Matthew Exposition' },
-    tituloTema: { pt: 'O Banquete das Bodas: Muitos são Chamados, mas Poucos Escolhidos', en: 'The Wedding Banquet: Many are Called, but Few Chosen' },
+    serie: { pt: 'O evangelho do reino: uma exposição bíblica de Mateus', en: 'The Gospel of the Kingdom: Matthew Exposition' },
+    tituloTema: { pt: 'As Bodas do Filho do Rei', en: 'The Wedding Feast' },
     tipo: 'exposicao'
   },
   {
@@ -933,8 +910,8 @@ export const SERMONARIO_2026: SermonarioEntry[] = [
     mesNome: { pt: 'Novembro', en: 'November' },
     dataIso: '2026-11-15',
     textoBiblico: 'Mateus 22.15-46',
-    serie: { pt: 'O Evangelho do Reino: Exposição Bíblica de Mateus', en: 'The Gospel of the Kingdom: Matthew Exposition' },
-    tituloTema: { pt: 'Dai a César o que é de César, a Esperança da Ressurreição e o Amor a Deus', en: 'Render to Caesar, the Hope of Resurrection and Love for God' },
+    serie: { pt: 'O evangelho do reino: uma exposição bíblica de Mateus', en: 'The Gospel of the Kingdom: Matthew Exposition' },
+    tituloTema: { pt: 'O Tributo a César • A Ressurreição', en: 'Tribute to Caesar • The Resurrection' },
     tipo: 'exposicao'
   },
   {
@@ -944,8 +921,8 @@ export const SERMONARIO_2026: SermonarioEntry[] = [
     mesNome: { pt: 'Novembro', en: 'November' },
     dataIso: '2026-11-22',
     textoBiblico: 'Mateus 23.1-39',
-    serie: { pt: 'O Evangelho do Reino: Exposição Bíblica de Mateus', en: 'The Gospel of the Kingdom: Matthew Exposition' },
-    tituloTema: { pt: 'Os Ais Contra a Hipocrisia Religiosa e o Lamento Compassivo de Jesus', en: 'Woes to Hypocrisy and Jesus’ Lament Over Jerusalem' },
+    serie: { pt: 'O evangelho do reino: uma exposição bíblica de Mateus', en: 'The Gospel of the Kingdom: Matthew Exposition' },
+    tituloTema: { pt: 'Os Sete Ais aos Escribas e Fariseus', en: 'The Seven Woes' },
     tipo: 'exposicao'
   },
   {
@@ -954,11 +931,10 @@ export const SERMONARIO_2026: SermonarioEntry[] = [
     mes: '11',
     mesNome: { pt: 'Novembro', en: 'November' },
     dataIso: '2026-11-29',
-    textoBiblico: 'Gênesis 1-2; Salmo 8',
-    serie: { pt: 'Série Advento 2026: A História do Reino', en: 'Advent 2026 Series: The Story of the Kingdom' },
-    tituloTema: { pt: '1º Domingo do Advento: "Era Uma Vez um Reino"', en: '1st Sunday of Advent: "Once Upon a Kingdom"' },
+    textoBiblico: 'Gn 1-2; Sl 8',
+    serie: { pt: 'Série Advento 2026: A história do reino', en: 'Advent 2026 Series: The Story of the Kingdom' },
+    tituloTema: { pt: 'Era uma vez um reino', en: 'Once upon a kingdom' },
     tipo: 'advento',
-    referencias: 'Gn 1-2; Sl 8',
     destaque: true
   },
 
@@ -969,11 +945,10 @@ export const SERMONARIO_2026: SermonarioEntry[] = [
     mes: '12',
     mesNome: { pt: 'Dezembro', en: 'December' },
     dataIso: '2026-12-04',
-    textoBiblico: 'Gênesis 2.15-17; 3.1-24',
-    serie: { pt: 'Série Advento 2026: A História do Reino', en: 'Advent 2026 Series: The Story of the Kingdom' },
-    tituloTema: { pt: '2º Sermão de Advento: "A Rebelião no Reino"', en: '2nd Advent Sermon: "The Rebellion in the Kingdom"' },
+    textoBiblico: 'Gn 2.15-17; 3.1-24',
+    serie: { pt: 'Série Advento 2026: A história do reino', en: 'Advent 2026 Series: The Story of the Kingdom' },
+    tituloTema: { pt: 'A rebelião no reino', en: 'The rebellion in the kingdom' },
     tipo: 'advento',
-    referencias: 'Gn 2.15-17; 3.1-24',
     destaque: true
   },
   {
@@ -982,11 +957,10 @@ export const SERMONARIO_2026: SermonarioEntry[] = [
     mes: '12',
     mesNome: { pt: 'Dezembro', en: 'December' },
     dataIso: '2026-12-13',
-    textoBiblico: 'Gênesis 3.15; Romanos 5.12-21; Êxodo 19.5-6; 1 Pedro 2.8-10',
-    serie: { pt: 'Série Advento 2026: A História do Reino', en: 'Advent 2026 Series: The Story of the Kingdom' },
-    tituloTema: { pt: '3º Sermão de Advento: "O Reino Prometido"', en: '3rd Advent Sermon: "The Promised Kingdom"' },
+    textoBiblico: 'Gn 3.15; Rm 5.12-21; Êx 19.5-6; 1 Pe 2.8-10',
+    serie: { pt: 'Série Advento 2026: A história do reino', en: 'Advent 2026 Series: The Story of the Kingdom' },
+    tituloTema: { pt: 'O reino prometido', en: 'The promised kingdom' },
     tipo: 'advento',
-    referencias: 'Gn 3.15; Rm 5.12-21; Êx 19.5-6; 1 Pe 2.8-10',
     destaque: true
   },
   {
@@ -995,11 +969,10 @@ export const SERMONARIO_2026: SermonarioEntry[] = [
     mes: '12',
     mesNome: { pt: 'Dezembro', en: 'December' },
     dataIso: '2026-12-20',
-    textoBiblico: 'Apocalipse 11.15-19; 12.1-12',
-    serie: { pt: 'Série Advento 2026: A História do Reino', en: 'Advent 2026 Series: The Story of the Kingdom' },
-    tituloTema: { pt: '4º Sermão de Advento: "O Reino Que Veio e Virá"', en: '4th Advent Sermon: "The Kingdom That Came and Is to Come"' },
+    textoBiblico: 'Ap 11.15-19; 12.1-12',
+    serie: { pt: 'Série Advento 2026: A história do reino', en: 'Advent 2026 Series: The Story of the Kingdom' },
+    tituloTema: { pt: 'O reino que veio e virá', en: 'The kingdom that came and is to come' },
     tipo: 'advento',
-    referencias: 'Ap 11.15-19; 12.1-12',
     destaque: true
   },
   {
@@ -1008,9 +981,9 @@ export const SERMONARIO_2026: SermonarioEntry[] = [
     mes: '12',
     mesNome: { pt: 'Dezembro', en: 'December' },
     dataIso: '2026-12-27',
-    textoBiblico: 'Salmo 103; Salmo 116.12-19',
-    serie: { pt: 'Culto de Fim de Ano', en: 'Year-End Service' },
-    tituloTema: { pt: 'Sermão de Fim de Ano: Culto Solene de Ações de Graças', en: 'Year-End Sermon: Solemn Thanksgiving Service' },
+    textoBiblico: 'Ações de graças',
+    serie: { pt: 'Sermão de fim de ano', en: 'Year-End Sermon' },
+    tituloTema: { pt: 'Ações de graças', en: 'Thanksgiving' },
     tipo: 'gratidao',
     destaque: true
   }
