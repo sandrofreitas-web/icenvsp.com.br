@@ -7,6 +7,6 @@
  */
 
 export const SITE_MODE: 'limited' | 'full' =
-  (import.meta.env.VITE_SITE_MODE as 'limited' | 'full') || 'limited';
+  (import.meta.env.VITE_SITE_MODE as 'limited' | 'full') || 'full';
 
 export const IS_LIMITED_MODE: boolean = SITE_MODE === 'limited';

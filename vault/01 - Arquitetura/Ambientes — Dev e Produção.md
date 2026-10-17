@@ -7,15 +7,15 @@ related: [[🏠 Início]] · [[Git — Branches e Histórico]] · [[Docker — C
 
 ## Comparativo de Ambientes
 
-| Atributo | 🟢 Desenvolvimento | 🟡 Produção |
-|---|---|---|
-| **URL Local** | http://localhost:3000 | — |
-| **URL Web (Hostinger DEV)** | https://limegreen-salamander-658473.hostingersite.com | https://icenvsp.com.br |
-| **Branch Git** | `dev-full` | `main` |
-| **Versão do site** | Completa (todas as views) | Simplificada (só Cultos) |
-| **Infraestrutura** | Docker (local) / Hostinger Addon (web) | Hostinger Main (static hosting) |
-| **Banco de dados** | Supabase (mesmo projeto) | Supabase (mesmo projeto) |
-| **Alterar?** | ✅ Livre | ⛔ Somente após aprovação |
+| Atributo | 🟢 Desenvolvimento Local | 🔵 Staging / Preview (Hostinger) | 🟡 Produção Oficial |
+|---|---|---|---|
+| **URL** | http://localhost:3070 | https://limegreen-salamander-658473.hostingersite.com | https://icenv.com.br (ou icenvsp.com.br) |
+| **Branch Git** | `dev-full` | `dev-full` (ou staging) | `main` |
+| **Modo do Site** | **Completo (`full`)** | Configurável (`limited` ou `full`) | **Limitado (`limited`)** |
+| **Páginas Ativas** | Home, Sobre, Cultos, Sermões, Eventos, Contato, Admin | Todas ou Cultos + Sermões | Cultos + Sermões (Escala Litúrgica sem download/vídeos) |
+| **Infraestrutura** | Docker Compose (`port 3070`) | Hostinger Preview (FTP automático) | Hostinger Produção (FTP / File Manager) |
+| **Banco de Dados** | Supabase (mesmo projeto) | Supabase (mesmo projeto) | Supabase (mesmo projeto) |
+| **Comando de Build** | `npm run build:full` | `npm run build:limited` | `npm run build:limited` |
 
 > [!caution]
 > Ambos os ambientes apontam para o **mesmo projeto Supabase**. Alterações no banco de dados (via AdminView ou schema.sql) afetam produção e desenvolvimento simultaneamente.
