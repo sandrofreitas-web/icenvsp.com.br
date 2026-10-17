@@ -8,6 +8,8 @@
     "build": "vite build --mode full",
     "build:limited": "vite build --mode limited",
     "build:full": "vite build --mode full",
+    "deploy:dev": "powershell -ExecutionPolicy Bypass -File .\\deploy-dev.ps1",
+    "deploy:prod": "powershell -ExecutionPolicy Bypass -File .\\deploy-prod.ps1",
     "preview": "vite preview",
     "clean": "rm -rf dist server.js",
     "lint": "tsc --noEmit"
