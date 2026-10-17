@@ -3,6 +3,7 @@ import { Menu, X, Globe } from 'lucide-react';
 import { Language, ActiveTab } from '../types';
 import { DICTIONARY } from '../data';
 import ChurchLogo from './ChurchLogo';
+import { IS_LIMITED_MODE } from '../config';
 
 interface TopNavBarProps {
   currentTab: ActiveTab;
@@ -26,9 +27,19 @@ export default function TopNavBar({
     setIsScrolled(true);
   }, []);
 
-  const navItems: { id: ActiveTab; label: string }[] = [
-    { id: 'cultos', label: dict.navServices },
-  ];
+  const navItems: { id: ActiveTab; label: string }[] = IS_LIMITED_MODE
+    ? [
+        { id: 'cultos', label: dict.navServices },
+        { id: 'sermoes', label: dict.navSermons },
+      ]
+    : [
+        { id: 'home', label: dict.navHome },
+        { id: 'sobre', label: dict.navAbout },
+        { id: 'cultos', label: dict.navServices },
+        { id: 'sermoes', label: dict.navSermons },
+        { id: 'eventos', label: dict.navEvents },
+        { id: 'contato', label: dict.navContact },
+      ];
 
   const handleTabClick = (tabId: ActiveTab) => {
     onChangeTab(tabId);
@@ -41,8 +52,8 @@ export default function TopNavBar({
       id="top-navbar-container"
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100 py-3'
-          : 'bg-gradient-to-b from-black/60 via-black/30 to-transparent text-white py-5'
+          ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100 py-2 sm:py-2.5'
+          : 'bg-gradient-to-b from-black/60 via-black/30 to-transparent text-white py-3 sm:py-4'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -51,7 +62,7 @@ export default function TopNavBar({
           <div
             id="brand-logo"
             className="flex items-center cursor-pointer group"
-            onClick={() => handleTabClick('cultos')}
+            onClick={() => handleTabClick(IS_LIMITED_MODE ? 'cultos' : 'home')}
           >
             <ChurchLogo language={language} isScrolled={isScrolled} />
           </div>
@@ -68,11 +79,11 @@ export default function TopNavBar({
                   className={`px-3 py-2 rounded-md text-sm font-medium transition-all ${
                     isActive
                       ? isScrolled
-                        ? 'bg-[#007cc3]/10 text-[#28166f]'
-                        : 'bg-white/15 text-white shadow-sm'
+                        ? 'bg-secondary/15 text-primary font-bold'
+                        : 'bg-white/20 text-white shadow-xs font-bold'
                       : isScrolled
-                      ? 'text-gray-600 hover:text-[#007cc3] hover:bg-gray-50'
-                      : 'text-white/80 hover:text-white hover:bg-white/5'
+                      ? 'text-neutral-dark hover:text-secondary hover:bg-surface'
+                      : 'text-white/80 hover:text-white hover:bg-white/10'
                   }`}
                 >
                   {item.label}
@@ -81,9 +92,9 @@ export default function TopNavBar({
             })}
 
             {/* Language Switcher */}
-            <div className="h-5 w-[1px] bg-gray-300 mx-3 self-center hidden lg:block" />
+            <div className="h-5 w-[1px] bg-gray-200 mx-3 self-center hidden lg:block" />
             <div className="flex items-center space-x-1 pl-2">
-              <Globe className={`h-4 w-4 ${isScrolled ? 'text-gray-500' : 'text-white/60'}`} />
+              <Globe className={`h-4 w-4 ${isScrolled ? 'text-secondary' : 'text-white/80'}`} />
               <div className="flex items-center text-xs font-mono font-bold">
                 <button
                   id="lang-toggle-pt"
@@ -91,11 +102,11 @@ export default function TopNavBar({
                   className={`px-1.5 py-0.5 rounded transition-all ${
                     language === 'pt'
                       ? isScrolled
-                        ? 'text-[#007cc3] font-extrabold'
-                        : 'text-[#007cc3] font-extrabold'
+                        ? 'text-secondary font-extrabold'
+                        : 'text-accent font-extrabold'
                       : isScrolled
-                      ? 'text-gray-400 hover:text-gray-600'
-                      : 'text-white/40 hover:text-white'
+                      ? 'text-neutral-dark/60 hover:text-neutral-dark'
+                      : 'text-white/50 hover:text-white'
                   }`}
                 >
                   PT
@@ -107,11 +118,11 @@ export default function TopNavBar({
                   className={`px-1.5 py-0.5 rounded transition-all ${
                     language === 'en'
                       ? isScrolled
-                        ? 'text-[#007cc3] font-extrabold'
-                        : 'text-[#007cc3] font-extrabold'
+                        ? 'text-secondary font-extrabold'
+                        : 'text-accent font-extrabold'
                       : isScrolled
-                      ? 'text-gray-400 hover:text-gray-600'
-                      : 'text-white/40 hover:text-white'
+                      ? 'text-neutral-dark/60 hover:text-neutral-dark'
+                      : 'text-white/50 hover:text-white'
                   }`}
                 >
                   EN
@@ -167,8 +178,8 @@ export default function TopNavBar({
                   onClick={() => handleTabClick(item.id)}
                   className={`w-full text-left block px-4 py-2.5 rounded-md text-base font-medium transition-all ${
                     isActive
-                      ? 'bg-[#007cc3]/10 text-[#28166f] font-semibold'
-                      : 'text-gray-600 hover:text-[#007cc3] hover:bg-gray-50'
+                      ? 'bg-secondary/15 text-primary font-bold'
+                      : 'text-neutral-dark hover:text-secondary hover:bg-surface'
                   }`}
                 >
                   {item.label}

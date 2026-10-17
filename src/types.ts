@@ -42,3 +42,46 @@ export interface TimelineEvent {
   description: { pt: string; en: string };
   image?: string;
 }
+
+export interface CarouselSlide {
+  id: string;
+  tag: { pt: string; en: string };
+  title: { pt: string; en: string };
+  description: { pt: string; en: string };
+  buttonText: { pt: string; en: string };
+  buttonLink: string;
+  image: string;
+  sort_order: number;
+  active: boolean;
+}
+
+export type MessageSubject = 'info' | 'prayer' | 'pastoral' | 'admin' | 'ministries';
+export type MessageStatus = 'unread' | 'read' | 'answered' | 'archived';
+
+export interface ContactMessage {
+  id: string;
+  createdAt: string;
+  name: string;
+  email: string;
+  phone?: string;
+  subject: MessageSubject;
+  message: string;
+  status: MessageStatus;
+  notes?: string;
+}
+
+export interface SermonarioEntry {
+  id: string;
+  dia: string;
+  mes: string;
+  mesNome: { pt: string; en: string };
+  dataIso: string;
+  textoBiblico: string;
+  serie: { pt: string; en: string };
+  tituloTema?: { pt: string; en: string };
+  tipo: 'exposicao' | 'especial' | 'advento' | 'gratidao';
+  referencias?: string;
+  destaque?: boolean;
+}
+
+

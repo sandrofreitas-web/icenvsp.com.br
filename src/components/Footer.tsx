@@ -2,6 +2,8 @@ import { Mail, Phone, MapPin, Youtube, Facebook, Instagram, Share2 } from 'lucid
 import { Language, ActiveTab } from '../types';
 import { DICTIONARY } from '../data';
 import ChurchLogo from './ChurchLogo';
+import DenominationLogo from './DenominationLogo';
+import { IS_LIMITED_MODE } from '../config';
 
 interface FooterProps {
   onChangeTab: (tab: ActiveTab) => void;
@@ -17,82 +19,149 @@ export default function Footer({ onChangeTab, language }: FooterProps) {
   };
 
   return (
-    <footer id="footer-container" className="bg-gradient-to-br from-[#1e1054] to-[#0a0421] text-gray-200 border-t-2 border-[#b59a57]/30 shadow-2xl relative overflow-hidden">
+    <footer id="footer-container" className="bg-gradient-to-br from-[#0c3945] via-[#07252d] to-[#04161b] text-gray-200 border-t-2 border-[#2a8182]/40 shadow-2xl relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12">
           {/* Brand Col */}
           <div className="space-y-6">
-            <div className="flex items-center cursor-pointer" onClick={() => handleLinkClick('cultos')}>
-              <ChurchLogo language={language} isScrolled={false} className="h-16 sm:h-20 md:h-24" />
+            <div className="flex items-center cursor-pointer" onClick={() => handleLinkClick(IS_LIMITED_MODE ? 'cultos' : 'home')}>
+              <ChurchLogo language={language} isScrolled={false} className="h-16 sm:h-20 md:h-24" theme="dark" />
             </div>
-            <p className="text-sm text-gray-300 leading-relaxed">
+            <p className="text-sm text-gray-300 leading-relaxed font-sans">
               {language === 'pt'
                 ? 'Uma igreja de teologia bíblica e compromisso profundo com o testemunho cristão.'
                 : 'A church of biblical theology and deep commitment to Christian witness.'}
             </p>
+            <div className="pt-2">
+              <span className="text-xs uppercase tracking-wider font-bold text-[#bbd2d0] block mb-2 font-mono">
+                {language === 'pt' ? 'Filiação Denominacional' : 'Denominational Affiliation'}
+              </span>
+              <p className="text-xs text-gray-300 mb-3">
+                {language === 'pt'
+                  ? 'Filiada à Igreja Cristã Evangélica do Brasil (ICEB).'
+                  : 'Affiliated with the Evangelical Christian Church of Brazil (ICEB).'}
+              </p>
+              <DenominationLogo theme="dark" className="h-10 sm:h-12" />
+            </div>
           </div>
 
           {/* Navigation Links Col */}
           <div>
-            <h3 className="text-base font-bold tracking-wider uppercase text-amber-400 mb-6 font-sans">
+            <h3 className="text-base font-bold tracking-wider uppercase text-[#bbd2d0] mb-6 font-sans">
               {language === 'pt' ? 'Links Úteis' : 'Useful Links'}
             </h3>
             <ul className="space-y-2.5 text-sm">
-              <li>
-                <button
-                  onClick={() => handleLinkClick('cultos')}
-                  className="hover:text-amber-400 transition-colors focus:outline-none"
-                >
-                  {dict.navServices}
-                </button>
-              </li>
-              <li>
-                <a
-                  href="#horarios"
-                  className="hover:text-amber-400 transition-colors focus:outline-none inline-block"
-                >
-                  {language === 'pt' ? 'Horários dos Cultos' : 'Worship Times'}
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#localizacao"
-                  className="hover:text-amber-400 transition-colors focus:outline-none inline-block"
-                >
-                  {language === 'pt' ? 'Localização' : 'Location'}
-                </a>
-              </li>
+              {IS_LIMITED_MODE ? (
+                <>
+                  <li>
+                    <button
+                      onClick={() => handleLinkClick('cultos')}
+                      className="hover:text-amber-400 transition-colors focus:outline-none"
+                    >
+                      {dict.navServices}
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      onClick={() => handleLinkClick('sermoes')}
+                      className="hover:text-amber-400 transition-colors focus:outline-none"
+                    >
+                      {dict.navSermons}
+                    </button>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li>
+                    <button
+                      onClick={() => handleLinkClick('home')}
+                      className="hover:text-white transition-colors focus:outline-none"
+                    >
+                      {dict.navHome}
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      onClick={() => handleLinkClick('sobre')}
+                      className="hover:text-amber-400 transition-colors focus:outline-none"
+                    >
+                      {dict.navAbout}
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      onClick={() => handleLinkClick('cultos')}
+                      className="hover:text-amber-400 transition-colors focus:outline-none"
+                    >
+                      {dict.navServices}
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      onClick={() => handleLinkClick('sermoes')}
+                      className="hover:text-amber-400 transition-colors focus:outline-none"
+                    >
+                      {dict.navSermons}
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      onClick={() => handleLinkClick('eventos')}
+                      className="hover:text-amber-400 transition-colors focus:outline-none"
+                    >
+                      {dict.navEvents}
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      onClick={() => handleLinkClick('contato')}
+                      className="hover:text-amber-400 transition-colors focus:outline-none"
+                    >
+                      {dict.navContact}
+                    </button>
+                  </li>
+                  <li className="pt-1.5 border-t border-neutral-800">
+                    <button
+                      onClick={() => handleLinkClick('admin')}
+                      className="text-neutral-400 hover:text-amber-400 text-xs font-semibold tracking-wide uppercase transition-colors focus:outline-none flex items-center space-x-1"
+                    >
+                      <span className="inline-block h-1.5 w-1.5 rounded-full bg-amber-500 mr-1.5 animate-pulse" />
+                      <span>{language === 'pt' ? 'Painel Admin' : 'Admin Panel'}</span>
+                    </button>
+                  </li>
+                </>
+              )}
             </ul>
           </div>
 
           {/* Schedule Col */}
           <div>
-            <h3 className="text-base font-bold tracking-wider uppercase text-amber-400 mb-6 font-sans">
+            <h3 className="text-base font-bold tracking-wider uppercase text-[#bbd2d0] mb-6 font-sans">
               {language === 'pt' ? 'Nossos Horários' : 'Our Services'}
             </h3>
             <div className="space-y-4 text-sm">
               <div>
-                <span className="font-medium text-amber-400 block">
+                <span className="font-medium text-[#bbd2d0] block">
                   {language === 'pt' ? 'Domingo — 9h30' : 'Sunday — 9:30 AM'}
                 </span>
-                <span className="text-neutral-400 text-xs">
+                <span className="text-slate-300 text-xs">
                   {language === 'pt' ? 'Escola Bíblica Dominical (EBD)' : 'Sunday School (EBD)'}
                 </span>
               </div>
               <div>
-                <span className="font-medium text-amber-400 block">
+                <span className="font-medium text-[#bbd2d0] block">
                   {language === 'pt' ? 'Domingo — 18h00' : 'Sunday — 6:00 PM'}
                 </span>
-                <span className="text-neutral-400 text-xs">
-                  {language === 'pt' ? 'Culto de Adoração' : 'Worship Service'}
+                <span className="text-slate-300 text-xs">
+                  {language === 'pt' ? 'Culto de Adoração Principal' : 'Primary Worship Service'}
                 </span>
               </div>
               <div>
-                <span className="font-medium text-amber-400 block">
+                <span className="font-medium text-[#bbd2d0] block">
                   {language === 'pt' ? 'Terça-feira — 20h00' : 'Tuesday — 8:00 PM'}
                 </span>
-                <span className="text-neutral-400 text-xs">
-                  {language === 'pt' ? 'Reunião de Oração' : 'Prayer Meeting'}
+                <span className="text-slate-300 text-xs">
+                  {language === 'pt' ? 'Reunião de Oração e Estudo' : 'Prayer & Bible Study'}
                 </span>
               </div>
             </div>
@@ -100,25 +169,25 @@ export default function Footer({ onChangeTab, language }: FooterProps) {
 
           {/* Contact details Col */}
           <div>
-            <h3 className="text-base font-bold tracking-wider uppercase text-amber-400 mb-6 font-sans">
+            <h3 className="text-base font-bold tracking-wider uppercase text-[#bbd2d0] mb-6 font-sans">
               {language === 'pt' ? 'Contate-nos' : 'Get in Touch'}
             </h3>
             <ul className="space-y-3.5 text-sm text-gray-300">
               <li className="flex items-start">
-                <MapPin className="h-5 w-5 text-amber-400 mr-2.5 mt-0.5 shrink-0" />
+                <MapPin className="h-5 w-5 text-[#2a8182] mr-2.5 mt-0.5 shrink-0" />
                 <span>{dict.contactAddress}</span>
               </li>
               <li className="flex items-center">
-                <Phone className="h-4 w-4 text-amber-400 mr-2.5 shrink-0" />
-                <a href="tel:" className="hover:text-amber-400 transition-colors">
+                <Phone className="h-4 w-4 text-[#2a8182] mr-2.5 shrink-0" />
+                <a href="tel:1132840000" className="hover:text-white transition-colors">
                   {dict.contactPhone}
                 </a>
               </li>
               <li className="flex items-center">
-                <Mail className="h-4 w-4 text-amber-400 mr-2.5 shrink-0" />
+                <Mail className="h-4 w-4 text-[#2a8182] mr-2.5 shrink-0" />
                 <a
                   href="mailto:contato@icenvsp.com.br"
-                  className="hover:text-amber-400 transition-colors break-all"
+                  className="hover:text-white transition-colors break-all"
                 >
                   {dict.contactEmail}
                 </a>

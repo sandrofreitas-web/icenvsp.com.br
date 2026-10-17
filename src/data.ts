@@ -1,4 +1,4 @@
-import { Sermon, ChurchEvent, Leader, TimelineEvent } from './types';
+import { Sermon, ChurchEvent, Leader, TimelineEvent, CarouselSlide, SermonarioEntry } from './types';
 
 export const DICTIONARY = {
   pt: {
@@ -56,7 +56,7 @@ export const DICTIONARY = {
     aboutHeroTitle: 'Nossa História, Sua Família',
     aboutHeroSub: 'Conheça nossos valores históricos e nossa liderança pastoral',
     mission: 'Missão',
-    missionText: 'Glorificar a Deus por meio do culto reverente, da pregação fiel das Escrituras, do discipulado e do serviço compassivo à sociedade.',
+    missionText: 'Firmados no Evangelho, intencionais no discipulado, frutíferos na missão. Glorificar a Deus por meio do culto reverente, da pregação fiel das Escrituras e do serviço compassivo à sociedade.',
     vision: 'Visão',
     visionText: 'Ser uma comunidade de fé vibrante, teologicamente enraizada e acolhedora, que transforma vidas e inspira esperança em São Paulo.',
     values: 'Valores',
@@ -128,7 +128,7 @@ export const DICTIONARY = {
 
     // Contact View
     contactHeroTitle: 'Fale Conosco',
-    contactHeroSub: 'Tem alguma dúvida, pedido de oração ou quer conversar? Nossa equipe está pronta para lhe atender',
+    contactHeroSub: 'Tem alguma dúvida, pedido de oração ou quer conversar? Nos envie uma mensagem.',
     contactFormTitle: 'Envie uma mensagem',
     formName: 'Nome Completo',
     formEmail: 'Endereço de E-mail',
@@ -206,7 +206,7 @@ export const DICTIONARY = {
     aboutHeroTitle: 'Our History, Your Family',
     aboutHeroSub: 'Discover our historical values and our pastoral leadership',
     mission: 'Mission',
-    missionText: 'To glorify God through reverent worship, faithful preaching of the Scriptures, discipleship, and compassionate service to society.',
+    missionText: 'Grounded in the Gospel, intentional in discipleship, fruitful in mission. Glorifying God through reverent worship, faithful preaching of the Scriptures, and compassionate service.',
     vision: 'Vision',
     visionText: 'To be a vibrant, theologically rooted, and welcoming community of faith that transforms lives and inspires hope in São Paulo.',
     values: 'Values',
@@ -278,7 +278,7 @@ export const DICTIONARY = {
 
     // Contact View
     contactHeroTitle: 'Contact Us',
-    contactHeroSub: 'Have any questions, prayer requests, or want to talk? Our team is ready to assist you',
+    contactHeroSub: 'Have a question, prayer request, or want to talk? Send us a message.',
     contactFormTitle: 'Send a message',
     formName: 'Full Name',
     formEmail: 'Email Address',
@@ -609,6 +609,84 @@ export const TIMELINE: TimelineEvent[] = [
   }
 ];
 
+export interface LeadershipMember {
+  role: { pt: string; en: string };
+  name: string;
+}
+
+export interface LeadershipStructure {
+  period: { pt: string; en: string };
+  mandate: { pt: string; en: string };
+  board: LeadershipMember[];
+  elders: LeadershipMember[];
+  deacons: LeadershipMember[];
+}
+
+export const LEADERSHIP_BIENNIUM: LeadershipStructure = {
+  period: {
+    pt: 'Liderança — Biênio 2026 / 2027',
+    en: 'Leadership — 2026 / 2027 Biennium'
+  },
+  mandate: {
+    pt: 'Mandato até 31/12/2027',
+    en: 'Term until 12/31/2027'
+  },
+  board: [
+    {
+      role: { pt: 'Presidente', en: 'President' },
+      name: 'Vinicius Araújo Ferreira'
+    },
+    {
+      role: { pt: 'Vice-Presidente', en: 'Vice-President' },
+      name: 'Cesar Augusto Figueiredo'
+    },
+    {
+      role: { pt: 'Primeira Secretária', en: 'First Secretary' },
+      name: 'Mercia Santos Campos'
+    },
+    {
+      role: { pt: 'Segunda Secretária', en: 'Second Secretary' },
+      name: 'Gabriele Ramos Costa da Silva'
+    },
+    {
+      role: { pt: 'Primeiro Tesoureiro', en: 'First Treasurer' },
+      name: "Sandro D'Almeida Freitas"
+    },
+    {
+      role: { pt: 'Segundo Tesoureiro', en: 'Second Treasurer' },
+      name: 'Marcelo José Santos de Campos'
+    }
+  ],
+  elders: [
+    {
+      role: { pt: 'Presbítero', en: 'Ruling Elder' },
+      name: 'Edeilton Salustiano dos Santos Junior'
+    },
+    {
+      role: { pt: 'Presbítero', en: 'Ruling Elder' },
+      name: 'Cesar Augusto Figueiredo'
+    }
+  ],
+  deacons: [
+    {
+      role: { pt: 'Diaconisa', en: 'Deaconess' },
+      name: 'Glaucia Oliani Chaves Leão'
+    },
+    {
+      role: { pt: 'Diácono', en: 'Deacon' },
+      name: 'Filipe Carlos Barbosa'
+    },
+    {
+      role: { pt: 'Diácono', en: 'Deacon' },
+      name: 'Fabio'
+    },
+    {
+      role: { pt: 'Diácono', en: 'Deacon' },
+      name: 'Odezanir Pires de Oliveira'
+    }
+  ]
+};
+
 export const LEADERS: Leader[] = [
   {
     id: 'leader-1',
@@ -622,44 +700,293 @@ export const LEADERS: Leader[] = [
       pt: 'Bacharel em Teologia pela Faculdade Teológica Reformada e Mestre em Divindade. Atua no pastorado há mais de 20 anos, focado em teologia bíblica e aconselhamento familiar.',
       en: 'Bachelor of Theology from the Reformed Theological Seminary and Master of Divinity. Serving in pastoral ministry for over 20 years, focusing on biblical theology and family counseling.'
     }
-  },
-  {
-    id: 'leader-2',
-    name: 'Pr. André Silva',
-    role: {
-      pt: 'Pastor Auxiliar (Jovens e Família)',
-      en: 'Assistant Pastor (Youth & Family)'
-    },
-    image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&h=400&q=80',
-    bio: {
-      pt: 'Graduado em Teologia com ênfase em ministério de juventude. Lidera as ações de comunhão de jovens, adolescentes e o ministério de integração comunitária.',
-      en: 'Graduated in Theology with emphasis on youth ministry. Leads youth fellowship, adolescents, and the community integration ministry.'
-    }
-  },
-  {
-    id: 'leader-3',
-    name: 'Ricardo Mendes',
-    role: {
-      pt: 'Presbítero Regente',
-      en: 'Ruling Elder'
-    },
-    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=400&h=400&q=80',
-    bio: {
-      pt: 'Administrador de empresas, serve no Conselho da Igreja há 15 anos, sendo responsável pela gestão administrativa, financeira e apoio aos ministérios sociais.',
-      en: 'Business administrator, serving on the Church Session for 15 years, responsible for administrative and financial management and supporting social ministries.'
-    }
-  },
-  {
-    id: 'leader-4',
-    name: 'Dra. Helena Costa',
-    role: {
-      pt: 'Conselho Educacional e EBD',
-      en: 'Educational Board & EBD Director'
-    },
-    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&h=400&q=80',
-    bio: {
-      pt: 'Doutora em Pedagogia pela USP, supervisiona o currículo pedagógico da Escola Bíblica Dominical e coordena o treinamento contínuo de nossos professores e educadores.',
-      en: 'Doctor in Pedagogy from USP, supervises the pedagogical curriculum of the Sunday School and coordinates the continuous training of our teachers and educators.'
-    }
   }
 ];
+
+export const CAROUSEL_SLIDES: CarouselSlide[] = [
+  {
+    id: 'slide-1',
+    tag: { pt: '25 DE MAIO', en: 'MAY 25' },
+    title: { pt: 'Retiro de Jovens 2026: Conectados na Videira', en: 'Youth Retreat 2026: Connected to the Vine' },
+    description: {
+      pt: 'Três dias de comunhão, louvor, estudo bíblico e atividades ao ar livre no Recanto da Esperança.',
+      en: 'Three days of fellowship, worship, Bible study, and outdoor activities at Recanto da Esperança.'
+    },
+    buttonText: { pt: 'Saiba Mais', en: 'Learn More' },
+    buttonLink: 'eventos',
+    image: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80',
+    sort_order: 1,
+    active: true
+  },
+  {
+    id: 'slide-2',
+    tag: { pt: '08 DE JUNHO', en: 'JUNE 08' },
+    title: { pt: 'Concerto de Inverno & Coral Clássico', en: 'Winter Concert & Classical Choir' },
+    description: {
+      pt: 'Apresentação especial do nosso Grande Coral interpretando clássicos sacros de Bach, Handel e hinos tradicionais.',
+      en: 'Special performance by our Grand Choir performing sacred classics by Bach, Handel, and traditional hymns.'
+    },
+    buttonText: { pt: 'Saiba Mais', en: 'Learn More' },
+    buttonLink: 'eventos',
+    image: 'https://images.unsplash.com/photo-1465847899084-d164df4dedc6?auto=format&fit=crop&w=1200&q=80',
+    sort_order: 2,
+    active: true
+  },
+  {
+    id: 'slide-3',
+    tag: { pt: '15 DE JUNHO', en: 'JUNE 15' },
+    title: { pt: 'Noite da Comunhão & Jantar de Ação de Graças', en: 'Communion Night & Thanksgiving Dinner' },
+    description: {
+      pt: 'Jantar comunitário especial no salão social para celebrar a providência de Deus e fortalecer os laços fraternos.',
+      en: 'Special community dinner in the social hall to celebrate God’s providence and strengthen brotherly bonds.'
+    },
+    buttonText: { pt: 'Saiba Mais', en: 'Learn More' },
+    buttonLink: 'eventos',
+    image: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1200&q=80',
+    sort_order: 3,
+    active: true
+  }
+];
+
+export const SERMONARIO_BOOKS: any[] = [];
+
+export const SERMONARIO_2026: SermonarioEntry[] = [
+  // AGOSTO
+  {
+    id: 'sermonario-2026-08-16',
+    dia: '16',
+    mes: '08',
+    mesNome: { pt: 'Agosto', en: 'August' },
+    dataIso: '2026-08-16',
+    textoBiblico: 'Mateus 18.1-14',
+    serie: { pt: 'O evangelho do reino: uma exposição bíblica de Mateus', en: 'The Gospel of the Kingdom: Matthew Exposition' },
+    tituloTema: { pt: 'O Maior no Reino dos Céus', en: 'The Greatest in the Kingdom' },
+    tipo: 'exposicao'
+  },
+  {
+    id: 'sermonario-2026-08-23',
+    dia: '23',
+    mes: '08',
+    mesNome: { pt: 'Agosto', en: 'August' },
+    dataIso: '2026-08-23',
+    textoBiblico: 'Mateus 18.15-20',
+    serie: { pt: 'O evangelho do reino: uma exposição bíblica de Mateus', en: 'The Gospel of the Kingdom: Matthew Exposition' },
+    tituloTema: { pt: 'A Reconciliação Fraterna', en: 'Brotherly Reconciliation' },
+    tipo: 'exposicao'
+  },
+  {
+    id: 'sermonario-2026-08-30',
+    dia: '30',
+    mes: '08',
+    mesNome: { pt: 'Agosto', en: 'August' },
+    dataIso: '2026-08-30',
+    textoBiblico: 'Mateus 18.21-19.2',
+    serie: { pt: 'O evangelho do reino: uma exposição bíblica de Mateus', en: 'The Gospel of the Kingdom: Matthew Exposition' },
+    tituloTema: { pt: 'O Credor Incompassivo', en: 'The Unforgiving Servant' },
+    tipo: 'exposicao'
+  },
+
+  // SETEMBRO
+  {
+    id: 'sermonario-2026-09-06',
+    dia: '06',
+    mes: '09',
+    mesNome: { pt: 'Setembro', en: 'September' },
+    dataIso: '2026-09-06',
+    textoBiblico: 'Mateus 19.3-12',
+    serie: { pt: 'O evangelho do reino: uma exposição bíblica de Mateus', en: 'The Gospel of the Kingdom: Matthew Exposition' },
+    tituloTema: { pt: 'O Casamento e o Divórcio', en: 'Marriage and Divorce' },
+    tipo: 'exposicao'
+  },
+  {
+    id: 'sermonario-2026-09-13',
+    dia: '13',
+    mes: '09',
+    mesNome: { pt: 'Setembro', en: 'September' },
+    dataIso: '2026-09-13',
+    textoBiblico: 'Mateus 19.13-30',
+    serie: { pt: 'O evangelho do reino: uma exposição bíblica de Mateus', en: 'The Gospel of the Kingdom: Matthew Exposition' },
+    tituloTema: { pt: 'Jesus e as Crianças • O Jovem Rico', en: 'Jesus, the Children and the Rich Young Ruler' },
+    tipo: 'exposicao'
+  },
+  {
+    id: 'sermonario-2026-09-20',
+    dia: '20',
+    mes: '09',
+    mesNome: { pt: 'Setembro', en: 'September' },
+    dataIso: '2026-09-20',
+    textoBiblico: 'Mateus 20.1-16',
+    serie: { pt: 'O evangelho do reino: uma exposição bíblica de Mateus', en: 'The Gospel of the Kingdom: Matthew Exposition' },
+    tituloTema: { pt: 'Os Trabalhadores da Vinha', en: 'The Workers in the Vineyard' },
+    tipo: 'exposicao'
+  },
+  {
+    id: 'sermonario-2026-09-27',
+    dia: '27',
+    mes: '09',
+    mesNome: { pt: 'Setembro', en: 'September' },
+    dataIso: '2026-09-27',
+    textoBiblico: 'Conferência Missionária',
+    serie: { pt: 'Culto Especial', en: 'Special Service' },
+    tituloTema: { pt: 'Conferência Missionária', en: 'Missionary Conference' },
+    tipo: 'especial',
+    destaque: true
+  },
+
+  // OUTUBRO
+  {
+    id: 'sermonario-2026-10-04',
+    dia: '04',
+    mes: '10',
+    mesNome: { pt: 'Outubro', en: 'October' },
+    dataIso: '2026-10-04',
+    textoBiblico: 'Mateus 20.17-34',
+    serie: { pt: 'O evangelho do reino: uma exposição bíblica de Mateus', en: 'The Gospel of the Kingdom: Matthew Exposition' },
+    tituloTema: { pt: 'O Resgate do Filho do Homem', en: 'The Ransom of the Son of Man' },
+    tipo: 'exposicao'
+  },
+  {
+    id: 'sermonario-2026-10-11',
+    dia: '11',
+    mes: '10',
+    mesNome: { pt: 'Outubro', en: 'October' },
+    dataIso: '2026-10-11',
+    textoBiblico: 'Mateus 21.1-17',
+    serie: { pt: 'O evangelho do reino: uma exposição bíblica de Mateus', en: 'The Gospel of the Kingdom: Matthew Exposition' },
+    tituloTema: { pt: 'A Entrada Triunfal em Jerusalém', en: 'The Triumphal Entry into Jerusalem' },
+    tipo: 'exposicao'
+  },
+  {
+    id: 'sermonario-2026-10-18',
+    dia: '18',
+    mes: '10',
+    mesNome: { pt: 'Outubro', en: 'October' },
+    dataIso: '2026-10-18',
+    textoBiblico: 'Aniversário da igreja',
+    serie: { pt: 'Culto Especial', en: 'Special Service' },
+    tituloTema: { pt: 'Aniversário da igreja', en: 'Church Anniversary' },
+    tipo: 'especial',
+    destaque: true
+  },
+  {
+    id: 'sermonario-2026-10-25',
+    dia: '25',
+    mes: '10',
+    mesNome: { pt: 'Outubro', en: 'October' },
+    dataIso: '2026-10-25',
+    textoBiblico: 'Mateus 21.18-32',
+    serie: { pt: 'O evangelho do reino: uma exposição bíblica de Mateus', en: 'The Gospel of the Kingdom: Matthew Exposition' },
+    tituloTema: { pt: 'A Figueira Seca • Os Dois Filhos', en: 'The Withered Fig Tree • The Two Sons' },
+    tipo: 'exposicao'
+  },
+
+  // NOVEMBRO
+  {
+    id: 'sermonario-2026-11-01',
+    dia: '01',
+    mes: '11',
+    mesNome: { pt: 'Novembro', en: 'November' },
+    dataIso: '2026-11-01',
+    textoBiblico: 'Mateus 21.33-46',
+    serie: { pt: 'O evangelho do reino: uma exposição bíblica de Mateus', en: 'The Gospel of the Kingdom: Matthew Exposition' },
+    tituloTema: { pt: 'Os Lavradores Maus', en: 'The Wicked Tenants' },
+    tipo: 'exposicao'
+  },
+  {
+    id: 'sermonario-2026-11-08',
+    dia: '08',
+    mes: '11',
+    mesNome: { pt: 'Novembro', en: 'November' },
+    dataIso: '2026-11-08',
+    textoBiblico: 'Mateus 22.1-14',
+    serie: { pt: 'O evangelho do reino: uma exposição bíblica de Mateus', en: 'The Gospel of the Kingdom: Matthew Exposition' },
+    tituloTema: { pt: 'As Bodas do Filho do Rei', en: 'The Wedding Feast' },
+    tipo: 'exposicao'
+  },
+  {
+    id: 'sermonario-2026-11-15',
+    dia: '15',
+    mes: '11',
+    mesNome: { pt: 'Novembro', en: 'November' },
+    dataIso: '2026-11-15',
+    textoBiblico: 'Mateus 22.15-46',
+    serie: { pt: 'O evangelho do reino: uma exposição bíblica de Mateus', en: 'The Gospel of the Kingdom: Matthew Exposition' },
+    tituloTema: { pt: 'O Tributo a César • A Ressurreição', en: 'Tribute to Caesar • The Resurrection' },
+    tipo: 'exposicao'
+  },
+  {
+    id: 'sermonario-2026-11-22',
+    dia: '22',
+    mes: '11',
+    mesNome: { pt: 'Novembro', en: 'November' },
+    dataIso: '2026-11-22',
+    textoBiblico: 'Mateus 23.1-39',
+    serie: { pt: 'O evangelho do reino: uma exposição bíblica de Mateus', en: 'The Gospel of the Kingdom: Matthew Exposition' },
+    tituloTema: { pt: 'Os Sete Ais aos Escribas e Fariseus', en: 'The Seven Woes' },
+    tipo: 'exposicao'
+  },
+  {
+    id: 'sermonario-2026-11-29',
+    dia: '29',
+    mes: '11',
+    mesNome: { pt: 'Novembro', en: 'November' },
+    dataIso: '2026-11-29',
+    textoBiblico: 'Gn 1-2; Sl 8',
+    serie: { pt: 'Série Advento 2026: A história do reino', en: 'Advent 2026 Series: The Story of the Kingdom' },
+    tituloTema: { pt: 'Era uma vez um reino', en: 'Once upon a kingdom' },
+    tipo: 'advento',
+    destaque: true
+  },
+
+  // DEZEMBRO
+  {
+    id: 'sermonario-2026-12-04',
+    dia: '04',
+    mes: '12',
+    mesNome: { pt: 'Dezembro', en: 'December' },
+    dataIso: '2026-12-04',
+    textoBiblico: 'Gn 2.15-17; 3.1-24',
+    serie: { pt: 'Série Advento 2026: A história do reino', en: 'Advent 2026 Series: The Story of the Kingdom' },
+    tituloTema: { pt: 'A rebelião no reino', en: 'The rebellion in the kingdom' },
+    tipo: 'advento',
+    destaque: true
+  },
+  {
+    id: 'sermonario-2026-12-13',
+    dia: '13',
+    mes: '12',
+    mesNome: { pt: 'Dezembro', en: 'December' },
+    dataIso: '2026-12-13',
+    textoBiblico: 'Gn 3.15; Rm 5.12-21; Êx 19.5-6; 1 Pe 2.8-10',
+    serie: { pt: 'Série Advento 2026: A história do reino', en: 'Advent 2026 Series: The Story of the Kingdom' },
+    tituloTema: { pt: 'O reino prometido', en: 'The promised kingdom' },
+    tipo: 'advento',
+    destaque: true
+  },
+  {
+    id: 'sermonario-2026-12-20',
+    dia: '20',
+    mes: '12',
+    mesNome: { pt: 'Dezembro', en: 'December' },
+    dataIso: '2026-12-20',
+    textoBiblico: 'Ap 11.15-19; 12.1-12',
+    serie: { pt: 'Série Advento 2026: A história do reino', en: 'Advent 2026 Series: The Story of the Kingdom' },
+    tituloTema: { pt: 'O reino que veio e virá', en: 'The kingdom that came and is to come' },
+    tipo: 'advento',
+    destaque: true
+  },
+  {
+    id: 'sermonario-2026-12-27',
+    dia: '27',
+    mes: '12',
+    mesNome: { pt: 'Dezembro', en: 'December' },
+    dataIso: '2026-12-27',
+    textoBiblico: 'Ações de graças',
+    serie: { pt: 'Sermão de fim de ano', en: 'Year-End Sermon' },
+    tituloTema: { pt: 'Ações de graças', en: 'Thanksgiving' },
+    tipo: 'gratidao',
+    destaque: true
+  }
+];
+
+

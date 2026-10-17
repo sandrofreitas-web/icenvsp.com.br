@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { Shield, Target, Award, ArrowRight, UserCheck, BookOpen, Heart, Globe, Coins, Users, Building2, Compass, FileText } from 'lucide-react';
+import { Shield, Target, Award, ArrowRight, UserCheck, BookOpen, Heart, Globe, Coins, Users, Building2, Compass, FileText, Landmark, ShieldCheck, User } from 'lucide-react';
 import { Language, ActiveTab, Leader, TimelineEvent } from '../types';
-import { DICTIONARY, LEADERS, TIMELINE } from '../data';
+import { DICTIONARY, LEADERS, LEADERSHIP_BIENNIUM, TIMELINE } from '../data';
+import selo1912 from '../assets/icenv-selo-circular-1912-colorido.png';
 
 interface SobreViewProps {
   language: Language;
@@ -104,7 +105,7 @@ export default function SobreView({ language, onChangeTab, activeSubTab, setActi
               onClick={() => setActiveSubTab('historia')}
               className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-mono font-bold uppercase tracking-wider transition-all ${
                 activeSubTab === 'historia'
-                  ? 'bg-[#28166f] text-white shadow-md'
+                  ? 'bg-[#0c3945] text-white shadow-md'
                   : 'bg-white hover:bg-amber-50 text-gray-700 border border-gray-100'
               }`}
             >
@@ -116,7 +117,7 @@ export default function SobreView({ language, onChangeTab, activeSubTab, setActi
               onClick={() => setActiveSubTab('confissao')}
               className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-mono font-bold uppercase tracking-wider transition-all ${
                 activeSubTab === 'confissao'
-                  ? 'bg-[#28166f] text-white shadow-md'
+                  ? 'bg-[#0c3945] text-white shadow-md'
                   : 'bg-white hover:bg-amber-50 text-gray-700 border border-gray-100'
               }`}
             >
@@ -128,7 +129,7 @@ export default function SobreView({ language, onChangeTab, activeSubTab, setActi
               onClick={() => setActiveSubTab('lideranca')}
               className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-mono font-bold uppercase tracking-wider transition-all ${
                 activeSubTab === 'lideranca'
-                  ? 'bg-[#28166f] text-white shadow-md'
+                  ? 'bg-[#0c3945] text-white shadow-md'
                   : 'bg-white hover:bg-amber-50 text-gray-700 border border-gray-100'
               }`}
             >
@@ -140,7 +141,7 @@ export default function SobreView({ language, onChangeTab, activeSubTab, setActi
               onClick={() => setActiveSubTab('ebd')}
               className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-mono font-bold uppercase tracking-wider transition-all ${
                 activeSubTab === 'ebd'
-                  ? 'bg-[#28166f] text-white shadow-md'
+                  ? 'bg-[#0c3945] text-white shadow-md'
                   : 'bg-white hover:bg-amber-50 text-gray-700 border border-gray-100'
               }`}
             >
@@ -152,7 +153,7 @@ export default function SobreView({ language, onChangeTab, activeSubTab, setActi
               onClick={() => setActiveSubTab('dizimos')}
               className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-mono font-bold uppercase tracking-wider transition-all ${
                 activeSubTab === 'dizimos'
-                  ? 'bg-[#28166f] text-white shadow-md'
+                  ? 'bg-[#0c3945] text-white shadow-md'
                   : 'bg-white hover:bg-amber-50 text-gray-700 border border-gray-100'
               }`}
             >
@@ -164,7 +165,7 @@ export default function SobreView({ language, onChangeTab, activeSubTab, setActi
               onClick={() => setActiveSubTab('denominacao')}
               className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-mono font-bold uppercase tracking-wider transition-all ${
                 activeSubTab === 'denominacao'
-                  ? 'bg-[#28166f] text-white shadow-md'
+                  ? 'bg-[#0c3945] text-white shadow-md'
                   : 'bg-white hover:bg-amber-50 text-gray-700 border border-gray-100'
               }`}
             >
@@ -176,7 +177,7 @@ export default function SobreView({ language, onChangeTab, activeSubTab, setActi
               onClick={() => setActiveSubTab('missionarios')}
               className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-mono font-bold uppercase tracking-wider transition-all ${
                 activeSubTab === 'missionarios'
-                  ? 'bg-[#28166f] text-white shadow-md'
+                  ? 'bg-[#0c3945] text-white shadow-md'
                   : 'bg-white hover:bg-amber-50 text-gray-700 border border-gray-100'
               }`}
             >
@@ -188,7 +189,7 @@ export default function SobreView({ language, onChangeTab, activeSubTab, setActi
               onClick={() => setActiveSubTab('grupos')}
               className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-mono font-bold uppercase tracking-wider transition-all ${
                 activeSubTab === 'grupos'
-                  ? 'bg-[#28166f] text-white shadow-md'
+                  ? 'bg-[#0c3945] text-white shadow-md'
                   : 'bg-white hover:bg-amber-50 text-gray-700 border border-gray-100'
               }`}
             >
@@ -200,7 +201,7 @@ export default function SobreView({ language, onChangeTab, activeSubTab, setActi
               onClick={() => setActiveSubTab('ministerios')}
               className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-mono font-bold uppercase tracking-wider transition-all ${
                 activeSubTab === 'ministerios'
-                  ? 'bg-[#28166f] text-white shadow-md'
+                  ? 'bg-[#0c3945] text-white shadow-md'
                   : 'bg-white hover:bg-amber-50 text-gray-700 border border-gray-100'
               }`}
             >
@@ -219,14 +220,17 @@ export default function SobreView({ language, onChangeTab, activeSubTab, setActi
           {/* TAB CONTENT: TIMELINE/HISTORIA */}
           {activeSubTab === 'historia' && (
             <div className="space-y-12 animate-in fade-in duration-200">
-              <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
-                <span className="text-amber-700 uppercase font-mono text-xs font-bold tracking-widest block">
-                  {language === 'pt' ? 'Nossa Jornada' : 'Our Journey'}
+              <div className="text-center max-w-2xl mx-auto mb-16 space-y-4">
+                <div className="inline-flex items-center justify-center p-2 rounded-2xl bg-[#0c3945]/5 border border-[#2a8182]/20 shadow-xs mb-1">
+                  <img src={selo1912} alt="ICENV Desde 1912" className="h-20 sm:h-24 w-auto object-contain drop-shadow-xs" />
+                </div>
+                <span className="text-[#2a8182] uppercase font-mono text-xs font-bold tracking-widest block">
+                  {language === 'pt' ? 'Mais de um Século de Fidelidade' : 'Over a Century of Faithfulness'}
                 </span>
-                <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight">
+                <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight font-sans">
                   {dict.historyTitle}
                 </h2>
-                <div className="h-1 w-12 bg-amber-500 rounded mx-auto" />
+                <div className="h-1 w-16 bg-[#2a8182] rounded mx-auto" />
               </div>
 
               {/* Timeline layout */}
@@ -334,53 +338,147 @@ export default function SobreView({ language, onChangeTab, activeSubTab, setActi
 
           {/* TAB CONTENT: LIDERANÇA */}
           {activeSubTab === 'lideranca' && (
-            <div className="space-y-12 animate-in fade-in duration-200">
-              <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
-                <span className="text-amber-700 uppercase font-mono text-xs font-bold tracking-widest block">
-                  {language === 'pt' ? 'Corpo Pastoral e Conselho' : 'Pastoral Council'}
+            <div className="space-y-16 animate-in fade-in duration-200">
+              {/* Header */}
+              <div className="text-center max-w-2xl mx-auto space-y-3">
+                <span className="inline-block text-amber-700 uppercase font-mono text-xs font-bold tracking-widest bg-amber-50 px-3.5 py-1 rounded-full border border-amber-200">
+                  {LEADERSHIP_BIENNIUM.mandate[language]}
                 </span>
-                <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight">
-                  {dict.leadershipTitle}
+                <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight">
+                  {LEADERSHIP_BIENNIUM.period[language]}
                 </h2>
-                <p className="text-sm text-gray-500">
-                  {dict.leadershipSub}
+                <p className="text-sm text-gray-500 max-w-xl mx-auto">
+                  {language === 'pt'
+                    ? 'Homens e mulheres eleitos em Assembleia Geral para o pastoreio, governo eclesiástico, administração e serviço diaconal da igreja.'
+                    : 'Men and women elected to pastoral care, church governance, administration, and diaconal service.'}
                 </p>
-                <div className="h-1 w-12 bg-amber-500 rounded mx-auto" />
+                <div className="h-1 w-16 bg-amber-500 rounded mx-auto mt-4" />
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                {leaders.map((leader) => (
-                  <div
-                    key={leader.id}
-                    id={`leader-card-${leader.id}`}
-                    className="bg-gray-50 rounded-2xl overflow-hidden border border-gray-100 group flex flex-col justify-between hover:shadow-md hover:bg-white transition-all duration-200"
-                  >
-                    <div>
-                      <div className="relative aspect-square bg-gray-200 overflow-hidden">
-                        <img
-                          src={leader.image}
-                          alt={leader.name}
-                          className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-300"
-                          referrerPolicy="no-referrer"
-                        />
-                        <div className="absolute top-3 right-3 bg-white/95 backdrop-blur p-1.5 rounded-lg text-amber-700 shadow-sm">
-                          <UserCheck className="h-4 w-4" />
+              {/* 1. MESA ADMINISTRATIVA */}
+              <div className="space-y-6">
+                <div className="flex items-center gap-3 border-b border-gray-200 pb-3">
+                  <div className="h-9 w-9 rounded-xl bg-secondary/15 text-primary flex items-center justify-center">
+                    <Landmark className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <h3 className="font-sans font-extrabold text-xl text-gray-900 leading-tight">
+                      {language === 'pt' ? 'Mesa Administrativa' : 'Administrative Board'}
+                    </h3>
+                    <span className="text-xs text-gray-500 font-mono">
+                      {language === 'pt' ? 'Cargos Definitivos' : 'Executive Officers'}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {LEADERSHIP_BIENNIUM.board.map((member, idx) => (
+                    <div
+                      key={`board-${idx}`}
+                      className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm border-l-4 border-l-primary hover:shadow-md hover:translate-y-[-2px] transition-all duration-200 flex flex-col justify-between space-y-3"
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="text-[11px] font-mono font-bold text-primary uppercase tracking-wider bg-secondary/10 px-2.5 py-1 rounded-md border border-secondary/20">
+                          {member.role[language]}
+                        </span>
+                        <div className="h-7 w-7 rounded-full bg-gray-50 flex items-center justify-center text-gray-400">
+                          {idx <= 1 ? (
+                            <Shield className="h-3.5 w-3.5 text-secondary" />
+                          ) : idx <= 3 ? (
+                            <FileText className="h-3.5 w-3.5 text-emerald-600" />
+                          ) : (
+                            <Coins className="h-3.5 w-3.5 text-amber-600" />
+                          )}
                         </div>
                       </div>
-                      <div className="p-5 space-y-2">
-                        <h3 className="font-sans font-bold text-base text-gray-900 leading-tight">
-                          {leader.name}
-                        </h3>
-                        <span className="inline-block text-xs font-mono font-bold text-amber-700 uppercase tracking-wider">
-                          {leader.role[language]}
-                        </span>
-                        <p className="text-xs text-gray-500 leading-relaxed pt-2 border-t border-gray-100/60">
-                          {leader.bio[language]}
-                        </p>
+                      <div>
+                        <h4 className="font-sans font-bold text-base sm:text-lg text-gray-900 leading-snug">
+                          {member.name}
+                        </h4>
                       </div>
                     </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* 2. PRESBÍTEROS ELEITOS */}
+              <div className="space-y-6">
+                <div className="flex items-center gap-3 border-b border-gray-200 pb-3">
+                  <div className="h-9 w-9 rounded-xl bg-amber-500/10 text-amber-700 flex items-center justify-center">
+                    <ShieldCheck className="h-5 w-5" />
                   </div>
-                ))}
+                  <div>
+                    <h3 className="font-sans font-extrabold text-xl text-gray-900 leading-tight">
+                      {language === 'pt' ? 'Presbíteros Eleitos' : 'Elected Elders'}
+                    </h3>
+                    <span className="text-xs text-gray-500 font-mono">
+                      {language === 'pt' ? 'Conselho de Presbíteros' : 'Presbytery / Session'}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  {LEADERSHIP_BIENNIUM.elders.map((member, idx) => (
+                    <div
+                      key={`elder-${idx}`}
+                      className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm border-l-4 border-l-amber-500 hover:shadow-md hover:translate-y-[-2px] transition-all duration-200 flex flex-col justify-between space-y-3"
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="text-[11px] font-mono font-bold text-amber-800 uppercase tracking-wider bg-amber-50 px-2.5 py-1 rounded-md border border-amber-200">
+                          {member.role[language]}
+                        </span>
+                        <div className="h-7 w-7 rounded-full bg-amber-50 flex items-center justify-center text-amber-700">
+                          <UserCheck className="h-3.5 w-3.5" />
+                        </div>
+                      </div>
+                      <div>
+                        <h4 className="font-sans font-bold text-base sm:text-lg text-gray-900 leading-snug">
+                          {member.name}
+                        </h4>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* 3. DIÁCONOS ELEITOS */}
+              <div className="space-y-6">
+                <div className="flex items-center gap-3 border-b border-gray-200 pb-3">
+                  <div className="h-9 w-9 rounded-xl bg-emerald-600/10 text-emerald-700 flex items-center justify-center">
+                    <Heart className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <h3 className="font-sans font-extrabold text-xl text-gray-900 leading-tight">
+                      {language === 'pt' ? 'Diáconos Eleitos' : 'Elected Deacons'}
+                    </h3>
+                    <span className="text-xs text-gray-500 font-mono">
+                      {language === 'pt' ? 'Corpo Diaconal e Acolhimento' : 'Diaconate & Welcome'}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {LEADERSHIP_BIENNIUM.deacons.map((member, idx) => (
+                    <div
+                      key={`deacon-${idx}`}
+                      className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm border-l-4 border-l-emerald-500 hover:shadow-md hover:translate-y-[-2px] transition-all duration-200 flex flex-col justify-between space-y-3"
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="text-[11px] font-mono font-bold text-emerald-800 uppercase tracking-wider bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200">
+                          {member.role[language]}
+                        </span>
+                        <div className="h-7 w-7 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-700">
+                          <Users className="h-3.5 w-3.5" />
+                        </div>
+                      </div>
+                      <div>
+                        <h4 className="font-sans font-bold text-base text-gray-900 leading-snug">
+                          {member.name}
+                        </h4>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           )}
@@ -484,7 +582,7 @@ export default function SobreView({ language, onChangeTab, activeSubTab, setActi
                     <div className="bg-neutral-950 rounded-2xl p-4 border border-neutral-800 space-y-3 font-mono text-xs text-neutral-300">
                       <div>
                         <span className="block text-[10px] text-neutral-500 font-bold uppercase">{language === 'pt' ? 'CHAVE PIX (CNPJ)' : 'PIX KEY (CNPJ)'}</span>
-                        <span className="text-[#007cc3] font-bold text-sm select-all">60.123.456/0001-77</span>
+                        <span className="text-secondary-container font-bold text-sm select-all">60.123.456/0001-77</span>
                       </div>
                       <div className="pt-2 border-t border-neutral-900 grid grid-cols-2 gap-2">
                         <div>
@@ -556,7 +654,7 @@ export default function SobreView({ language, onChangeTab, activeSubTab, setActi
                   </div>
                 </div>
                 <div className="md:col-span-4 bg-white border border-gray-100 rounded-2xl p-6 shadow-sm text-center space-y-3">
-                  <Building2 className="h-12 w-12 text-[#28166f] mx-auto" />
+                  <Building2 className="h-12 w-12 text-[#0c3945] mx-auto" />
                   <div className="space-y-1">
                     <span className="block font-sans font-black text-gray-900 text-base">ICEB</span>
                     <span className="block text-[10px] font-mono text-gray-400 uppercase tracking-widest">{language === 'pt' ? 'FUNDADA EM 1901' : 'ESTABLISHED IN 1901'}</span>
@@ -587,7 +685,7 @@ export default function SobreView({ language, onChangeTab, activeSubTab, setActi
                 {/* Mission Card 1 */}
                 <div className="bg-gray-50 border border-gray-100 rounded-3xl p-6 flex flex-col justify-between space-y-4">
                   <div className="space-y-3">
-                    <span className="text-[#28166f] font-mono text-[10px] font-bold uppercase tracking-wider block">{language === 'pt' ? 'Campo Nacional — Nordeste' : 'National Field — Northeast'}</span>
+                    <span className="text-[#0c3945] font-mono text-[10px] font-bold uppercase tracking-wider block">{language === 'pt' ? 'Campo Nacional — Nordeste' : 'National Field — Northeast'}</span>
                     <h3 className="font-sans font-bold text-gray-950 text-base">{language === 'pt' ? 'Família Silva' : 'Silva Family'}</h3>
                     <p className="text-xs text-gray-500 leading-relaxed">
                       {language === 'pt'
@@ -603,7 +701,7 @@ export default function SobreView({ language, onChangeTab, activeSubTab, setActi
                 {/* Mission Card 2 */}
                 <div className="bg-gray-50 border border-gray-100 rounded-3xl p-6 flex flex-col justify-between space-y-4">
                   <div className="space-y-3">
-                    <span className="text-[#28166f] font-mono text-[10px] font-bold uppercase tracking-wider block">{language === 'pt' ? 'Campo Transcultural — Ásia' : 'Cross-Cultural — Asia'}</span>
+                    <span className="text-[#0c3945] font-mono text-[10px] font-bold uppercase tracking-wider block">{language === 'pt' ? 'Campo Transcultural — Ásia' : 'Cross-Cultural — Asia'}</span>
                     <h3 className="font-sans font-bold text-gray-950 text-base">{language === 'pt' ? 'Pr. Jonathan & Clara' : 'Pr. Jonathan & Clara'}</h3>
                     <p className="text-xs text-gray-500 leading-relaxed">
                       {language === 'pt'
@@ -619,7 +717,7 @@ export default function SobreView({ language, onChangeTab, activeSubTab, setActi
                 {/* Mission Card 3 */}
                 <div className="bg-gray-50 border border-gray-100 rounded-3xl p-6 flex flex-col justify-between space-y-4">
                   <div className="space-y-3">
-                    <span className="text-[#28166f] font-mono text-[10px] font-bold uppercase tracking-wider block">{language === 'pt' ? 'Parceria Institucional' : 'Institutional Partnership'}</span>
+                    <span className="text-[#0c3945] font-mono text-[10px] font-bold uppercase tracking-wider block">{language === 'pt' ? 'Parceria Institucional' : 'Institutional Partnership'}</span>
                     <h3 className="font-sans font-bold text-gray-950 text-base">{language === 'pt' ? 'Departamento de Missões ICEB' : 'ICEB Missions Department'}</h3>
                     <p className="text-xs text-gray-500 leading-relaxed">
                       {language === 'pt'
@@ -667,7 +765,7 @@ export default function SobreView({ language, onChangeTab, activeSubTab, setActi
                   <div className="pt-2">
                     <button
                       onClick={() => onChangeTab('contato')}
-                      className="px-5 py-2.5 bg-[#28166f] hover:bg-[#1e1054] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all"
+                      className="px-5 py-2.5 bg-[#0c3945] hover:bg-[#2a8182] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all"
                     >
                       {language === 'pt' ? 'Quero fazer parte de um grupo' : 'I want to join a group'}
                     </button>
@@ -702,7 +800,7 @@ export default function SobreView({ language, onChangeTab, activeSubTab, setActi
                 
                 {/* Ministry 1 */}
                 <div className="bg-gray-50 border border-gray-100 rounded-2xl p-6 space-y-3 hover:shadow-md transition-shadow">
-                  <div className="h-10 w-10 bg-[#28166f]/10 text-[#28166f] rounded-xl flex items-center justify-center">
+                  <div className="h-10 w-10 bg-[#0c3945]/10 text-[#0c3945] rounded-xl flex items-center justify-center">
                     <Compass className="h-5 w-5" />
                   </div>
                   <h3 className="font-sans font-black text-gray-950 text-base uppercase tracking-tight">{language === 'pt' ? 'Adoração & Música' : 'Worship & Music'}</h3>
@@ -715,7 +813,7 @@ export default function SobreView({ language, onChangeTab, activeSubTab, setActi
 
                 {/* Ministry 2 */}
                 <div className="bg-gray-50 border border-gray-100 rounded-2xl p-6 space-y-3 hover:shadow-md transition-shadow">
-                  <div className="h-10 w-10 bg-[#28166f]/10 text-[#28166f] rounded-xl flex items-center justify-center">
+                  <div className="h-10 w-10 bg-[#0c3945]/10 text-[#0c3945] rounded-xl flex items-center justify-center">
                     <Heart className="h-5 w-5" />
                   </div>
                   <h3 className="font-sans font-black text-gray-950 text-base uppercase tracking-tight">{language === 'pt' ? 'Nova Vida Kids (Infantil)' : 'Nova Vida Kids (Children)'}</h3>
@@ -728,7 +826,7 @@ export default function SobreView({ language, onChangeTab, activeSubTab, setActi
 
                 {/* Ministry 3 */}
                 <div className="bg-gray-50 border border-gray-100 rounded-2xl p-6 space-y-3 hover:shadow-md transition-shadow">
-                  <div className="h-10 w-10 bg-[#28166f]/10 text-[#28166f] rounded-xl flex items-center justify-center">
+                  <div className="h-10 w-10 bg-[#0c3945]/10 text-[#0c3945] rounded-xl flex items-center justify-center">
                     <Users className="h-5 w-5" />
                   </div>
                   <h3 className="font-sans font-black text-gray-950 text-base uppercase tracking-tight">{language === 'pt' ? 'Mocidade & Adolescentes' : 'Youth & Teens'}</h3>
@@ -741,7 +839,7 @@ export default function SobreView({ language, onChangeTab, activeSubTab, setActi
 
                 {/* Ministry 4 */}
                 <div className="bg-gray-50 border border-gray-100 rounded-2xl p-6 space-y-3 hover:shadow-md transition-shadow">
-                  <div className="h-10 w-10 bg-[#28166f]/10 text-[#28166f] rounded-xl flex items-center justify-center">
+                  <div className="h-10 w-10 bg-[#0c3945]/10 text-[#0c3945] rounded-xl flex items-center justify-center">
                     <Target className="h-5 w-5" />
                   </div>
                   <h3 className="font-sans font-black text-gray-950 text-base uppercase tracking-tight">{language === 'pt' ? 'Famílias & Casais' : 'Couples & Families'}</h3>
@@ -754,7 +852,7 @@ export default function SobreView({ language, onChangeTab, activeSubTab, setActi
 
                 {/* Ministry 5 */}
                 <div className="bg-gray-50 border border-gray-100 rounded-2xl p-6 space-y-3 hover:shadow-md transition-shadow">
-                  <div className="h-10 w-10 bg-[#28166f]/10 text-[#28166f] rounded-xl flex items-center justify-center">
+                  <div className="h-10 w-10 bg-[#0c3945]/10 text-[#0c3945] rounded-xl flex items-center justify-center">
                     <Coins className="h-5 w-5" />
                   </div>
                   <h3 className="font-sans font-black text-gray-950 text-base uppercase tracking-tight">{language === 'pt' ? 'Ação Social & Compaixão' : 'Social Action & Mercy'}</h3>

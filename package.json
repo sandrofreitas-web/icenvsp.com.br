@@ -4,8 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --port=3000 --host=0.0.0.0",
-    "build": "vite build",
+    "dev": "vite --port=3000 --host=0.0.0.0 --mode development",
+    "build": "vite build --mode full",
+    "build:limited": "vite build --mode limited",
+    "build:full": "vite build --mode full",
     "preview": "vite preview",
     "clean": "rm -rf dist server.js",
     "lint": "tsc --noEmit"
